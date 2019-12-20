@@ -1,7 +1,7 @@
 from operator import itemgetter
 from math import sqrt
 
-from categories_m import leaves_from_tree, get_tree
+from taxonomy import leaves_from_tree, get_taxonomy_tree
 
 LIMIT = .2
 GAMMA = .4
