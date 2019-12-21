@@ -48,7 +48,7 @@ def normalize_and_return_leaf_weights(node, summ):
 
     leaf_weights = []
 
-    if not node.children:
+    if node.is_leaf:
         node.u /= sqrt(summ)
         leaf_weights.append([node.u, node.name])
 
@@ -60,7 +60,7 @@ def normalize_and_return_leaf_weights(node, summ):
 
 def truncate_weights(node, threshold):
     summ = 0
-    if not node.children:
+    if node.is_leaf:
         if node.u < threshold:
             node.u = 0
         else:
@@ -73,7 +73,7 @@ def truncate_weights(node, threshold):
 
 
 def set_internal_weights(node):
-    if not node.children:
+    if node.is_leaf:
         return node.u ** 2
 
     summ = 0
@@ -84,13 +84,13 @@ def set_internal_weights(node):
 
 
 def prune_tree(node):
-    if node.children:
+    if node.is_internal:
         for t in node:
             prune_tree(t)
 
         if not node.u:
             g_label = 0
-            if node.children and not any([t.children for t in node]):
+            if node.is_internal and not any([t.children for t in node]):
                 g_label = 1
             node.children = []
 
@@ -132,10 +132,10 @@ def reduce_edges(node):
 
         def update_layer_number(n):
             n.e -= 1
-            for t in n.children:
+            for t in n:
                 update_layer_number(t)
 
-        for t in node.children:
+        for t in node:
             update_layer_number(t)
 
     for t in node:
@@ -143,7 +143,7 @@ def reduce_edges(node):
 
 
 def make_init_step(node, gamma_v):
-    if node.children:
+    if node.is_internal:
         for t in node:
             make_init_step(t, gamma_v)
     else:
@@ -161,7 +161,7 @@ def make_init_step(node, gamma_v):
 
 def make_recursive_step(node, gamma_v, lambda_v):
 
-    if node.children: # make function
+    if node.is_internal:
         for t in node:
             make_recursive_step(t, gamma_v, lambda_v)
 
@@ -173,16 +173,13 @@ def make_recursive_step(node, gamma_v, lambda_v):
                 node.L = node.G
                 node.p = node.u + lambda_v * node.V
             else:
-                #node["H"] = sum([t.get("H", []) for t in node], [])
-                #node["L"] = sum([t.get("L", []) for t in node], [])
-                #node["p"] = sum([t.get("p", 0) for t in node], 0)
                 node.H = sum((t.H if t.H is not None else [] for t in node), [])
                 node.L = sum((t.L if t.L is not None else [] for t in node), [])
                 node.p = sum((t.p if t.p is not None else 0 for t in node), 0)
 
 
 def indicate_offshoots(node):
-    if node.children:
+    if node.is_internal:
         for t in node:
             indicate_offshoots(t)
     else:
@@ -195,7 +192,7 @@ def make_result_table(node):
 
     table = []
 
-    if node.children:
+    if node.is_internal:
         for t in node:
             table.extend(make_result_table(t))
 
@@ -226,7 +223,7 @@ def make_ete3(taxonomy_tree, print_all=True):
         if node.index in heads and not h:
             h = 1
 
-        if node.children:
+        if node.is_internal:
             output.append("(")
             sorted_children = sorted(node.children, key=lambda x: x.u)
             j = 0
@@ -274,7 +271,7 @@ def make_ete3(taxonomy_tree, print_all=True):
                                                                      Node(None, "...", None), \
                                                                      node.L[-1]])]), \
                            "}:Hd=", ("1" if node.index in heads else "0"), ":Ch=", \
-                           ("1" if node.children else "0"), ":Sq=", ("1" if h else "0"),\
+                           ("1" if node.is_internal else "0"), ":Sq=", ("1" if h else "0"),\
                            "]"])
 
         return output
