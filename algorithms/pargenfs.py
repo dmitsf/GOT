@@ -15,8 +15,8 @@ def get(tree):
 
 def enumerate_tree_layers(node, e=0):
     node.e = e
-    for i in node:
-        enumerate_tree_layers(i, e=e+1)
+    for t in node:
+        enumerate_tree_layers(t, e=e+1)
 
 
 def get_cluster_k(tree_leaves, node_names, membership_matrix, k):

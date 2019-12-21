@@ -1,5 +1,5 @@
-from ete3 import AttrFace, TextFace, Tree, TreeStyle, add_face_to_node, \
-     NodeStyle, RectFace, CircleFace, PieChartFace
+from ete3 import TextFace, Tree, TreeStyle, \
+     NodeStyle, RectFace, PieChartFace
 
 
 def layout(node, levels=3):
@@ -89,7 +89,8 @@ def draw_tree(file_name="taxonomy_tree.ete"):
     ts.legend.add_face(TextFace("  "), column=3)
 
     ts.legend.add_face(RectFace(20, 20, "black", "white"), column=0)
-    ts.legend.add_face(TextFace("  topics that don't refer to cluster                     "), column=1)
+    ts.legend.add_face(TextFace("  topics that don't refer to cluster                     "), \
+                       column=1)
 
     ts.legend.add_face(RectFace(30, 10, "#004000", "#004000"), column=2)
     ts.legend.add_face(TextFace("  topic with high membership u(t)>0.4"), column=3)
