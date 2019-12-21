@@ -1,0 +1,179 @@
+1.1.1.	svezhij
+1.1.2.	svezhajshij
+1.1.3.	prosrochennyj
+1.1.4.	prokisshij
+1.2.1.1.	bljuda byli super
+1.2.1.2.	eda vkusnaja
+1.2.1.3.	eda domashnjaja
+1.2.1.4.	kuhnja prekrasnaja
+1.2.1.5.	eda horoshaja
+1.2.1.6.	ot kuhni v vostorge
+1.2.1.7.	zatejlivye bljuda
+1.2.1.8.	kuhnju ne opisat'
+1.2.1.9.	bljuda kak proizvedenija iskusstva
+1.2.1.10.	eda horosha v ljubom vide
+1.2.1.11.	edoj naslazhdalis'
+1.2.1.12.	bljudo luchshee v gorode
+1.2.1.13.	eda prosto kosmos
+1.2.1.14.	umopomrachitel'naja eda
+1.2.1.15.	eda posredstvennaja
+1.2.1.16.	eda potrjasnaja
+1.2.1.17.	eda velikolepnaja
+1.2.1.18.	eda ne ustupaet
+1.2.1.19.	kuhnja 10 ballov
+1.2.1.20.	kuhnja na vysote
+1.2.1.21.	kuhnja plohaja
+1.2.2.1.	teploe
+1.2.2.2.	bljuda gorjachie
+1.2.2.3.	prinesli holodnoe
+1.2.3.1.	ochen' vkusnyj
+1.2.3.2.	est' nevozmozhno
+1.2.3.3.	vkusnejshij
+1.2.4.1.	kachestvennaja eda
+1.2.4.2.	produkty kachestvennye
+1.2.4.3.	kachestvo posredstvennoe
+1.2.4.4.	kachestvo otvratitel'noe
+1.2.5.1.	zdorovoe pitanie
+1.2.5.2.	natural'nye ingredienty
+1.2.5.3.	zheludok ne bolit
+1.2.5.4.	otravilsja
+1.2.6.1.	gotovjat horosho
+1.2.6.2.	ponravilos' kachestvo prigotovlenija bljud
+1.2.6.3.	gotovit' ne umejut
+1.2.7.1.	bol'shie portsii
+1.2.7.2.	dovol'no krupnye portsii
+1.2.7.3.	bol'shaja razmernaja eda
+1.2.7.4.	portsii dostojnyh razmerov
+1.2.7.5.	portsii slishkom malen'kie
+1.2.7.6.	na odin zub
+1.2.8.1.	original'nyj
+1.2.8.2.	ekzotichno
+1.2.8.3.	neobychno
+1.2.8.4.	nigde ne najti
+1.2.9.1.	mozhno poprosit' ubrat'
+1.2.9.2.	ubirajut ingredienty
+1.2.9.3.	est' kastomizatsija
+1.2.10.1.	krasivaja podacha
+1.2.10.2	krasivoe oformlenie
+1.2.10.3.	podacha bljud hromaet
+1.2.10.4.	blagorodnaja podacha 
+1.2.10.5.	ponravilos' oformlenie
+1.2.10.6.	ponravilsja vneshnij vid
+1.3.1.	bol'shoj vybor napitkov
+1.3.2.	koktejli klassnye po oformleniju
+1.3.3.	est' avtorskie koktejli
+1.3.4.	firmennye koktejli
+1.3.5.	znatnyj alkogol'
+1.3.6.	otlichnaja barnaja karta
+1.3.7.	horoshaja vinnaja karta
+1.3.8.	uzhasnyj alkogol'
+1.3.9.	alkogolja net
+1.4.1.	mnogo desertov
+1.4.2.	vkusnye deserty
+1.4.3.	deserty nevkusnye
+1.5.1.	horoshie zakuski
+1.5.2.	bol'shie portsii zakusok
+1.6.1.	udivlen assortimentom
+1.6.2.	vnushitel'nyj assortiment
+1.6.3.	horoshij vybor
+1.6.4.	glaza razbegajutsja
+1.6.5.	net v nalichii
+1.7.1.	vkusnye obedy
+1.7.2.	deshevye obedy
+1.7.3.	horoshie biznes lanchi
+1.8.2.	est' zavtraki
+1.8.3.	est' menju iz zavtrakov
+2.2.1.1.	bystroe obsluzhivanie
+2.2.1.2.	prijatnoe obsluzhivanie
+2.2.1.3.	obsluzhivanie super
+2.2.1.4.	ofitsianty vysshego urovnja
+2.2.1.5.	druzheljubnyj personal
+2.2.1.6.	chutkoe obsluzhivanie
+2.2.1.7.	kachestvennoe obsluzhivanie
+2.2.1.8.	ideal'noe obsluzhivanie
+2.2.1.9.	terpelivyj personal
+2.2.1.10.	barmeny volshebniki
+2.2.1.11.	zabotlivye sotrudniki
+2.2.1.12.	servis na vysote
+2.2.1.13.	gramotnye ofitsianty
+2.2.1.14.	ofitsianty osvedomleny v menju
+2.2.1.15.	znajut menju
+2.2.1.16.	menju prishlos' zhdat'
+2.2.1.17.	druzheljubnyj personal
+2.2.1.18.	vnimatel'nyj personal
+2.2.1.19.	vysokomernyj ofitsiant
+2.2.1.20.	navjazchivye ofitsianty
+2.2.1.21.	prishlos' dolgo zhdat'
+2.2.1.22.	mogut zabyt' prinesti pozitsiju iz zakaza
+2.5.5.	mnogo pozitsij
+2.5.6.	obshirnoe menju
+2.5.7.	smeloe menju
+2.9.4.	besplatnyj wifi
+2.9.5.	besplatnyj vajfaj
+2.10.2.	bystro dostavljajut
+2.11.1.	bronirovat' zaranee
+2.11.2.	mozhno zabronirovat'
+2.11.3.	bronirovanie s predoplatoj
+2.12.1.	bankovskimi kartami ne prinimaetsja
+2.12.2.	ne prinimajutsja kreditnye karty
+2.12.3.	mozhno oplatit' kartoj
+2.12.4.	nel'zja oplatit' kartoj
+3.1.1.	horoshij inter'er
+3.1.2.	potrjasajuschij inter'er
+3.1.3.	chuvstvuesh' kak doma
+3.1.4.	shikarnyj inter'er
+3.1.5.	dorogaja mebel'
+3.1.6.	ujutnyj inter'er
+3.1.7.	nevychurnyj inter'er
+3.1.8.	dorogoj inter'er
+3.1.9.	prostoj inter'er
+3.1.10.	inter'er uzhasnyj
+3.2.1.	prijatnaja atmosfera
+3.2.2.	ujutnaja atmosfera
+3.2.3.	neprinuzhdennaja atmosfera
+3.3.1.	dorogaja posuda
+3.3.2.	posuda horoshaja
+3.4.1.1.	melodichnaja muzyka
+3.4.1.2.	zhivaja muzyka
+3.4.1.3.	horoshaja muzyka
+3.4.1.4.	otlichnyj zvuk
+3.4.1.5.	prijatnaja muzyka
+3.4.2.1.	est' televizor
+3.4.2.2.	televizor oret
+3.4.2.3.	gromkij televizor
+3.4.3.1.	futbol s pivom
+3.4.3.2.	est' sportivnye transljatsii
+3.4.3.3.	pokazyvajut futbol
+3.4.3.4.	mozhno smotret' futbol
+3.4.4.1.	horoshij kal'jan
+3.4.4.2.	horoshaja kal'jannaja karta
+3.4.5.1.	est' zhivye vystuplenija
+3.5.1.1.	prostornyj zal
+3.5.1.2.	vysokie potolki
+3.5.1.3.	panoramnyj vid
+3.5.2.1.	est' konditsioner
+3.5.2.2.	letom konditsioner
+3.6.1.	est' kurilka
+3.6.2.	mozhno vyjti pokurit'
+3.6.3.	klassnaja veranda
+3.6.4.	horoshaja veranda
+3.6.5.	bol'shoj banketnyj zal
+3.6.6.	horoshij bar
+3.7.1.	tualet chistyj
+3.7.2.	tualet grjaznyj
+3.7.3.	tualet ne ubirajut
+3.8.1.	horoshij vid iz okna
+3.8.2.	otkryvaetsja otlichnyj vid
+3.9.1.	otlichnoe mestoraspolozhenie
+3.9.2.	legko dobrat'sja
+3.9.3.	nedaleko ot metro
+3.9.4.	mozhno legko doehat'
+4.6.	besplatnaja degustatsija
+4.7.	mozhno vzjat' so skidkoj
+4.8.	Karta postojannogo klienta
+5.8.	adekvatnye tseny
+5.9.	tseny stabil'nye
+5.10.	vysokie tseny
+6.7.	mesto uzhasnoe
+6.8.	moja novaja ljubov'
+6.9.	k posescheniju ne sovetuju
