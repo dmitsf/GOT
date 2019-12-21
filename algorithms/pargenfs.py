@@ -342,7 +342,7 @@ def run():
     taxonomy_tree = get_taxonomy_tree()
 
     node_names = []
-    with open("latin_taxonomy_leaves.txt", 'r') as f:
+    with open("test_files/latin_taxonomy_leaves.txt", 'r') as f:
         for i in f.readlines():
             node_names.append(i.split('\t')[1].strip().replace("ju", "yu").\
                               replace("ja", "ya").lower().replace("hor", "khor").\
@@ -351,7 +351,7 @@ def run():
                               replace("hol", "khol").replace("oh", "okh"))
 
     membership_matrix = []
-    with open("mem2dat", 'r') as f:
+    with open("test_files/clusters.dat", 'r') as f:
         for l in f.readlines():
             line = list(map(float, l.split('\t')))
             membership_matrix.append(line)

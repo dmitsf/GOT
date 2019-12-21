@@ -37,7 +37,7 @@ class Node(Collection):
         return bool(self.children)
 
 
-def get_taxonomy_tree(file_name="latin_taxonomy_rest.csv"):
+def get_taxonomy_tree(file_name="test_files/latin_taxonomy_rest.csv"):
 
     tree = Node('', 'root', None)
     curr_parent = tree
