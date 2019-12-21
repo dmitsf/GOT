@@ -20,6 +20,20 @@ class Node(Collection):
     def __len__(self):
         return len(self.children)
 
+    def __setattr__(self, name, value):
+        self.__dict__[name] = value
+
+    def __getattr__(self, name):
+        if name not in self.__dict__:
+            return None
+        return self.__dict__[name]
+
+    def is_leaf(self):
+        return self.children is []
+
+    def is_internal(self):
+        return self.children is not []
+
 
 def get_taxonomy_tree(file_name="latin_taxonomy_rest.csv"):
 
