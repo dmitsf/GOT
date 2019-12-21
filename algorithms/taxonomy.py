@@ -28,11 +28,13 @@ class Node(Collection):
             return None
         return self.__dict__[name]
 
+    @property
     def is_leaf(self):
-        return self.children is []
+        return not self.children
 
+    @property
     def is_internal(self):
-        return self.children is not []
+        return bool(self.children)
 
 
 def get_taxonomy_tree(file_name="latin_taxonomy_rest.csv"):
@@ -66,8 +68,8 @@ def leaves_from_tree(tree):
     leaves = []
 
     def find_leaves(node):
-        if node.children:
-            for t in node.children:
+        if node.is_internal:
+            for t in node:
                 find_leaves(t)
         else:
             leaves.append(node)
