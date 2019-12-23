@@ -4,7 +4,41 @@ from collections.abc import Collection
 
 
 class Node(Collection):
-    def __init__(self, index, name, parent):
+    """
+    A class used to represent an Tree node with descendants
+
+    ...
+
+    Initial attributes
+    ----------
+    index : str
+        a string representing the node index, for example 1.2.3.
+    name : str
+        the name of the node
+    parent : Node or None
+        the parent of the node
+    children : list
+        a list of the all direct descendants (children) of the node
+
+    Methods
+    -------
+    __contains__(item)
+        checks whether the item is a direct decsendant of the node
+    ...
+    """
+    def __init__(self, index: str, name: str, parent) -> None:
+        """
+        Parameters
+        ----------
+        index : str
+            a string representing the node index, for example 1.2.3.
+        name : str
+            the name of the node
+        parent : Node or None
+            the parent of the node
+        children : list
+            a list of the all direct descendants (children) of the node
+        """
         self.index = index
         self.name = name
         self.parent = parent
