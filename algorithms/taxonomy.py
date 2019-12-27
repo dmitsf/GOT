@@ -20,7 +20,7 @@ class Node(Collection):
         the name of the node
     parent : Node or None
         the parent of the node
-    children : list
+    children : List['Node']
         a list of the all direct descendants (children) of the node
 
     Main methods
@@ -52,7 +52,8 @@ class Node(Collection):
         checks whether the node is an internal node (i.e., is
         not a leaf)
     """
-    def __init__(self, index: str, name: str, parent: 'Node') -> None:
+    def __init__(self, index: str, name: str, parent: Union['Node', None], \
+                 children: List['Node'] = None) -> None:
         """Constructor
 
         Parameters
@@ -61,8 +62,10 @@ class Node(Collection):
             a string representing the node index, for example 1.2.3.
         name : str
             the name of the node
-        parent : Node or None
+        parent : Union['Node', None]
             the parent of the node
+        children : List['Node']
+            a list of the all direct descendants (children) of the node
 
         Returns
         -------
@@ -71,14 +74,17 @@ class Node(Collection):
         self.index = index
         self.name = name
         self.parent = parent
-        self.children = []
+        if children is None:
+            self.children = []
+        else:
+            self.children = children
 
-    def __contains__(self, item: 'Node') -> bool:
+    def __contains__(self, item: Union['Node', object]) -> bool:
         """Checks whether the item is a direct descendant of the node
 
         Parameters
         ----------
-        item : Node
+        item : Union['Node', object]
             a node to check
 
         Returns
@@ -187,7 +193,7 @@ def get_taxonomy_tree(filename: str = "test_files/latin_taxonomy_rest.csv") -> N
             the root of the taxonomy built
     """
 
-    tree = Node('', "root", None)
+    tree = Node("", "root", None)
     curr_parent = tree
 
     with open(filename, 'r') as file_opened:
@@ -202,7 +208,8 @@ def get_taxonomy_tree(filename: str = "test_files/latin_taxonomy_rest.csv") -> N
                                   name_s.group(0)[-1] == "'") \
                                   else name_s.group(0)[1:-1].lower()
                 while curr_parent.index not in index:
-                    curr_parent = curr_parent.parent
+                    if curr_parent.parent is not None:
+                        curr_parent = curr_parent.parent
 
                 current_node = Node(index, name, curr_parent)
                 curr_parent.children.append(current_node)
