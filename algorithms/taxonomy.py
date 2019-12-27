@@ -5,9 +5,8 @@ from collections.abc import Collection
 
 class Node(Collection):
     """
-    A class used to represent an Tree node with descendants
-
-    ...
+    A class used to represent a Tree node with the all descendants.
+    This is a basic data structure for a taxonomy representing.
 
     Initial attributes
     ----------
@@ -20,14 +19,37 @@ class Node(Collection):
     children : list
         a list of the all direct descendants (children) of the node
 
-    Methods
+    Main methods
     -------
     __contains__(item)
-        checks whether the item is a direct decsendant of the node
-    ...
+        checks whether the item is a direct decsendant of the node,
+        one may use "in" operator to check the property above
+
+    __iter__()
+        iterates over all descendants of the node, this is a 
+        syntactic sugar for iteration over "node.children"
+
+    __len__()
+        returns the outgoing degree of the node, i.e., the 
+        number of node's children
+
+    __setattr__(name, value)
+        allows to set any custom attribute, this is useful for
+        ParGenFS algorithm
+
+    __getattr__(name)
+        allows to get a custom attribute. If there is no such
+        attrubute, returns "None"
+    is_leaf() (property)
+        returns whether the node is a leaf node
+
+    is_internal (property)
+        returns whether the node is am internal node (i.e., is
+        not a leaf)
     """
     def __init__(self, index: str, name: str, parent) -> None:
-        """
+        """Constructor
+
         Parameters
         ----------
         index : str
@@ -36,8 +58,10 @@ class Node(Collection):
             the name of the node
         parent : Node or None
             the parent of the node
-        children : list
-            a list of the all direct descendants (children) of the node
+
+        Returns
+        -------
+        None
         """
         self.index = index
         self.name = name
