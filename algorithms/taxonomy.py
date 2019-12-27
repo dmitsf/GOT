@@ -1,6 +1,10 @@
+""" A class for taxonomy representing
+"""
+
 import re
 
 from collections.abc import Collection
+from typing import List, Generator, Union
 
 
 class Node(Collection):
@@ -26,11 +30,11 @@ class Node(Collection):
         one may use "in" operator to check the property above
 
     __iter__()
-        iterates over all descendants of the node, this is a 
+        iterates over all descendants of the node, this is a
         syntactic sugar for iteration over "node.children"
 
     __len__()
-        returns the outgoing degree of the node, i.e., the 
+        returns the outgoing degree of the node, i.e., the
         number of node's children
 
     __setattr__(name, value)
@@ -40,14 +44,15 @@ class Node(Collection):
     __getattr__(name)
         allows to get a custom attribute. If there is no such
         attrubute, returns "None"
+
     is_leaf() (property)
-        returns whether the node is a leaf node
+        checks whether the node is a leaf node
 
     is_internal (property)
-        returns whether the node is am internal node (i.e., is
+        checks whether the node is an internal node (i.e., is
         not a leaf)
     """
-    def __init__(self, index: str, name: str, parent) -> None:
+    def __init__(self, index: str, name: str, parent: 'Node') -> None:
         """Constructor
 
         Parameters
@@ -68,40 +73,89 @@ class Node(Collection):
         self.parent = parent
         self.children = []
 
-    def __contains__(self, item):
+    def __contains__(self, item: 'Node') -> bool:
+        """Checks whether the item is a direct descendant of the node
+
+        Parameters
+        ----------
+        item : Node
+            a node to check
+
+        Returns
+        -------
+        bool
+            "True" if item is a direct descendant of the node,
+            else "False"
+        """
         return item in self.children
 
-    def __iter__(self):
+    def __iter__(self) -> Generator['Node', None, None]:
+        """
+        """
         for item in self.children:
             yield item
 
-    def __len__(self):
+    def __len__(self) -> int:
+        """
+        """
         return len(self.children)
 
-    def __setattr__(self, name, value):
+    def __setattr__(self, name: str, value: Union[list, dict, str, bool]) -> None:
+        """
+        """
         self.__dict__[name] = value
 
-    def __getattr__(self, name):
+    def __getattr__(self, name: str) -> Union[list, dict, str, bool, None]:
+        """
+        """
         if name not in self.__dict__:
             return None
         return self.__dict__[name]
 
     @property
-    def is_leaf(self):
+    def is_leaf(self) -> bool:
+        """Checks whether the node is a leaf node
+
+        Returns
+        -------
+        bool
+            "True" if the node is a leaf node,
+            else "False"
+        """
         return not self.children
 
     @property
-    def is_internal(self):
+    def is_internal(self) -> bool:
+        """Checks whether the node is an internal node (i.e., is
+        not a leaf)
+
+        Returns
+        -------
+        bool
+            "True" if the node is an internal node,
+            else "False"
+        """
         return bool(self.children)
 
 
-def get_taxonomy_tree(file_name="test_files/latin_taxonomy_rest.csv"):
+def get_taxonomy_tree(filename: str = "test_files/latin_taxonomy_rest.csv") -> Node:
+    """
 
-    tree = Node('', 'root', None)
+        Parameters
+        ----------
+        filename : str
+
+        Returns
+        -------
+        Node
+            the root of the taxonomy built
+    """
+
+    tree = Node('', "root", None)
     curr_parent = tree
 
-    with open(file_name, 'r') as f:
-        for line in f:
+    with open(filename, 'r') as file_opened:
+        for line in file_opened:
             index_s = re.search(r"(^[\.\d]+)[*, ]", line)
             name_s = re.search(r",([A-Za-z 102\-']+),?", line)
 
@@ -121,14 +175,25 @@ def get_taxonomy_tree(file_name="test_files/latin_taxonomy_rest.csv"):
     return tree
 
 
-def leaves_from_tree(tree):
+def leaves_from_tree(tree: Node) -> List[Node]:
+    """Returns all the leaves of the taxonomy
 
+        Parameters
+        ----------
+        tree : Node
+            the root of the taxonomy
+
+        Returns
+        -------
+        List[Node]
+            a list of the taxonomy leaves
+    """
     leaves = []
 
     def find_leaves(node):
         if node.is_internal:
-            for t in node:
-                find_leaves(t)
+            for child in node:
+                find_leaves(child)
         else:
             leaves.append(node)
 
@@ -139,5 +204,5 @@ def leaves_from_tree(tree):
 
 if __name__ == '__main__':
 
-    t = get_taxonomy_tree()
-    print(('\n'.join([i.index +' ' + i.name for i in leaves_from_tree(t)])))
+    TAXONOMY_GOT = get_taxonomy_tree()
+    print(('\n'.join([i.index +' ' + i.name for i in leaves_from_tree(TAXONOMY_GOT)])))
