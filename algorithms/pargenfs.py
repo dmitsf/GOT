@@ -98,8 +98,8 @@ def truncate_weights(node, threshold):
         else:
             summ += node.u ** 2
 
-    for t in node:
-        summ += truncate_weights(t, threshold)
+    for child in node:
+        summ += truncate_weights(child, threshold)
 
     return summ
 
@@ -109,16 +109,16 @@ def set_internal_weights(node):
         return node.u ** 2
 
     summ = 0
-    for t in node:
-        summ += set_internal_weights(t)
+    for child in node:
+        summ += set_internal_weights(child)
         node.u = sqrt(summ)
     return summ
 
 
 def prune_tree(node):
     if node.is_internal:
-        for t in node:
-            prune_tree(t)
+        for child in node:
+            prune_tree(child)
 
         if not node.u:
             g_label = 0
@@ -131,20 +131,20 @@ def prune_tree(node):
 
 
 def set_gaps_for_tree(node):
-    g = [t for t in node if t.u == 0]
+    gaps = [child for child in node if child.u == 0]
     if not node.G:
-        node.G = g
+        node.G = gaps
 
-    for t in node:
-        set_gaps_for_tree(t)
+    for child in node:
+        set_gaps_for_tree(child)
 
 
 def set_parameters(node):
 
-    for t in node:
-        set_parameters(t)
+    for child in node:
+        set_parameters(child)
 
-    g_set = sum([t.G for t in node], node.G or [])
+    g_set = sum([child.G for child in node], node.G or [])
     added = set()
     g_result = []
     for t in g_set:
@@ -154,7 +154,7 @@ def set_parameters(node):
 
     node.G = g_result
     node.v = node.parent.u if node.parent else 1
-    node.V = sum(x.v if x.v is not None else 0 for x in node.G)
+    node.V = sum(g.v if g.v is not None else 0 for g in node.G)
 
 
 def reduce_edges(node):
@@ -162,16 +162,16 @@ def reduce_edges(node):
         h = node.children[0].children
         node.children = h
 
-        def update_layer_number(n):
-            n.e -= 1
-            for t in n:
-                update_layer_number(t)
+        def update_layer_number(t_node):
+            t_node.e -= 1
+            for child in t_node:
+                update_layer_number(child)
 
-        for t in node:
-            update_layer_number(t)
+        for child in node:
+            update_layer_number(child)
 
-    for t in node:
-        reduce_edges(t)
+    for child in node:
+        reduce_edges(child)
 
 
 def make_init_step(node, gamma_v):
@@ -314,8 +314,8 @@ def make_ete3(taxonomy_tree, print_all=True):
 
 
 def save_ete3(ete3_desc, filename="taxonomy_tree.ete"):
-    with open(filename, 'w') as f:
-        f.write(ete3_desc)
+    with open(filename, 'w') as file_opened:
+        file_opened.write(ete3_desc)
 
 
 def pargenfs(cluster, taxonomy_tree, gamma_v=.2, lambda_v=.2):
@@ -327,18 +327,18 @@ def pargenfs(cluster, taxonomy_tree, gamma_v=.2, lambda_v=.2):
     print("Number of leaves:", len(leaf_weights))
     print("All positive weights:")
 
-    for w, i in sorted(leaf_weights, key=itemgetter(0), reverse=True):
-        if not w:
+    for weight, i in sorted(leaf_weights, key=itemgetter(0), reverse=True):
+        if not weight:
             break
-        print("%-50s %.5f" % (i, w))
+        print("%-50s %.5f" % (i, weight))
 
     summ_after_trunc = truncate_weights(taxonomy_tree, LIMIT)
     updated_leaf_weights = normalize_and_return_leaf_weights(taxonomy_tree, summ_after_trunc)
     print("After transformation:")
-    for w, i in sorted(updated_leaf_weights, key=itemgetter(0), reverse=True):
-        if not w:
+    for weight, i in sorted(updated_leaf_weights, key=itemgetter(0), reverse=True):
+        if not weight:
             break
-        print("%-50s %.5f" % (i, w))
+        print("%-50s %.5f" % (i, weight))
 
     print("Setting weights for internal nodes")
     root_u = set_internal_weights(taxonomy_tree)
