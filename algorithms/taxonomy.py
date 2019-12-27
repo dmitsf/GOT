@@ -90,7 +90,7 @@ class Node(Collection):
         Returns
         -------
         bool
-            "True" if item is a direct descendant of the node,
+            "True" if the item is a direct descendant of the node,
             else "False"
         """
         return item in self.children
