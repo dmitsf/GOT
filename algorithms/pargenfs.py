@@ -1,5 +1,9 @@
+""" ParGenFS algorithm with accessory functions
+"""
+
 from operator import itemgetter
 from math import sqrt
+from typing import List
 
 from taxonomy import leaves_from_tree, get_taxonomy_tree, Node
 
@@ -9,17 +13,45 @@ GAMMA = .4
 LAMBDA = .1
 
 
-def get(tree):
-    return leaves_from_tree(tree)
+def enumerate_tree_layers(node: None, current_layer: int = 0) -> None:
+    """Assigns a corresponding layer numbers to the all nodes of the taxonomy
+
+    Parameters
+    ----------
+    tree : Node
+        the root of the taxonomy
+    current_layer : int
+        a layer number (nodes' level) to assign
+
+    Returns
+    -------
+    None
+    """
+
+    node.e = current_layer
+    for child in node:
+        enumerate_tree_layers(child, current_layer=current_layer+1)
 
 
-def enumerate_tree_layers(node, e=0):
-    node.e = e
-    for t in node:
-        enumerate_tree_layers(t, e=e+1)
+def get_cluster_k(tree_leaves: List[Node], node_names: List[str], \
+                  membership_matrix: List[List[float]], k: int) -> List[float]:
+    """Return a membership vector corresponding to a k-th cluster
 
-
-def get_cluster_k(tree_leaves, node_names, membership_matrix, k):
+    Parameters
+    ----------
+    tree_leaves : List[Node]
+        all the leaves of the taxonomy
+    node_names : List[str]
+        string names of nodes
+    membership_matrix : List[List[float]]
+        membership matrix, size: (number_of_clusters x number_of_node_names)
+    k : int
+        index of a cluster
+    Returns
+    -------
+    List[float]
+        membership vector corresponding to a k-th cluster
+    """
 
     node_to_weight = dict(zip(node_names, (c[k] for c in membership_matrix)))
     cluster = {t.name: node_to_weight.get(t.name, 0) for t in tree_leaves}
