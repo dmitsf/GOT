@@ -237,11 +237,11 @@ def make_result_table(node):
     return table
 
 
-def save_result_table(result_table, file_name="table.csv"):
+def save_result_table(result_table, filename="table.csv"):
     result_table = sorted(result_table, key=lambda x: (len(x), x))
     result_table = [["index", "name", "u", "p", "V", "H", "G", "L"]] + result_table
 
-    with open(file_name, 'w') as f:
+    with open(filename, 'w') as f:
         for t in result_table:
             f.write('\t'.join(t) + '\n')
 
@@ -313,8 +313,8 @@ def make_ete3(taxonomy_tree, print_all=True):
     return "".join(output)
 
 
-def save_ete3(ete3_desc, file_name="taxonomy_tree.ete"):
-    with open(file_name, 'w') as f:
+def save_ete3(ete3_desc, filename="taxonomy_tree.ete"):
+    with open(filename, 'w') as f:
         f.write(ete3_desc)
 
 
@@ -374,8 +374,8 @@ def run():
     taxonomy_tree = get_taxonomy_tree()
 
     node_names = []
-    with open("test_files/latin_taxonomy_leaves.txt", 'r') as f:
-        for i in f.readlines():
+    with open("test_files/latin_taxonomy_leaves.txt", 'r') as file_opened:
+        for i in file_opened.readlines():
             node_names.append(i.split('\t')[1].strip().replace("ju", "yu").\
                               replace("ja", "ya").lower().replace("hor", "khor").\
                               replace("kuh", "kukh").replace("eha", "ekha").\
@@ -383,10 +383,10 @@ def run():
                               replace("hol", "khol").replace("oh", "okh"))
 
     membership_matrix = []
-    with open("test_files/clusters.dat", 'r') as f:
-        for l in f.readlines():
-            line = list(map(float, l.split('\t')))
-            membership_matrix.append(line)
+    with open("test_files/clusters.dat", 'r') as file_opened:
+        for line in file_opened.readlines():
+            membership_vector = list(map(float, line.split('\t')))
+            membership_matrix.append(membership_vector)
 
     tree_leaves = leaves_from_tree(taxonomy_tree)
     cluster = get_cluster_k(tree_leaves, node_names, membership_matrix, 2)
