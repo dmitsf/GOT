@@ -90,23 +90,57 @@ class Node(Collection):
         return item in self.children
 
     def __iter__(self) -> Generator['Node', None, None]:
-        """
+        """Iterates over all the descendants of the node
+
+        Returns
+        -------
+        Generator['Node', None, None]
+            generator over all the descendants
         """
         for item in self.children:
             yield item
 
     def __len__(self) -> int:
-        """
+        """Returns an outgoing degree of the node, i.e., a
+        number of node's children
+
+        Returns
+        -------
+        int
+            an outgoing degree of the node
         """
         return len(self.children)
 
     def __setattr__(self, name: str, value: Union[list, dict, str, bool]) -> None:
-        """
+        """Allows to set any custom attribute, this is useful for
+        ParGenFS algorithm
+
+        Parameters
+        ----------
+        name: str
+            a name of the attribute
+        value: Union[list, dict, str, bool]
+            a value of the attribute
+        Returns
+        -------
+        None
         """
         self.__dict__[name] = value
 
     def __getattr__(self, name: str) -> Union[list, dict, str, bool, None]:
-        """
+        """Allows to get a custom attribute. If there is no such
+        attrubute, returns "None"
+
+        Parameters
+        ----------
+        name: str
+            a name of the attribute
+
+        Returns
+        -------
+        Union[list, dict, str, bool, None]
+            a value of the attribute or "None", if there is no such
+            an attibute
         """
         if name not in self.__dict__:
             return None
@@ -139,11 +173,13 @@ class Node(Collection):
 
 
 def get_taxonomy_tree(filename: str = "test_files/latin_taxonomy_rest.csv") -> Node:
-    """
+    """Builds the taxonomy from its description in the file
 
         Parameters
         ----------
         filename : str
+            the file with the taxonomy description in tab-separated
+            taxonomy description (TSTD) format
 
         Returns
         -------
