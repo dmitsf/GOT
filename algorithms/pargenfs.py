@@ -247,6 +247,8 @@ def save_result_table(result_table, filename="table.csv"):
 
 
 def make_ete3(taxonomy_tree, print_all=True):
+    """
+    """
     head_subjects = set(t.index for t in taxonomy_tree.H)
 
     def rec_ete3(node, head_subject=0):
