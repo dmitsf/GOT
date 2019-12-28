@@ -147,10 +147,10 @@ def set_parameters(node):
     g_set = sum([child.G for child in node], node.G or [])
     added = set()
     g_result = []
-    for t in g_set:
-        if t.name not in added:
-            g_result.append(t)
-            added |= {t.name}
+    for gap in g_set:
+        if gap.name not in added:
+            g_result.append(gap)
+            added |= {gap.name}
 
     node.G = g_result
     node.v = node.parent.u if node.parent else 1
@@ -159,8 +159,8 @@ def set_parameters(node):
 
 def reduce_edges(node):
     if len(node) == 1:
-        h = node.children[0].children
-        node.children = h
+        temp = node.children[0].children
+        node.children = temp
 
         def update_layer_number(t_node):
             t_node.e -= 1
@@ -176,8 +176,8 @@ def reduce_edges(node):
 
 def make_init_step(node, gamma_v):
     if node.is_internal:
-        for t in node:
-            make_init_step(t, gamma_v)
+        for child in node:
+            make_init_step(child, gamma_v)
     else:
         if node.u > 0:
             node.H = [node]
@@ -194,8 +194,8 @@ def make_init_step(node, gamma_v):
 def make_recursive_step(node, gamma_v, lambda_v):
 
     if node.is_internal:
-        for t in node:
-            make_recursive_step(t, gamma_v, lambda_v)
+        for child in node:
+            make_recursive_step(child, gamma_v, lambda_v)
 
         if not node.o:
             sum_penalty = sum([t.p if t.p is not None else 0 for t in node])
@@ -212,8 +212,8 @@ def make_recursive_step(node, gamma_v, lambda_v):
 
 def indicate_offshoots(node):
     if node.is_internal:
-        for t in node:
-            indicate_offshoots(t)
+        for child in node:
+            indicate_offshoots(child)
     else:
         heads = [t.name for t in (node.parent.H or [])]
         if not heads:
@@ -225,8 +225,8 @@ def make_result_table(node):
     table = []
 
     if node.is_internal:
-        for t in node:
-            table.extend(make_result_table(t))
+        for child in node:
+            table.extend(make_result_table(child))
 
     table.append([node.index.rstrip(".") or "", node.name, str(round(node.u, 3)),
                   str(round(node.p, 3)), str(round(node.V, 3)),
@@ -241,9 +241,9 @@ def save_result_table(result_table, filename="table.csv"):
     result_table = sorted(result_table, key=lambda x: (len(x), x))
     result_table = [["index", "name", "u", "p", "V", "H", "G", "L"]] + result_table
 
-    with open(filename, 'w') as f:
-        for t in result_table:
-            f.write('\t'.join(t) + '\n')
+    with open(filename, 'w') as file_opened:
+        for table_row in result_table:
+            file_opened.write('\t'.join(table_row) + '\n')
 
 
 def make_ete3(taxonomy_tree, print_all=True):
