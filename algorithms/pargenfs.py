@@ -247,13 +247,13 @@ def save_result_table(result_table, filename="table.csv"):
 
 
 def make_ete3(taxonomy_tree, print_all=True):
-    heads = set(t.index for t in taxonomy_tree.H)
+    head_subjects = set(t.index for t in taxonomy_tree.H)
 
-    def rec_ete3(node, h=0):
+    def rec_ete3(node, head_subject=0):
         output = []
 
-        if node.index in heads and not h:
-            h = 1
+        if node.index in head_subjects and not head_subject:
+            head_subject = 1
 
         if node.is_internal:
             output.append("(")
@@ -262,7 +262,7 @@ def make_ete3(taxonomy_tree, print_all=True):
             while not sorted_children[j].u:
                 j += 1
 
-            sn = sorted_children[j - 1].name
+            last_sorted_name = sorted_children[j - 1].name
             if j == 2:
                 sorted_children[j - 1].name = sorted_children[0].name + ". " \
                                                  + sorted_children[j - 1].name
@@ -271,15 +271,15 @@ def make_ete3(taxonomy_tree, print_all=True):
                                                  + sorted_children[j - 1].name + \
                                                  " " +  str(j) + " items"
             if j:
-                output.extend(rec_ete3(sorted_children[j - 1], h=h))
+                output.extend(rec_ete3(sorted_children[j - 1], head_subject=head_subject))
                 output.append(",")
 
-            sorted_children[j - 1].name = sn
+            sorted_children[j - 1].name = last_sorted_name
 
-            l = len(sorted_children[j:])
-            for k, t in enumerate(sorted_children[j:]):
-                output.extend(rec_ete3(t, h=h))
-                if k < l - 1:
+            children_len = len(sorted_children[j:])
+            for k, child in enumerate(sorted_children[j:]):
+                output.extend(rec_ete3(child, head_subject=head_subject))
+                if k < children_len - 1:
                     output.append(",")
             output.append(")")
 
@@ -302,8 +302,8 @@ def make_ete3(taxonomy_tree, print_all=True):
                                                                else [node.L[0], \
                                                                      Node(None, "...", None), \
                                                                      node.L[-1]])]), \
-                           "}:Hd=", ("1" if node.index in heads else "0"), ":Ch=", \
-                           ("1" if node.is_internal else "0"), ":Sq=", ("1" if h else "0"),\
+                           "}:Hd=", ("1" if node.index in head_subjects else "0"), ":Ch=", \
+                           ("1" if node.is_internal else "0"), ":Sq=", ("1" if head_subject else "0"),\
                            "]"])
 
         return output
