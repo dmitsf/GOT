@@ -178,6 +178,15 @@ class Node(Collection):
         return bool(self.children)
 
 
+class Taxonomy:
+    """
+    A class for taxonomy representation
+    """
+
+    def __init__(self):
+        raise NotImplemented
+
+
 def get_taxonomy_tree(filename: str = "test_files/latin_taxonomy_rest.csv") -> Node:
     """Builds the taxonomy from its description in the file
 
