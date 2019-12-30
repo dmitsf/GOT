@@ -120,7 +120,8 @@ class Node(Collection):
         """
         return len(self.children)
 
-    def __setattr__(self, name: str, value: Union[list, dict, str, bool, int]) -> None:
+    def __setattr__(self, name: str, value: Union[list, dict, str, bool, int, \
+                                                  float]) -> None:
         """Allows to set any custom attribute, this is useful for
         ParGenFS algorithm
 
@@ -368,4 +369,4 @@ def extract_leaves(tree: Node) -> List[Node]:
 if __name__ == '__main__':
 
     TAXONOMY_GOT = Taxonomy("test_files/latin_taxonomy_rest.csv")
-    print(('\n'.join([i.index +' ' + i.name for i in TAXONOMY_GOT.leaves])))
+    print(('\n'.join([' '.join([i.index, i.name]) for i in TAXONOMY_GOT.leaves])))

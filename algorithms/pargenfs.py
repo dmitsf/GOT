@@ -3,7 +3,7 @@
 
 from operator import itemgetter
 from math import sqrt
-from typing import Dict, List
+from typing import Dict, List, Set
 
 from taxonomy import Taxonomy, Node
 
@@ -27,7 +27,6 @@ def enumerate_tree_layers(node: Node, current_layer: int = 0) -> None:
     -------
     None
     """
-
     node.e = current_layer
     for child in node:
         enumerate_tree_layers(child, current_layer=current_layer+1)
@@ -52,23 +51,37 @@ def get_cluster_k(tree_leaves: List[Node], node_names: List[str], \
     Dict[str, float]
         membership dictionary corresponding to a k-th cluster
     """
-
     node_to_weight = dict(zip(node_names, (c[k] for c in membership_matrix)))
     cluster = {t.name: node_to_weight.get(t.name, 0) for t in tree_leaves}
 
     return cluster
 
 
-def annotate_with_sum(node, cluster):
-    summ = 0
+def annotate_with_sum(node: Node, cluster: Dict[str, float]) -> float:
+    """Annotates a tree with the cluster weights
+
+    Parameters
+    ----------
+    node : Node
+        the root of the taxonomy tree / sub-tree
+    cluster : Dict[str, float]
+        the cluster
+
+    Returns
+    -------
+    float
+        a not-normalized sum of squared weights
+    """
+    summ = .0
 
     if node.is_leaf:
-        node.score = cluster.get(node.name, 0)
-        node.u = node.score
-        summ += node.score ** 2
+        membership = cluster.get(node.name, .0)
+        node.score = membership
+        node.u = membership
+        summ += membership ** 2
     else:
-        node.score = 0
-        node.u = node.score
+        node.score = .0
+        node.u = .0
 
     for i in node:
         summ += annotate_with_sum(i, cluster)
@@ -76,8 +89,21 @@ def annotate_with_sum(node, cluster):
     return summ
 
 
-def normalize_and_return_leaf_weights(node, summ):
+def normalize_and_return_leaf_weights(node: Node, summ: float) -> List[float]:
+    """Normalizes leaves' weights (annotations)
 
+    Parameters
+    ----------
+    node : Node
+        the root of the taxonomy tree / sub-tree
+    summ : float
+        sum of weights value
+
+    Returns
+    -------
+    List[float]
+        a list of wiights normalized
+    """
     leaf_weights = []
 
     if node.is_leaf:
@@ -90,7 +116,22 @@ def normalize_and_return_leaf_weights(node, summ):
     return leaf_weights
 
 
-def truncate_weights(node, threshold):
+def truncate_weights(node: Node, threshold: float) -> float:
+    """Truncates (sets to zero) leaves' weights (annotations)
+    what are less than the threshold
+
+    Parameters
+    ----------
+    node : Node
+        the root of the taxonomy tree / sub-tree
+    threshold : float
+        the threshold value
+
+    Returns
+    -------
+    float
+        summ of the resulting squared weights
+    """
     summ = 0
     if node.is_leaf:
         if node.u < threshold:
@@ -104,7 +145,19 @@ def truncate_weights(node, threshold):
     return summ
 
 
-def set_internal_weights(node):
+def set_internal_weights(node: Node) -> float:
+    """Sets weights for internal nodes
+
+    Parameters
+    ----------
+    node : Node
+        the root of the taxonomy tree / sub-tree
+
+    Returns
+    -------
+    float
+        summ of the resulting squared weights
+    """
     if node.is_leaf:
         return node.u ** 2
 
@@ -115,7 +168,17 @@ def set_internal_weights(node):
     return summ
 
 
-def prune_tree(node):
+def prune_tree(node: Node) -> None:
+    """Prunes the tree / sub-tree
+
+    Parameters
+    ----------
+    node : Node
+        the root of the taxonomy tree / sub-tree
+
+    Returns
+    -------
+    """
     if node.is_internal:
         for child in node:
             prune_tree(child)
@@ -130,7 +193,17 @@ def prune_tree(node):
                 node.G = [node]
 
 
-def set_gaps_for_tree(node):
+def set_gaps_for_tree(node: Node) -> None:
+    """Sets gaps for the tree / sub-tree
+
+    Parameters
+    ----------
+    node : Node
+        the root of the taxonomy tree / sub-tree
+
+    Returns
+    -------
+    """
     gaps = [child for child in node if child.u == 0]
     if not node.G:
         node.G = gaps
@@ -139,13 +212,22 @@ def set_gaps_for_tree(node):
         set_gaps_for_tree(child)
 
 
-def set_parameters(node):
+def set_parameters(node: Node) -> None:
+    """Sets parameters G, v, V for the tree / sub-tree
 
+    Parameters
+    ----------
+    node : Node
+        the root of the taxonomy tree / sub-tree
+
+    Returns
+    -------
+    """
     for child in node:
         set_parameters(child)
 
     g_set = sum([child.G for child in node], node.G or [])
-    added = set()
+    added: Set[str] = set()
     g_result = []
     for gap in g_set:
         if gap.name not in added:
@@ -153,11 +235,21 @@ def set_parameters(node):
             added |= {gap.name}
 
     node.G = g_result
-    node.v = node.parent.u if node.parent else 1
+    node.v = node.parent.u if node.parent else 1.
     node.V = sum(g.v if g.v is not None else 0 for g in node.G)
 
 
-def reduce_edges(node):
+def reduce_edges(node: Node) -> None:
+    """Reduces tree edges for the tree / sub-tree
+
+    Parameters
+    ----------
+    node : Node
+        the root of the taxonomy tree / sub-tree
+
+    Returns
+    -------
+    """
     if len(node) == 1:
         temp = node.children[0].children
         node.children = temp
@@ -174,7 +266,19 @@ def reduce_edges(node):
         reduce_edges(child)
 
 
-def make_init_step(node, gamma_v):
+def make_init_step(node: Node, gamma_v: float) -> None:
+    """Init step of ParGenFS algorithm
+
+    Parameters
+    ----------
+    node : Node
+        the root of the taxonomy tree / sub-tree
+    gamma_v : float
+        gamma value
+
+    Returns
+    -------
+    """
     if node.is_internal:
         for child in node:
             make_init_step(child, gamma_v)
@@ -191,8 +295,21 @@ def make_init_step(node, gamma_v):
         node.o = True
 
 
-def make_recursive_step(node, gamma_v, lambda_v):
+def make_recursive_step(node: Node, gamma_v: float, lambda_v: float) -> None:
+    """Recursive step of ParGenFS algorithm
 
+    Parameters
+    ----------
+    node : Node
+        the root of the taxonomy tree / sub-tree
+    gamma_v : float
+        gamma value
+    lambda_v : float
+        lambda value
+
+    Returns
+    -------
+    """
     if node.is_internal:
         for child in node:
             make_recursive_step(child, gamma_v, lambda_v)
@@ -305,8 +422,8 @@ def make_ete3(taxonomy_tree, print_all=True):
                                                                      Node(None, "...", None), \
                                                                      node.L[-1]])]), \
                            "}:Hd=", ("1" if node.index in head_subjects else "0"), ":Ch=", \
-                           ("1" if node.is_internal else "0"), ":Sq=", ("1" if head_subject else "0"),\
-                           "]"])
+                           ("1" if node.is_internal else "0"), ":Sq=", ("1" if head_subject \
+                                                                        else "0"), "]"])
 
         return output
 
