@@ -3,7 +3,7 @@
 
 from operator import itemgetter
 from math import sqrt
-from typing import Dict, List, Set
+from typing import Dict, List, Set, Iterable
 
 from taxonomy import Taxonomy, Node
 
@@ -89,7 +89,7 @@ def annotate_with_sum(node: Node, cluster: Dict[str, float]) -> float:
     return summ
 
 
-def normalize_and_return_leaf_weights(node: Node, summ: float) -> List[float]:
+def normalize_and_return_leaf_weights(node: Node, summ: float) -> Iterable[List[object]]:
     """Normalizes leaves' weights (annotations)
 
     Parameters
@@ -101,7 +101,7 @@ def normalize_and_return_leaf_weights(node: Node, summ: float) -> List[float]:
 
     Returns
     -------
-    List[float]
+    Iterable[List[object]]
         a list of wiights normalized
     """
     leaf_weights = []
@@ -132,7 +132,7 @@ def truncate_weights(node: Node, threshold: float) -> float:
     float
         summ of the resulting squared weights
     """
-    summ = 0
+    summ = .0
     if node.is_leaf:
         if node.u < threshold:
             node.u = 0
@@ -161,7 +161,7 @@ def set_internal_weights(node: Node) -> float:
     if node.is_leaf:
         return node.u ** 2
 
-    summ = 0
+    summ = .0
     for child in node:
         summ += set_internal_weights(child)
         node.u = sqrt(summ)
@@ -315,7 +315,7 @@ def make_recursive_step(node: Node, gamma_v: float, lambda_v: float) -> None:
             make_recursive_step(child, gamma_v, lambda_v)
 
         if not node.o:
-            sum_penalty = sum([t.p if t.p is not None else 0 for t in node])
+            sum_penalty = sum([t.p if t.p is not None else 0 for t in node], .0)
 
             if node.u + lambda_v * node.V < sum_penalty:
                 node.H = [node]
@@ -324,7 +324,7 @@ def make_recursive_step(node: Node, gamma_v: float, lambda_v: float) -> None:
             else:
                 node.H = sum((t.H if t.H is not None else [] for t in node), [])
                 node.L = sum((t.L if t.L is not None else [] for t in node), [])
-                node.p = sum((t.p if t.p is not None else 0 for t in node), 0)
+                node.p = sum((t.p if t.p is not None else 0 for t in node), .0)
 
 
 def indicate_offshoots(node):

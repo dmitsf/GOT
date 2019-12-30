@@ -22,6 +22,18 @@ class Node(Collection):
         the parent of the node
     children : List['Node']
         a list of the all direct descendants (children) of the node
+    u : float
+        membership value (normalized)
+    score : float
+        membership value (non-normalized)
+    v : float
+        node's gap importance
+    V : float
+        node's cumulative gap importance
+    G : List['Node']
+        node's set of gaps
+    p : float
+        node's ParGenFS penalty
 
     Main methods
     ----------
@@ -81,6 +93,13 @@ class Node(Collection):
             self.children = []
         else:
             self.children = children
+
+        self.u: float = .0
+        self.score: float = .0
+        self.G: List['Node'] = []
+        self.V: float = .0
+        self.v: float = .0
+        self.p: float = .0
 
     def __contains__(self, item: Union['Node', object]) -> bool:
         """Checks whether the item is a direct descendant of the node
