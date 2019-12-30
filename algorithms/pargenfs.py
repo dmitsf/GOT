@@ -3,9 +3,9 @@
 
 from operator import itemgetter
 from math import sqrt
-from typing import List
+from typing import Dict, List
 
-from taxonomy import leaves_from_tree, get_taxonomy_tree, Node
+from taxonomy import Taxonomy, Node
 
 
 LIMIT = .2
@@ -13,13 +13,13 @@ GAMMA = .4
 LAMBDA = .1
 
 
-def enumerate_tree_layers(node: None, current_layer: int = 0) -> None:
+def enumerate_tree_layers(node: Node, current_layer: int = 0) -> None:
     """Assigns a corresponding layer numbers to the all nodes of the taxonomy
 
     Parameters
     ----------
-    tree : Node
-        the root of the taxonomy
+    node : Node
+        the root of the taxonomy tree / sub-tree
     current_layer : int
         a layer number (nodes' level) to assign
 
@@ -34,7 +34,7 @@ def enumerate_tree_layers(node: None, current_layer: int = 0) -> None:
 
 
 def get_cluster_k(tree_leaves: List[Node], node_names: List[str], \
-                  membership_matrix: List[List[float]], k: int) -> List[float]:
+                  membership_matrix: List[List[float]], k: int) -> Dict[str, float]:
     """Return a membership vector corresponding to a k-th cluster
 
     Parameters
@@ -49,8 +49,8 @@ def get_cluster_k(tree_leaves: List[Node], node_names: List[str], \
         index of a cluster
     Returns
     -------
-    List[float]
-        membership vector corresponding to a k-th cluster
+    Dict[str, float]
+        membership dictionary corresponding to a k-th cluster
     """
 
     node_to_weight = dict(zip(node_names, (c[k] for c in membership_matrix)))
@@ -322,10 +322,10 @@ def save_ete3(ete3_desc, filename="taxonomy_tree.ete"):
 
 def pargenfs(cluster, taxonomy_tree, gamma_v=.2, lambda_v=.2):
 
-    enumerate_tree_layers(taxonomy_tree)
+    enumerate_tree_layers(taxonomy_tree.root)
 
-    summ = annotate_with_sum(taxonomy_tree, cluster)
-    leaf_weights = normalize_and_return_leaf_weights(taxonomy_tree, summ)
+    summ = annotate_with_sum(taxonomy_tree.root, cluster)
+    leaf_weights = normalize_and_return_leaf_weights(taxonomy_tree.root, summ)
     print("Number of leaves:", len(leaf_weights))
     print("All positive weights:")
 
@@ -334,8 +334,8 @@ def pargenfs(cluster, taxonomy_tree, gamma_v=.2, lambda_v=.2):
             break
         print("%-50s %.5f" % (i, weight))
 
-    summ_after_trunc = truncate_weights(taxonomy_tree, LIMIT)
-    updated_leaf_weights = normalize_and_return_leaf_weights(taxonomy_tree, summ_after_trunc)
+    summ_after_trunc = truncate_weights(taxonomy_tree.root, LIMIT)
+    updated_leaf_weights = normalize_and_return_leaf_weights(taxonomy_tree.root, summ_after_trunc)
     print("After transformation:")
     for weight, i in sorted(updated_leaf_weights, key=itemgetter(0), reverse=True):
         if not weight:
@@ -343,28 +343,28 @@ def pargenfs(cluster, taxonomy_tree, gamma_v=.2, lambda_v=.2):
         print("%-50s %.5f" % (i, weight))
 
     print("Setting weights for internal nodes")
-    root_u = set_internal_weights(taxonomy_tree)
+    root_u = set_internal_weights(taxonomy_tree.root)
     print("Membership in root:", root_u)
     print("Pruning tree")
-    prune_tree(taxonomy_tree)
+    prune_tree(taxonomy_tree.root)
 
     print("Setting gaps")
-    set_gaps_for_tree(taxonomy_tree)
+    set_gaps_for_tree(taxonomy_tree.root)
 
     print("Other parameters setting")
-    set_parameters(taxonomy_tree)
-    reduce_edges(taxonomy_tree)
+    set_parameters(taxonomy_tree.root)
+    reduce_edges(taxonomy_tree.root)
 
     print("ParGenFS main steps")
-    make_init_step(taxonomy_tree, gamma_v)
-    make_recursive_step(taxonomy_tree, gamma_v, lambda_v)
+    make_init_step(taxonomy_tree.root, gamma_v)
+    make_recursive_step(taxonomy_tree.root, gamma_v, lambda_v)
 
-    indicate_offshoots(taxonomy_tree)
+    indicate_offshoots(taxonomy_tree.root)
 
-    result_table = make_result_table(taxonomy_tree)
+    result_table = make_result_table(taxonomy_tree.root)
     save_result_table(result_table)
 
-    ete3_desc = make_ete3(taxonomy_tree)
+    ete3_desc = make_ete3(taxonomy_tree.root)
     save_ete3(ete3_desc)
     print(ete3_desc)
     print("Done")
@@ -373,7 +373,7 @@ def pargenfs(cluster, taxonomy_tree, gamma_v=.2, lambda_v=.2):
 def run():
     gamma_val = GAMMA
     lambda_val = LAMBDA
-    taxonomy_tree = get_taxonomy_tree()
+    taxonomy_tree = Taxonomy("test_files/latin_taxonomy_rest.csv")
 
     node_names = []
     with open("test_files/latin_taxonomy_leaves.txt", 'r') as file_opened:
@@ -390,7 +390,7 @@ def run():
             membership_vector = list(map(float, line.split('\t')))
             membership_matrix.append(membership_vector)
 
-    tree_leaves = leaves_from_tree(taxonomy_tree)
+    tree_leaves = taxonomy_tree.leaves
     cluster = get_cluster_k(tree_leaves, node_names, membership_matrix, 2)
     pargenfs(cluster, taxonomy_tree, gamma_v=gamma_val, lambda_v=lambda_val)
 

@@ -120,7 +120,7 @@ class Node(Collection):
         """
         return len(self.children)
 
-    def __setattr__(self, name: str, value: Union[list, dict, str, bool]) -> None:
+    def __setattr__(self, name: str, value: Union[list, dict, str, bool, int]) -> None:
         """Allows to set any custom attribute, this is useful for
         ParGenFS algorithm
 
@@ -190,7 +190,7 @@ class Taxonomy:
     built_from : str
         a string representing the filename using for taxonomy
         building
-    root : Node
+    _root : Node
         a root of the taxonomy tree
     leaves_extracted : bool
         label: whether leaves were extracted for the taxonomy or not
@@ -208,8 +208,11 @@ class Taxonomy:
     get_taxonomy_tree(filename)
         builds the taxonomy from the file
 
-    leaves() (property, read/write)
+    leaves() (property)
         returns all the leaves of the taxonomy
+
+    root() (property)
+        returns the root of the taxonomy
     """
 
     def __init__(self, filename: str) -> None:
@@ -225,7 +228,7 @@ class Taxonomy:
         -------
         None
         """
-        self.root = self.get_taxonomy_tree(filename)
+        self._root = self.get_taxonomy_tree(filename)
         self.leaves_extracted: bool = False
         self._leaves: List[Node] = []
 
@@ -240,8 +243,21 @@ class Taxonomy:
         str
             string representing the information
         """
-
         return "Taxonomy built from {}".format(self.built_from)
+
+    @property
+    def root(self) -> Node:
+        """returns the root of the taxonomy
+
+        Parameters
+        ----------
+
+        Returns
+        -------
+        Node
+            the root of the tree
+        """
+        return self._root
 
     def get_taxonomy_tree(self, filename: str) -> Node:
         """Builds the taxonomy from its description in the file
@@ -257,7 +273,6 @@ class Taxonomy:
         Node
             the root of the taxonomy built
         """
-
         tree = Node("", "root", None)
         curr_parent = tree
 
@@ -301,7 +316,7 @@ class Taxonomy:
         if self.leaves_extracted:
             return self._leaves
 
-        leaves = extract_leaves(self.root)
+        leaves = extract_leaves(self._root)
         self._leaves = leaves
         self.leaves_extracted = True
 
@@ -336,7 +351,6 @@ def extract_leaves(tree: Node) -> List[Node]:
        List[Node]
            a list of the tree / sub-tree leaves
     """
-
     leaves = []
 
     def find_leaves(node):
