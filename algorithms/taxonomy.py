@@ -212,7 +212,7 @@ class Taxonomy:
     get_taxonomy_tree(filename)
         builds the taxonomy from the file
 
-    leaves() (property)
+    leaves() (property, read/write)
         returns all the leaves of the taxonomy
     """
 
@@ -288,35 +288,69 @@ class Taxonomy:
         return tree
 
     @property
-    def leaves(self, tree: Node) -> List[Node]:
-        """Returns all the leaves of the taxonomy
+    def leaves(self) -> List[Node]:
+        """Containts all the leaves of the taxonomy
 
-            Parameters
-            ----------
-            tree : Node
-                the root of the taxonomy
+           Parameters
+           ----------
+           tree : Node
+               the root of the taxonomy
 
-            Returns
-            -------
-            List[Node]
-                a list of the taxonomy leaves
+           Returns
+           -------
+           List[Node]
+               a list of the taxonomy leaves
         """
         if self.leaves_extracted:
             return self.leaves
 
-        leaves = []
-
-        def find_leaves(node):
-            if node.is_internal:
-                for child in node:
-                    find_leaves(child)
-            else:
-                leaves.append(node)
-
-        find_leaves(tree)
+        leaves = extract_leaves(self.root)
         self.leaves = leaves
 
         return leaves
+
+    @leaves.setter
+    def leaves(self, leaves_list: List[Node]) -> None:
+        """Property setter for leaves
+
+           Parameters
+           ----------
+           leaves_list : List[Node]
+               a list of the taxonomy leaves to set
+
+           Returns
+           -------
+           None
+        """
+        self.leaves = leaves_list
+
+
+def extract_leaves(tree: Node) -> List[Node]:
+    """Returns all the leaves of the tree / sub-tree
+
+       Parameters
+       ----------
+       tree : Node
+           the root of the tree / sub-tree
+
+       Returns
+       -------
+       List[Node]
+           a list of the tree / sub-tree leaves
+    """
+
+    leaves = []
+
+    def find_leaves(node):
+        if node.is_internal:
+            for child in node:
+                find_leaves(child)
+        else:
+            leaves.append(node)
+
+    find_leaves(tree)
+
+    return leaves
 
 
 if __name__ == '__main__':
