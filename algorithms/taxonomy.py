@@ -185,7 +185,6 @@ class Taxonomy:
     """
     A class for taxonomy representing
 
-
     Initial attributes
     ----------
     built_from : str
@@ -195,11 +194,8 @@ class Taxonomy:
         a root of the taxonomy tree
     leaves_extracted : bool
         label: whether leaves were extracted for the taxonomy or not
-
-    Attributes
-    ---------
-    leaves : List[None]
-        all the leaves of the taxonomy
+    _leaves : List[None]
+        containts all the leaves of the taxonomy
 
     Main methods
     ---------
@@ -230,7 +226,8 @@ class Taxonomy:
         None
         """
         self.root = self.get_taxonomy_tree(filename)
-        self.leaves_extracted = False
+        self.leaves_extracted: bool = False
+        self._leaves: List[Node] = []
 
     def _repr__(self) -> str:
         """Represents information about the taxonomy
@@ -302,10 +299,11 @@ class Taxonomy:
                a list of the taxonomy leaves
         """
         if self.leaves_extracted:
-            return self.leaves
+            return self._leaves
 
         leaves = extract_leaves(self.root)
-        self.leaves = leaves
+        self._leaves = leaves
+        self.leaves_extracted = True
 
         return leaves
 
@@ -322,7 +320,7 @@ class Taxonomy:
            -------
            None
         """
-        self.leaves = leaves_list
+        self._leaves = leaves_list
 
 
 def extract_leaves(tree: Node) -> List[Node]:
