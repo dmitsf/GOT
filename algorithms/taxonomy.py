@@ -24,7 +24,10 @@ class Node(Collection):
         a list of the all direct descendants (children) of the node
 
     Main methods
-    -------
+    ----------
+    __init__(index, name, parent, children)
+        constructor
+
     __contains__(item)
         checks whether the item is a direct decsendant of the node,
         one may use "in" operator to check the property above
@@ -45,10 +48,10 @@ class Node(Collection):
         allows to get a custom attribute. If there is no such
         attrubute, returns "None"
 
-    is_leaf() (property)
+    is_leaf(node) (property)
         checks whether the node is a leaf node
 
-    is_internal (property)
+    is_internal(node) (property)
         checks whether the node is an internal node (i.e., is
         not a leaf)
     """
@@ -180,7 +183,37 @@ class Node(Collection):
 
 class Taxonomy:
     """
-    A class for taxonomy representation
+    A class for taxonomy representing
+
+
+    Initial attributes
+    ----------
+    built_from : str
+        a string representing the filename using for taxonomy
+        building
+    root : Node
+        a root of the taxonomy tree
+    leaves_extracted : bool
+        label: whether leaves were extracted for the taxonomy or not
+
+    Attributes
+    ---------
+    leaves : List[None]
+        all the leaves of the taxonomy
+
+    Main methods
+    ---------
+    __init__(filename)
+        constructor
+
+    __repr__()
+        represents basic info about the taxonomy
+
+    get_taxonomy_tree(filename)
+        builds the taxonomy from the file
+
+    leaves() (property)
+        returns all the leaves of the taxonomy
     """
 
     def __init__(self, filename: str) -> None:
@@ -196,8 +229,8 @@ class Taxonomy:
         -------
         None
         """
-        self.built_from = filename
-        self.root = get_taxonomy_tree(filename)
+        self.root = self.get_taxonomy_tree(filename)
+        self.leaves_extracted = False
 
     def _repr__(self) -> str:
         """Represents information about the taxonomy
@@ -213,19 +246,19 @@ class Taxonomy:
 
         return "Taxonomy built from {}".format(self.built_from)
 
-    def get_taxonomy_tree(filename: str) -> Node:
+    def get_taxonomy_tree(self, filename: str) -> Node:
         """Builds the taxonomy from its description in the file
 
-            Parameters
-            ----------
-            filename : str
-                the file with the taxonomy description in tab-separated
-                taxonomy description (TSTD) format
+        Parameters
+        ----------
+        filename : str
+            the file with the taxonomy representation in flat-view
+            taxonomy representation (FVTR) format
 
-            Returns
-            -------
-            Node
-                the root of the taxonomy built
+        Returns
+        -------
+        Node
+            the root of the taxonomy built
         """
 
         tree = Node("", "root", None)
@@ -250,37 +283,43 @@ class Taxonomy:
                     curr_parent.children.append(current_node)
                     curr_parent = current_node
 
+        self.built_from = filename
+        self.leaves_extracted = False
         return tree
 
+    @property
+    def leaves(self, tree: Node) -> List[Node]:
+        """Returns all the leaves of the taxonomy
 
-def leaves_from_tree(tree: Node) -> List[Node]:
-    """Returns all the leaves of the taxonomy
+            Parameters
+            ----------
+            tree : Node
+                the root of the taxonomy
 
-        Parameters
-        ----------
-        tree : Node
-            the root of the taxonomy
+            Returns
+            -------
+            List[Node]
+                a list of the taxonomy leaves
+        """
+        if self.leaves_extracted:
+            return self.leaves
 
-        Returns
-        -------
-        List[Node]
-            a list of the taxonomy leaves
-    """
-    leaves = []
+        leaves = []
 
-    def find_leaves(node):
-        if node.is_internal:
-            for child in node:
-                find_leaves(child)
-        else:
-            leaves.append(node)
+        def find_leaves(node):
+            if node.is_internal:
+                for child in node:
+                    find_leaves(child)
+            else:
+                leaves.append(node)
 
-    find_leaves(tree)
+        find_leaves(tree)
+        self.leaves = leaves
 
-    return leaves
+        return leaves
 
 
 if __name__ == '__main__':
 
-    TAXONOMY_GOT = Taxonomy("test_files/latin_taxonomy_rest.csv") # get_taxonomy_tree()
-    print(('\n'.join([i.index +' ' + i.name for i in leaves_from_tree(TAXONOMY_GOT)])))
+    TAXONOMY_GOT = Taxonomy("test_files/latin_taxonomy_rest.csv")
+    print(('\n'.join([i.index +' ' + i.name for i in TAXONOMY_GOT.leaves])))
