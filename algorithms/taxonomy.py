@@ -183,48 +183,74 @@ class Taxonomy:
     A class for taxonomy representation
     """
 
-    def __init__(self):
-        raise NotImplemented
-
-
-def get_taxonomy_tree(filename: str = "test_files/latin_taxonomy_rest.csv") -> Node:
-    """Builds the taxonomy from its description in the file
+    def __init__(self, filename: str) -> None:
+        """Constructor
 
         Parameters
         ----------
         filename : str
-            the file with the taxonomy description in tab-separated
-            taxonomy description (TSTD) format
+            a string representing the name of the file for
+            taxonomy constructing
 
         Returns
         -------
-        Node
-            the root of the taxonomy built
-    """
+        None
+        """
+        self.built_from = filename
+        self.root = get_taxonomy_tree(filename)
 
-    tree = Node("", "root", None)
-    curr_parent = tree
+    def _repr__(self) -> str:
+        """Represents information about the taxonomy
 
-    with open(filename, 'r') as file_opened:
-        for line in file_opened:
-            index_s = re.search(r"(^[\.\d]+)[*, ]", line)
-            name_s = re.search(r",([A-Za-z 102\-']+),?", line)
+        Parameters
+        ----------
 
-            if index_s and name_s:
-                index, name = index_s.group(0)[:-1], \
-                              name_s.group(0)[1:].lower() \
-                              if (name_s.group(0)[-1].isalpha() or \
-                                  name_s.group(0)[-1] == "'") \
-                                  else name_s.group(0)[1:-1].lower()
-                while curr_parent.index not in index:
-                    if curr_parent.parent is not None:
-                        curr_parent = curr_parent.parent
+        Returns
+        -------
+        str
+            string representing the information
+        """
 
-                current_node = Node(index, name, curr_parent)
-                curr_parent.children.append(current_node)
-                curr_parent = current_node
+        return "Taxonomy built from {}".format(self.built_from)
 
-    return tree
+    def get_taxonomy_tree(filename: str) -> Node:
+        """Builds the taxonomy from its description in the file
+
+            Parameters
+            ----------
+            filename : str
+                the file with the taxonomy description in tab-separated
+                taxonomy description (TSTD) format
+
+            Returns
+            -------
+            Node
+                the root of the taxonomy built
+        """
+
+        tree = Node("", "root", None)
+        curr_parent = tree
+
+        with open(filename, 'r') as file_opened:
+            for line in file_opened:
+                index_s = re.search(r"(^[\.\d]+)[*, ]", line)
+                name_s = re.search(r",([A-Za-z 102\-']+),?", line)
+
+                if index_s and name_s:
+                    index, name = index_s.group(0)[:-1], \
+                                  name_s.group(0)[1:].lower() \
+                                  if (name_s.group(0)[-1].isalpha() or \
+                                      name_s.group(0)[-1] == "'") \
+                                      else name_s.group(0)[1:-1].lower()
+                    while curr_parent.index not in index:
+                        if curr_parent.parent is not None:
+                            curr_parent = curr_parent.parent
+
+                    current_node = Node(index, name, curr_parent)
+                    curr_parent.children.append(current_node)
+                    curr_parent = current_node
+
+        return tree
 
 
 def leaves_from_tree(tree: Node) -> List[Node]:
@@ -256,5 +282,5 @@ def leaves_from_tree(tree: Node) -> List[Node]:
 
 if __name__ == '__main__':
 
-    TAXONOMY_GOT = get_taxonomy_tree()
+    TAXONOMY_GOT = Taxonomy("test_files/latin_taxonomy_rest.csv") # get_taxonomy_tree()
     print(('\n'.join([i.index +' ' + i.name for i in leaves_from_tree(TAXONOMY_GOT)])))
