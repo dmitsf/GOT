@@ -10,7 +10,7 @@ def layout(node, levels=3):
 
     Parameters
     ----------
-    node : 
+    node : ete3_node
         the root of the taxonomy tree / sub-tree
     levels : int
         a number of tree levels to draw
@@ -64,12 +64,12 @@ def read_ete3_from_file(filename):
     str
         content of the file
     """
-    with open(filename, 'r') as f:
-        return f.read()
+    with open(filename, 'r') as file_opened:
+        return file_opened.read()
 
 
 def draw_tree(filename="taxonomy_tree.ete"):
-    """Draws a tree from ete3 representation 
+    """Draws a tree from ete3 representation
     stored in a file
 
     Parameters
