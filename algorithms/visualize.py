@@ -1,8 +1,24 @@
+""" Taxonomy visualization
+"""
+
 from ete3 import TextFace, Tree, TreeStyle, \
      NodeStyle, RectFace, PieChartFace
 
 
 def layout(node, levels=3):
+    """Layout implementation for a tree node
+
+    Parameters
+    ----------
+    node : 
+        the root of the taxonomy tree / sub-tree
+    levels : int
+        a number of tree levels to draw
+
+    Returns
+    -------
+    None
+    """
 
     name = TextFace(node.name if (int(node.e) < levels or node.Hd == "1") else "", tight_text=True)
     name.rotation = 270
@@ -18,7 +34,7 @@ def layout(node, levels=3):
     else:
         nst["fgcolor"] = "red"
 
-    if node.Hd == '0':
+    if node.Hd == "0":
         nst["size"] = 20
         nst["shape"] = "square"
     else:
@@ -35,12 +51,36 @@ def layout(node, levels=3):
     node.set_style(nst)
 
 
-def read_ete3_from_file(file_name):
-    with open(file_name, 'r') as f:
+def read_ete3_from_file(filename):
+    """Reads ete3 representation from the file
+
+    Parameters
+    ----------
+    filename : str
+        a name of the file
+
+    Returns
+    -------
+    str
+        content of the file
+    """
+    with open(filename, 'r') as f:
         return f.read()
 
 
-def draw_tree(file_name="taxonomy_tree.ete"):
+def draw_tree(filename="taxonomy_tree.ete"):
+    """Draws a tree from ete3 representation 
+    stored in a file
+
+    Parameters
+    ----------
+    filename : str
+        a name of the file
+
+    Returns
+    -------
+    None
+    """
 
     ts = TreeStyle()
     ts.show_leaf_name = False
@@ -108,7 +148,7 @@ def draw_tree(file_name="taxonomy_tree.ete"):
 
     ts.legend_position = 3
 
-    ete3_desc = read_ete3_from_file(file_name)
+    ete3_desc = read_ete3_from_file(filename)
     tree = Tree(ete3_desc, format=1)
 
     tree.show(tree_style=ts)
