@@ -327,17 +327,40 @@ def make_recursive_step(node: Node, gamma_v: float, lambda_v: float) -> None:
                 node.p = sum((t.p if t.p is not None else 0 for t in node), .0)
 
 
-def indicate_offshoots(node):
+def indicate_offshoots(node: Node) -> None:
+    """Indicates all the offshoots in the tree / sub-tree
+
+    Parameters
+    ----------
+    node : Node
+        the root of the taxonomy tree / sub-tree
+
+    Returns
+    -------
+    """
+
     if node.is_internal:
         for child in node:
             indicate_offshoots(child)
     else:
-        heads = [t.name for t in (node.parent.H or [])]
+        heads: str = [t.name for t in (node.parent.H or [])]
         if not heads:
             node.of = 1
 
 
-def make_result_table(node):
+def make_result_table(node: Node) -> List[List[str]]:
+    """Indicates all the offshoots in the tree / sub-tree
+
+    Parameters
+    ----------
+    node : Node
+        the root of the taxonomy tree / sub-tree
+
+    Returns
+    -------
+    List[List[str]]
+        resulting table for printing / saving in a file
+    """
 
     table = []
 
@@ -354,7 +377,20 @@ def make_result_table(node):
     return table
 
 
-def save_result_table(result_table, filename="table.csv"):
+def save_result_table(result_table: List[List[str]], filename: str = "table.csv") -> None:
+    """Writes resulting table in a file
+
+    Parameters
+    ----------
+    result_table : List[List[str]]
+        table for saving
+    filename : str
+        name of the file for writing
+
+    Returns
+    -------
+    """
+
     result_table = sorted(result_table, key=lambda x: (len(x), x))
     result_table = [["index", "name", "u", "p", "V", "H", "G", "L"]] + result_table
 
@@ -363,9 +399,22 @@ def save_result_table(result_table, filename="table.csv"):
             file_opened.write('\t'.join(table_row) + '\n')
 
 
-def make_ete3(taxonomy_tree, print_all=True):
+def make_ete3(taxonomy_tree: Node, print_all: bool = True) -> str:
+    """Returns ete3 representation of a taxonomy tree
+
+    Parameters
+    ----------
+    taxonomy_tree : Node
+        the root of the taxonomy tree / sub-tree
+    print_all : bool
+        label for printing all the parameters
+
+    Returns
+    -------
+    str
+        resulting ete3 representation
     """
-    """
+
     head_subjects = set(t.index for t in taxonomy_tree.H)
 
     def rec_ete3(node, head_subject=0):
@@ -432,7 +481,20 @@ def make_ete3(taxonomy_tree, print_all=True):
     return "".join(output)
 
 
-def save_ete3(ete3_desc, filename="taxonomy_tree.ete"):
+def save_ete3(ete3_desc: str, filename: str = "taxonomy_tree.ete") -> None:
+    """Writes resulting ete3 in a file
+
+    Parameters
+    ----------
+    ete3_desc
+        ete3 representation
+    filename : str
+        name of the file for writing
+
+    Returns
+    -------
+    """
+
     with open(filename, 'w') as file_opened:
         file_opened.write(ete3_desc)
 

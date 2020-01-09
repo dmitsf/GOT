@@ -34,6 +34,8 @@ class Node(Collection):
         node's set of gaps
     p : float
         node's ParGenFS penalty
+    H : List['Node']
+        node's head subjects
 
     Main methods
     ----------
@@ -100,6 +102,7 @@ class Node(Collection):
         self.V: float = .0
         self.v: float = .0
         self.p: float = .0
+        self.H: List['Node'] = []
 
     def __contains__(self, item: Union['Node', object]) -> bool:
         """Checks whether the item is a direct descendant of the node
