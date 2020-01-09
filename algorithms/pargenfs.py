@@ -3,7 +3,7 @@
 
 from operator import itemgetter
 from math import sqrt
-from typing import Dict, List, Set, Iterable
+from typing import Dict, List, Set, Union
 
 from taxonomy import Taxonomy, Node
 
@@ -89,7 +89,7 @@ def annotate_with_sum(node: Node, cluster: Dict[str, float]) -> float:
     return summ
 
 
-def normalize_and_return_leaf_weights(node: Node, summ: float) -> Iterable[List[object]]:
+def normalize_and_return_leaf_weights(node: Node, summ: float) -> List[List[Union[str, float]]]:
     """Normalizes leaves' weights (annotations)
 
     Parameters
@@ -101,10 +101,10 @@ def normalize_and_return_leaf_weights(node: Node, summ: float) -> Iterable[List[
 
     Returns
     -------
-    Iterable[List[object]]
-        a list of wiights normalized
+    List[List[Union[str, float]]]
+        a list of weights normalized
     """
-    leaf_weights = []
+    leaf_weights: List[List[Union[str, float]]] = []
 
     if node.is_leaf:
         node.u /= sqrt(summ)
@@ -397,6 +397,7 @@ def save_result_table(result_table: List[List[str]], filename: str = "table.csv"
 
     Returns
     -------
+    None
     """
 
     result_table = sorted(result_table, key=lambda x: (len(x), x))
@@ -494,20 +495,39 @@ def save_ete3(ete3_desc: str, filename: str = "taxonomy_tree.ete") -> None:
 
     Parameters
     ----------
-    ete3_desc
-        ete3 representation
+    ete3_desc : str
+        ete3 representation in a string
     filename : str
         name of the file for writing
 
     Returns
     -------
+    None
     """
 
     with open(filename, 'w') as file_opened:
         file_opened.write(ete3_desc)
 
 
-def pargenfs(cluster, taxonomy_tree, gamma_v=.2, lambda_v=.2):
+def pargenfs(cluster: Dict[str, float], taxonomy_tree: Taxonomy, \
+             gamma_v: float = .2, lambda_v: float = .2):
+    """Runs ParGenFS algorithm over a taxonomy tree
+
+    Parameters
+    ----------
+    cluster : List[float]
+        the cluster to generalize
+    taxonomy_tree : Taxonomy
+        the taxonomy tree
+    gamma_v : float
+        gamma penalty value
+    lambda_v : float
+        lambda penalty value
+
+    Returns
+    -------
+    None
+    """
 
     enumerate_tree_layers(taxonomy_tree.root)
 
@@ -519,7 +539,7 @@ def pargenfs(cluster, taxonomy_tree, gamma_v=.2, lambda_v=.2):
     for weight, i in sorted(leaf_weights, key=itemgetter(0), reverse=True):
         if not weight:
             break
-        print("%-50s %.5f" % (i, weight))
+        print("{:<50} {:.5f}".format(i, weight))
 
     summ_after_trunc = truncate_weights(taxonomy_tree.root, LIMIT)
     updated_leaf_weights = normalize_and_return_leaf_weights(taxonomy_tree.root, summ_after_trunc)
@@ -527,7 +547,7 @@ def pargenfs(cluster, taxonomy_tree, gamma_v=.2, lambda_v=.2):
     for weight, i in sorted(updated_leaf_weights, key=itemgetter(0), reverse=True):
         if not weight:
             break
-        print("%-50s %.5f" % (i, weight))
+        print("{:<50} {:.5f}".format(i, weight))
 
     print("Setting weights for internal nodes")
     root_u = set_internal_weights(taxonomy_tree.root)
@@ -558,6 +578,17 @@ def pargenfs(cluster, taxonomy_tree, gamma_v=.2, lambda_v=.2):
 
 
 def run():
+    """Obtains cluster and runs ParGenFS algorithm over a taxonomy tree
+
+    Parameters
+    ----------
+    None
+
+    Returns
+    -------
+    None
+    """
+
     gamma_val = GAMMA
     lambda_val = LAMBDA
     taxonomy_tree = Taxonomy("test_files/latin_taxonomy_rest.csv")
