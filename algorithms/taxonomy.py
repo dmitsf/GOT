@@ -32,6 +32,8 @@ class Node(Collection):
         node's cumulative gap importance
     G : List['Node']
         node's set of gaps
+    L : List['Node']
+        node's set of losses
     p : float
         node's ParGenFS penalty
     H : List['Node']
@@ -62,12 +64,16 @@ class Node(Collection):
         allows to get a custom attribute. If there is no such
         attrubute, returns "None"
 
-    is_leaf(node) (property)
+    is_leaf() (property)
         checks whether the node is a leaf node
 
-    is_internal(node) (property)
+    is_internal() (property)
         checks whether the node is an internal node (i.e., is
         not a leaf)
+
+    is_root() (property)
+        checks whether the node is a root of the tree
+
     """
     def __init__(self, index: str, name: str, parent: Union['Node', None], \
                  children: List['Node'] = None) -> None:
@@ -99,6 +105,7 @@ class Node(Collection):
         self.u: float = .0
         self.score: float = .0
         self.G: List['Node'] = []
+        self.L: List['Node'] = []
         self.V: float = .0
         self.v: float = .0
         self.p: float = .0
@@ -202,6 +209,18 @@ class Node(Collection):
             else "False"
         """
         return bool(self.children)
+
+    @property
+    def is_root(self) -> bool:
+        """Checks whether the node is a root of the tree
+
+        Returns
+        -------
+        bool
+            "True" if the node is a root node,
+            else "False"
+        """
+        return self.parent is None
 
 
 class Taxonomy:

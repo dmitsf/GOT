@@ -178,6 +178,7 @@ def prune_tree(node: Node) -> None:
 
     Returns
     -------
+    None
     """
     if node.is_internal:
         for child in node:
@@ -203,6 +204,7 @@ def set_gaps_for_tree(node: Node) -> None:
 
     Returns
     -------
+    None
     """
     gaps = [child for child in node if child.u == 0]
     if not node.G:
@@ -222,6 +224,7 @@ def set_parameters(node: Node) -> None:
 
     Returns
     -------
+    None
     """
     for child in node:
         set_parameters(child)
@@ -249,6 +252,7 @@ def reduce_edges(node: Node) -> None:
 
     Returns
     -------
+    None
     """
     if len(node) == 1:
         temp = node.children[0].children
@@ -278,6 +282,7 @@ def make_init_step(node: Node, gamma_v: float) -> None:
 
     Returns
     -------
+    None
     """
     if node.is_internal:
         for child in node:
@@ -309,6 +314,7 @@ def make_recursive_step(node: Node, gamma_v: float, lambda_v: float) -> None:
 
     Returns
     -------
+    None
     """
     if node.is_internal:
         for child in node:
@@ -337,15 +343,17 @@ def indicate_offshoots(node: Node) -> None:
 
     Returns
     -------
+    None
     """
 
     if node.is_internal:
         for child in node:
             indicate_offshoots(child)
     else:
-        heads: str = [t.name for t in (node.parent.H or [])]
-        if not heads:
-            node.of = 1
+        if node.parent:
+            heads = [t.name for t in node.parent.H]
+            if not heads:
+                node.of = 1
 
 
 def make_result_table(node: Node) -> List[List[str]]:
