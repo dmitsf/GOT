@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# ParGenFS documentation build configuration file, created by
+# GOT documentation build configuration file, created by
 # sphinx-quickstart on Fri Jan 10 12:55:17 2020.
 #
 # This file is execfile()d with the current directory set to its
@@ -54,7 +54,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'ParGenFS'
+project = 'GOT'
 copyright = '2020, Dmitry Frolov, Boris Mirkin, Susana Nascimento, Trevor Fenner'
 author = 'Dmitry Frolov, Boris Mirkin, Susana Nascimento, Trevor Fenner'
 
@@ -120,7 +120,7 @@ html_sidebars = {
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'ParGenFSdoc'
+htmlhelp_basename = 'GOTdoc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -147,7 +147,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'ParGenFS.tex', 'ParGenFS Documentation',
+    (master_doc, 'GOT.tex', 'GOT Documentation',
      'Dmitry Frolov, Boris Mirkin, Susana Nascimento, Trevor Fenner', 'manual'),
 ]
 
@@ -157,7 +157,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'pargenfs', 'ParGenFS Documentation',
+    (master_doc, 'got', 'GOT Documentation',
      [author], 1)
 ]
 
@@ -168,8 +168,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'ParGenFS', 'ParGenFS Documentation',
-     author, 'ParGenFS', 'One line description of project.',
+    (master_doc, 'GOT', 'GOT Documentation',
+     author, 'GOT', 'One line description of project.',
      'Miscellaneous'),
 ]
 
