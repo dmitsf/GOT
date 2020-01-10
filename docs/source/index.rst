@@ -6,11 +6,14 @@
 Welcome to GOT's documentation!
 ===============================
 
+Information
+===========
+
+.. mdinclude:: ../../README.md
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-
-
 
 Indices and tables
 ==================

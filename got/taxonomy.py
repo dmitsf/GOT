@@ -13,7 +13,7 @@ class Node(Collection):
     This is a basic data structure for a taxonomy representing.
 
     Initial attributes
-    ----------
+    ------------------
     index : str
         a string representing the node index, for example 1.2.3.
     name : str
@@ -40,7 +40,7 @@ class Node(Collection):
         node's head subjects
 
     Main methods
-    ----------
+    ------------
     __init__(index, name, parent, children)
         constructor
 
@@ -228,7 +228,7 @@ class Taxonomy:
     A class for taxonomy representing
 
     Initial attributes
-    ----------
+    ------------------
     built_from : str
         a string representing the filename using for taxonomy
         building
@@ -240,7 +240,7 @@ class Taxonomy:
         containts all the leaves of the taxonomy
 
     Main methods
-    ---------
+    ------------
     __init__(filename)
         constructor
 
