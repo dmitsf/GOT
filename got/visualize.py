@@ -1,8 +1,11 @@
 """ Taxonomy visualization
 """
 
-from ete3 import TextFace, Tree, TreeStyle, \
-     NodeStyle, RectFace, PieChartFace
+try:
+    from ete3 import TextFace, Tree, TreeStyle, \
+        NodeStyle, RectFace, PieChartFace
+except ImportError as e:
+    pass
 
 
 def layout(node, levels=3):

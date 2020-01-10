@@ -5,7 +5,7 @@ from operator import itemgetter
 from math import sqrt
 from typing import Dict, List, Set, Union
 
-from taxonomy import Taxonomy, Node
+from got.taxonomy import Taxonomy, Node
 
 
 LIMIT = .2
