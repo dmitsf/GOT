@@ -1,7 +1,13 @@
 import setuptools
+import os
 
-with open("README.md", "r") as fh:
-    long_description = fh.read()
+try:
+    with open("README.md", "r") as fh:
+        long_description = fh.read()
+except FileNotFoundError as e:
+    with open(os.path.join("..", "README.md"), "r") as fh:
+        long_description = fh.read()
+
 
 setuptools.setup(
     name="GOT",
