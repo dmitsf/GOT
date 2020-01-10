@@ -17,7 +17,7 @@ setuptools.setup(
     description="GOT (generalization over a taxonomy) package",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/dmitsf/ParGenFS",
+    url="https://github.com/dmitsf/GOT",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",

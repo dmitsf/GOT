@@ -1,10 +1,10 @@
-.. ParGenFS documentation master file, created by
+.. GOT documentation master file, created by
    sphinx-quickstart on Fri Jan 10 12:55:17 2020.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to ParGenFS's documentation!
-====================================
+Welcome to GOT's documentation!
+===============================
 
 .. toctree::
    :maxdepth: 2
