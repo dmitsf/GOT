@@ -5,7 +5,10 @@ from operator import itemgetter
 from math import sqrt
 from typing import Dict, List, Set, Union
 
-from got.taxonomy import Taxonomy, Node
+try:
+    from got.taxonomy import Taxonomy, Node
+except ImportError as e:
+    from taxonomy import Taxonomy, Node
 
 
 LIMIT = .2
