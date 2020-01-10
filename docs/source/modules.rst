@@ -1,5 +1,5 @@
-ParGenFS
-========
+GOT
+===
 
 .. toctree::
    :maxdepth: 4
