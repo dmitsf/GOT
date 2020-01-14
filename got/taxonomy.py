@@ -2,6 +2,7 @@
 """
 
 import re
+import argparse
 
 from collections.abc import Collection
 from typing import List, Generator, Union
@@ -409,5 +410,8 @@ def extract_leaves(tree: Node) -> List[Node]:
 
 if __name__ == '__main__':
 
-    TAXONOMY_GOT = Taxonomy("test_files/latin_taxonomy_rest.csv")
+    taxonomy_file = "test_files/taxonomy_acm_modified.fvtr"
+    #taxonomy_file = "test_files/taxonomy_restaurants.fvtr"
+
+    TAXONOMY_GOT = Taxonomy(taxonomy_file)
     print(('\n'.join([' '.join([i.index, i.name]) for i in TAXONOMY_GOT.leaves])))
