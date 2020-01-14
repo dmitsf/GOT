@@ -591,28 +591,39 @@ def run():
     -------
     None
     """
+    taxonomy_leaves = "test_files/taxonomy_leaves_restaurants.txt"
+    taxonomy_file = "test_files/taxonomy_restaurants.fvtr"
+    clusters = "test_files/clusters_restaurants.dat"
+
+    taxonomy_leaves = "test_files/taxonomy_leaves_acm_modified.txt"
+    taxonomy_file = "test_files/taxonomy_acm_modified.fvtr"
+    clusters = "test_files/clusters_acm_modified.dat"
 
     gamma_val = GAMMA
     lambda_val = LAMBDA
-    taxonomy_tree = Taxonomy("test_files/latin_taxonomy_rest.csv")
+    taxonomy_tree = Taxonomy(taxonomy_file)
 
     node_names = []
-    with open("test_files/latin_taxonomy_leaves.txt", 'r') as file_opened:
+    with open(taxonomy_leaves, 'r') as file_opened:
         for i in file_opened.readlines():
-            node_names.append(i.split('\t')[1].strip().replace("ju", "yu").\
-                              replace("ja", "ya").lower().replace("hor", "khor").\
-                              replace("kuh", "kukh").replace("eha", "ekha").\
-                              replace("hrom", "khrom").replace("yh", "ykh").\
-                              replace("hol", "khol").replace("oh", "okh"))
+            splitted = i.split('\t')
+            if len(splitted) > 1:
+                node_names.append(splitted[1].strip().replace("ju", "yu").\
+                                  replace("ja", "ya").lower().replace("hor", "khor").\
+                                  replace("kuh", "kukh").replace("eha", "ekha").\
+                                  replace("hrom", "khrom").replace("yh", "ykh").\
+                                  replace("hol", "khol").replace("oh", "okh"))
+            else:
+                node_names.append(splitted[0].strip())
 
     membership_matrix = []
-    with open("test_files/clusters.dat", 'r') as file_opened:
+    with open(clusters, 'r') as file_opened:
         for line in file_opened.readlines():
             membership_vector = list(map(float, line.split('\t')))
             membership_matrix.append(membership_vector)
 
     tree_leaves = taxonomy_tree.leaves
-    cluster = get_cluster_k(tree_leaves, node_names, membership_matrix, 2)
+    cluster = get_cluster_k(tree_leaves, node_names, membership_matrix, 1)
     pargenfs(cluster, taxonomy_tree, gamma_v=gamma_val, lambda_v=lambda_val)
 
 
