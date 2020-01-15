@@ -591,13 +591,17 @@ def run():
     -------
     None
     """
-    taxonomy_leaves = "test_files/taxonomy_leaves_restaurants.txt"
-    taxonomy_file = "test_files/taxonomy_restaurants.fvtr"
-    clusters = "test_files/clusters_restaurants.dat"
+    mode = "restaurants"
+    cluster_number = 1
 
-    taxonomy_leaves = "test_files/taxonomy_leaves_acm_modified.txt"
-    taxonomy_file = "test_files/taxonomy_acm_modified.fvtr"
-    clusters = "test_files/clusters_acm_modified.dat"
+    if mode == "restaurants":
+        taxonomy_leaves = "test_files/taxonomy_leaves_restaurants.txt"
+        taxonomy_file = "test_files/taxonomy_restaurants.fvtr"
+        clusters = "test_files/clusters_restaurants.dat"
+    else:
+        taxonomy_leaves = "test_files/taxonomy_leaves_acm_modified.txt"
+        taxonomy_file = "test_files/taxonomy_acm_modified.fvtr"
+        clusters = "test_files/clusters_acm_modified.dat"
 
     gamma_val = GAMMA
     lambda_val = LAMBDA
@@ -623,7 +627,7 @@ def run():
             membership_matrix.append(membership_vector)
 
     tree_leaves = taxonomy_tree.leaves
-    cluster = get_cluster_k(tree_leaves, node_names, membership_matrix, 1)
+    cluster = get_cluster_k(tree_leaves, node_names, membership_matrix, cluster_number)
     pargenfs(cluster, taxonomy_tree, gamma_v=gamma_val, lambda_v=lambda_val)
 
 
