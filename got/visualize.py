@@ -157,5 +157,5 @@ def draw_tree(filename="taxonomy_tree.ete"):
     tree.show(tree_style=ts)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     draw_tree()

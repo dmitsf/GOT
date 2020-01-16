@@ -536,13 +536,13 @@ def pargenfs(cluster: Dict[str, float], taxonomy_tree: Taxonomy, \
 
     summ = annotate_with_sum(taxonomy_tree.root, cluster)
     leaf_weights = normalize_and_return_leaf_weights(taxonomy_tree.root, summ)
-    print("Number of leaves:", len(leaf_weights))
+    print(f"Number of leaves: {len(leaf_weights)}")
     print("All positive weights:")
 
     for weight, i in sorted(leaf_weights, key=itemgetter(0), reverse=True):
         if not weight:
             break
-        print("{:<50} {:.5f}".format(i, weight))
+        print(f"{i:<60} {weight:.5f}")
 
     summ_after_trunc = truncate_weights(taxonomy_tree.root, LIMIT)
     updated_leaf_weights = normalize_and_return_leaf_weights(taxonomy_tree.root, summ_after_trunc)
@@ -550,11 +550,11 @@ def pargenfs(cluster: Dict[str, float], taxonomy_tree: Taxonomy, \
     for weight, i in sorted(updated_leaf_weights, key=itemgetter(0), reverse=True):
         if not weight:
             break
-        print("{:<50} {:.5f}".format(i, weight))
+        print(f"{i:<60} {weight:.5f}")
 
     print("Setting weights for internal nodes")
     root_u = set_internal_weights(taxonomy_tree.root)
-    print("Membership in root:", root_u)
+    print(f"Membership in root: {root_u:.5f}")
     print("Pruning tree")
     prune_tree(taxonomy_tree.root)
 
@@ -591,17 +591,11 @@ def run():
     -------
     None
     """
-    mode = "restaurants"
-    cluster_number = 1
 
-    if mode == "restaurants":
-        taxonomy_leaves = "test_files/taxonomy_leaves_restaurants.txt"
-        taxonomy_file = "test_files/taxonomy_restaurants.fvtr"
-        clusters = "test_files/clusters_restaurants.dat"
-    else:
-        taxonomy_leaves = "test_files/taxonomy_leaves_acm_modified.txt"
-        taxonomy_file = "test_files/taxonomy_acm_modified.fvtr"
-        clusters = "test_files/clusters_acm_modified.dat"
+    cluster_number = 1
+    taxonomy_leaves = "test_files/taxonomy_leaves_acm_modified.txt"
+    taxonomy_file = "test_files/taxonomy_acm_modified.fvtr"
+    clusters = "test_files/clusters_acm_modified.dat"
 
     gamma_val = GAMMA
     lambda_val = LAMBDA
@@ -631,6 +625,6 @@ def run():
     pargenfs(cluster, taxonomy_tree, gamma_v=gamma_val, lambda_v=lambda_val)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
 
     run()
