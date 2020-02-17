@@ -158,7 +158,7 @@ def draw_tree(filename: str) -> None:
 
 if __name__ == "__main__":
 
-    parser = argparse.ArgumentParser(description="Vizualization of lifting.")
+    parser = argparse.ArgumentParser(description="Visualization of lifting.")
     parser.add_argument("ete3_file", type=str,
                         help="lifting results description in *.ete format")
 
