@@ -31,7 +31,7 @@ These modules may be needed also:
 
 # Usage
 
-## Working with taxonomy
+## Working with a taxonomy
 
 __taxonomy.py__: parses a taxonomy file in _.fvtr_ format, prepares basic data structure for working with the taxonomy tree.
 
@@ -87,7 +87,10 @@ optional arguments:
 
 Let us consider working with IAB taxonomy fragment [test_files/taxonomy_iab_fragment.fvtr](https://github.com/dmitsf/GOT/blob/master/got/test_files/taxonomy_iab_fragment.fvtr).
 
-## Working with taxonomy
+![Taxonomy fragment](https://raw.githubusercontent.com/dmitsf/GOT/master/got/got_results/iab_fragment.png)
+
+
+## Working with a taxonomy
 
 ```
 python3 taxonomy.py test_files/taxonomy_iab_fragment.fvtr
