@@ -630,7 +630,7 @@ def run(taxonomy_file: str, taxonomy_leaves: str, clusters: str, cluster_number:
 
 if __name__ == '__main__':
 
-    parser = argparse.ArgumentParser(description="Working with taxonomy.")
+    parser = argparse.ArgumentParser(description="Lifting a cluster over a taxonomy.")
     parser.add_argument("taxonomy_file", type=str,
                         help="taxonomy description in *.fvtr format")
     parser.add_argument("taxonomy_leaves", type=str,

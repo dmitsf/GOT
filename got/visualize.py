@@ -1,14 +1,13 @@
 """ Taxonomy visualization
 """
 
-try:
-    from ete3 import TextFace, Tree, TreeStyle, \
-        NodeStyle, RectFace, PieChartFace
-except ImportError as e:
-    pass
+import argparse
+
+from ete3 import TextFace, Tree, TreeStyle, \
+    NodeStyle, RectFace, PieChartFace
 
 
-def layout(node, levels=3):
+def layout(node, levels: int=3) -> None:
     """Layout implementation for a tree node
 
     Parameters
@@ -54,7 +53,7 @@ def layout(node, levels=3):
     node.set_style(nst)
 
 
-def read_ete3_from_file(filename):
+def read_ete3_from_file(filename: str) -> str:
     """Reads ete3 representation from the file
 
     Parameters
@@ -71,7 +70,7 @@ def read_ete3_from_file(filename):
         return file_opened.read()
 
 
-def draw_tree(filename="taxonomy_tree.ete"):
+def draw_tree(filename: str) -> None:
     """Draws a tree from ete3 representation
     stored in a file
 
@@ -157,5 +156,12 @@ def draw_tree(filename="taxonomy_tree.ete"):
     tree.show(tree_style=ts)
 
 
-if __name__ == '__main__':
-    draw_tree()
+if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser(description="Vizualization of lifting.")
+    parser.add_argument("ete3_file", type=str,
+                        help="lifting results description in *.ete format")
+
+    args = parser.parse_args()
+
+    draw_tree(args.ete3_file)
