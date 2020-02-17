@@ -91,5 +91,5 @@ __visualize.py__: draws lifting results from _taxonomy_tree.ete_ on taxonomy tre
 python3 visualize.py
 ```
 
-![Visualization result](got/got_results/result_iab_fragment.png)
+![Visualization result](https://github.com/dmitsf/GOT/blob/master/got/got_results/result_iab_fragment.png)
 
