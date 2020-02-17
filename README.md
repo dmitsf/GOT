@@ -83,8 +83,8 @@ python3 pargenfs.py taxonomy_file taxonomy_leaves clusters cluster_number
 
 positional arguments:
 *  taxonomy_file    taxonomy description in *.fvtr format
-*  taxonomy_leaves  taxonomy leaves
-*  clusters         clusters' membership table *.dat format
+*  taxonomy_leaves  taxonomy leaves in *.txt format
+*  clusters         clusters' membership table in *.dat format
 *  cluster_number   number of cluster for lifting
 
 optional arguments:
