@@ -28,3 +28,19 @@ These modules may be needed also:
 [sudo] apt-get install python3-pyqt5.qtsvg
 [sudo] apt-get install python3-pyqt5.qtopengl
 ```
+
+# Examples
+
+Let us consider IAB taxonomy fragment.
+
+## Working with taxonomies
+
+
+
+## Generalization
+
+## Visualization
+
+
+![Visualization result](got/got_result/result_iab_fragment.png)
+
