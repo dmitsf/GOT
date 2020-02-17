@@ -74,9 +74,26 @@ __pargensf.py__: lifts the leaf cluster over a taxonomy tree. Produces two files
 * _table.csv_: table with all the variables' values
 * _taxonomy\_tree.ete_: lifting result on the taxonomy tree in ete3 format.
 
+### Usage
 
 ```
-python3 pargensf.py
+python3 pargenfs.py taxonomy_file taxonomy_leaves clusters cluster_number
+
+```
+
+positional arguments:
+*  taxonomy_file    taxonomy description in *.fvtr format
+*  taxonomy_leaves  taxonomy leaves
+*  clusters         clusters' membership table *.dat format
+*  cluster_number   number of cluster for lifting
+
+optional arguments:
+*  -h, --help       show this help message and exit
+
+### Example
+
+```
+python3 pargensf.py test_files/taxonomy_iab_fragment.fvtr test_files/taxonomy_leaves_iab_fragment.txt test_files/clusters_ds_modified.dat 0
 
 Number of leaves: 8
 All positive weights:
