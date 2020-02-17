@@ -85,7 +85,7 @@ optional arguments:
 
 # Tutorial
 
-Let us consider GOT package and working with IAB taxonomy fragment.
+Let us consider working with IAB taxonomy fragment [test_files/taxonomy_iab_fragment.fvtr](https://github.com/dmitsf/GOT/blob/master/got/test_files/taxonomy_ds_modified.fvtr).
 
 ## Working with taxonomy
 
