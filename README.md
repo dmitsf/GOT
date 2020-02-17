@@ -29,7 +29,7 @@ These modules may be needed also:
 [sudo] apt-get install python3-pyqt5.qtopengl
 ```
 
-# Example
+# Tutorial
 
 Let us consider GOT package and working with IAB taxonomy fragment.
 
@@ -37,10 +37,25 @@ Let us consider GOT package and working with IAB taxonomy fragment.
 
 __taxonomy.py__: parses a taxonomy file in _.fvtr_ format, prepares basic data structure for working with the taxonomy tree.
 
-```
-python3 taxonomy.py
+### Usage
 
-Taxonomy leaves:
+```
+python3 taxonomy.py taxonomy_file
+```
+
+positional arguments:
+*  taxonomy_file  taxonomy description in *.fvtr format
+
+optional arguments:
+*  -h, --help     show this help message and exit
+
+
+### Example
+
+```
+python3 taxonomy.py test_files/taxonomy_iab_fragment.fvtr
+
+Taxonomy leaves for test_files/taxonomy_iab_fragment.fvtr:
 579.580.581. men's jewelry and watches
 579.582.583. men's business wear
 579.582.584. men's casual wear
@@ -49,6 +64,7 @@ Taxonomy leaves:
 579.582.587. men's sportswear
 579.582.588. men's underwear and sleepwear
 579.589. men's shoes and footwear
+
 ```
 
 
@@ -58,9 +74,26 @@ __pargensf.py__: lifts the leaf cluster over a taxonomy tree. Produces two files
 * _table.csv_: table with all the variables' values
 * _taxonomy\_tree.ete_: lifting result on the taxonomy tree in ete3 format.
 
+### Usage
 
 ```
-python3 pargensf.py
+python3 pargenfs.py taxonomy_file taxonomy_leaves clusters cluster_number
+
+```
+
+positional arguments:
+*  taxonomy_file    taxonomy description in *.fvtr format
+*  taxonomy_leaves  taxonomy leaves in *.txt format
+*  clusters         clusters' membership table in *.dat format
+*  cluster_number   number of cluster for lifting
+
+optional arguments:
+*  -h, --help       show this help message and exit
+
+### Example
+
+```
+python3 pargensf.py test_files/taxonomy_iab_fragment.fvtr test_files/taxonomy_leaves_iab_fragment.txt test_files/clusters_ds_modified.dat 0
 
 Number of leaves: 8
 All positive weights:
@@ -86,6 +119,20 @@ Done
 ## Visualization
 
 __visualize.py__: draws lifting results from _taxonomy_tree.ete_ on taxonomy tree.
+
+### Usage
+
+```
+python3 visualize.py ete3_file
+```
+
+positional arguments:
+*  ete3_file   lifting results description in *.ete format
+
+optional arguments:
+ * -h, --help  show this help message and exit
+
+### Example
 
 ```
 python3 visualize.py
