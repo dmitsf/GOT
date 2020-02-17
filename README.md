@@ -33,7 +33,7 @@ These modules may be needed also:
 
 ## Working with taxonomy
 
-__taxonomy.py__: parses a taxonomy file in _.fvtr_ format, prepares basic data structure for working with the taxonomy tree.
+__taxonomy.py__: parses a taxonomy file in _.fvtr_ format, prepares a basic data structure for working with the taxonomy tree.
 
 ```
 python3 taxonomy.py taxonomy_file

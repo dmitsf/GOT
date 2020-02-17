@@ -4,24 +4,24 @@ got package
 Submodules
 ----------
 
-got\.pargenfs module
---------------------
+got.pargenfs module
+-------------------
 
 .. automodule:: got.pargenfs
     :members:
     :undoc-members:
     :show-inheritance:
 
-got\.taxonomy module
---------------------
+got.taxonomy module
+-------------------
 
 .. automodule:: got.taxonomy
     :members:
     :undoc-members:
     :show-inheritance:
 
-got\.visualize module
----------------------
+got.visualize module
+--------------------
 
 .. automodule:: got.visualize
     :members:
