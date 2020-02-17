@@ -54,8 +54,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'GOT'
-copyright = '2020, Dmitry Frolov, Boris Mirkin, Susana Nascimento, Trevor Fenner'
-author = 'Dmitry Frolov, Boris Mirkin, Susana Nascimento, Trevor Fenner'
+copyright = '2020, Dmitry Frolov, Boris Mirkin'
+author = 'Dmitry Frolov, Boris Mirkin'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -147,7 +147,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'GOT.tex', 'GOT Documentation',
-     'Dmitry Frolov, Boris Mirkin, Susana Nascimento, Trevor Fenner', 'manual'),
+     'Dmitry Frolov, Boris Mirkin', 'manual'),
 ]
 
 

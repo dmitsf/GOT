@@ -12,7 +12,7 @@ except FileNotFoundError as e:
 setuptools.setup(
     name="GOT",
     version="0.0.1",
-    author="Dmitry Frolov, Boris Mirkin, Susana Nascimento, Trevor Fenner",
+    author="Dmitry Frolov, Boris Mirkin",
     author_email="dmitsf@gmail.com",
     description="GOT (generalization over a taxonomy) package",
     long_description=long_description,
@@ -24,5 +24,5 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.5',
+    python_requires='>=3.6',
 )
