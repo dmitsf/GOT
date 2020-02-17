@@ -29,11 +29,13 @@ These modules may be needed also:
 [sudo] apt-get install python3-pyqt5.qtopengl
 ```
 
-# Examples
+# Example
 
-Let us consider IAB taxonomy fragment.
+Let us consider GOT package and working with IAB taxonomy fragment.
 
-## Working with taxonomies
+## Working with taxonomy
+
+__taxonomy.py__: parses a taxonomy file in _.fvtr_ format, prepares basic data structure for working with the taxonomy tree.
 
 ```
 python3 taxonomy.py
@@ -51,6 +53,11 @@ Taxonomy leaves:
 
 
 ## Generalization
+
+__pargensf.py__: lifts the leaf cluster over a taxonomy tree. Produces two files:
+* _table.csv_: table with all the variables' values
+* _taxonomy_tree.ete_: lifting result on the taxonomy tree in ete3 format.
+
 
 ```
 python3 pargensf.py
@@ -78,8 +85,10 @@ Done
 
 ## Visualization
 
+__visualize.py__: draws lifting results from _taxonomy_tree.ete_ on taxonomy tree.
+
 ```
-python visualize.py
+python3 visualize.py
 ```
 
 ![Visualization result](got/got_results/result_iab_fragment.png)
