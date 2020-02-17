@@ -1,6 +1,7 @@
 """ ParGenFS algorithm with accessory functions
 """
 
+import argparse
 from operator import itemgetter
 from math import sqrt
 from typing import Dict, List, Set, Union
@@ -513,7 +514,7 @@ def save_ete3(ete3_desc: str, filename: str = "taxonomy_tree.ete") -> None:
 
 
 def pargenfs(cluster: Dict[str, float], taxonomy_tree: Taxonomy, \
-             gamma_v: float = .2, lambda_v: float = .2):
+             gamma_v: float = .2, lambda_v: float = .2) -> None:
     """Runs ParGenFS algorithm over a taxonomy tree
 
     Parameters
@@ -580,25 +581,24 @@ def pargenfs(cluster: Dict[str, float], taxonomy_tree: Taxonomy, \
     print("Done")
 
 
-def run():
+def run(taxonomy_file: str, taxonomy_leaves: str, clusters: str, cluster_number: int) -> None:
     """Obtains cluster and runs ParGenFS algorithm over a taxonomy tree
 
     Parameters
     ----------
-    None
+    taxonomy_file : str
+        taxonomy description in *.fvtr format
+    taxonomy_leaves : str
+        taxonomy leaves in *.txt format
+    clusters : str
+        clusters' membership table in *.dat format
+    cluster_number : int
+        number of cluster for lifting
 
     Returns
     -------
     None
     """
-
-    cluster_number = 0
-    taxonomy_leaves = "test_files/taxonomy_leaves_ds_modified.txt"
-    taxonomy_file = "test_files/taxonomy_ds_modified.fvtr"
-    clusters = "test_files/clusters_ds_modified.dat"
-    taxonomy_leaves = "test_files/taxonomy_leaves_iab_fragment.txt"
-    taxonomy_file = "test_files/taxonomy_iab_fragment.fvtr"
-    clusters = "test_files/clusters_iab_fragment.dat"
 
     gamma_val = GAMMA
     lambda_val = LAMBDA
@@ -630,4 +630,16 @@ def run():
 
 if __name__ == '__main__':
 
-    run()
+    parser = argparse.ArgumentParser(description="Working with taxonomy.")
+    parser.add_argument("taxonomy_file", type=str,
+                        help="taxonomy description in *.fvtr format")
+    parser.add_argument("taxonomy_leaves", type=str,
+                        help="taxonomy leaves in *.txt format")
+    parser.add_argument("clusters", type=str,
+                        help="clusters' membership table in *.dat format")
+    parser.add_argument("cluster_number", type=int,
+                        help="number of cluster for lifting")
+
+    args = parser.parse_args()
+
+    run(args.taxonomy_file, args.taxonomy_leaves, args.clusters, args.cluster_number)
