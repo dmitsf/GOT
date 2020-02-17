@@ -413,4 +413,5 @@ if __name__ == '__main__':
     taxonomy_file = "test_files/taxonomy_iab_fragment.fvtr"
 
     TAXONOMY_GOT = Taxonomy(taxonomy_file)
+    print("Taxonomy leaves:")
     print(('\n'.join([' '.join([i.index, i.name]) for i in TAXONOMY_GOT.leaves])))
