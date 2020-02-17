@@ -592,10 +592,13 @@ def run():
     None
     """
 
-    cluster_number = 1
-    taxonomy_leaves = "test_files/taxonomy_leaves_acm_modified.txt"
-    taxonomy_file = "test_files/taxonomy_acm_modified.fvtr"
-    clusters = "test_files/clusters_acm_modified.dat"
+    cluster_number = 0
+    taxonomy_leaves = "test_files/taxonomy_leaves_ds_modified.txt"
+    taxonomy_file = "test_files/taxonomy_ds_modified.fvtr"
+    clusters = "test_files/clusters_ds_modified.dat"
+    taxonomy_leaves = "test_files/taxonomy_leaves_iab_fragment.txt"
+    taxonomy_file = "test_files/taxonomy_iab_fragment.fvtr"
+    clusters = "test_files/clusters_iab_fragment.dat"
 
     gamma_val = GAMMA
     lambda_val = LAMBDA
