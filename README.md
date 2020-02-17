@@ -56,7 +56,7 @@ Taxonomy leaves:
 
 __pargensf.py__: lifts the leaf cluster over a taxonomy tree. Produces two files:
 * _table.csv_: table with all the variables' values
-* _taxonomy_tree.ete_: lifting result on the taxonomy tree in ete3 format.
+* _taxonomy\_tree.ete_: lifting result on the taxonomy tree in ete3 format.
 
 
 ```
@@ -91,5 +91,5 @@ __visualize.py__: draws lifting results from _taxonomy_tree.ete_ on taxonomy tre
 python3 visualize.py
 ```
 
-![Visualization result](got/got_results/result_iab_fragment.png)
+![Visualization result](https://raw.githubusercontent.com/dmitsf/GOT/master/got/got_results/result_iab_fragment.png)
 
