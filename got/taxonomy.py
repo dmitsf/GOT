@@ -410,8 +410,12 @@ def extract_leaves(tree: Node) -> List[Node]:
 
 if __name__ == '__main__':
 
-    taxonomy_file = "test_files/taxonomy_iab_fragment.fvtr"
+    parser = argparse.ArgumentParser(description="Working with taxonomy.")
+    parser.add_argument("taxonomy_file", type=str,
+                        help="taxonomy description in *.fvtr format")
 
-    TAXONOMY_GOT = Taxonomy(taxonomy_file)
-    print("Taxonomy leaves:")
+    args = parser.parse_args()
+
+    TAXONOMY_GOT = Taxonomy(args.taxonomy_file)
+    print(f"Taxonomy leaves for {args.taxonomy_file}:")
     print(('\n'.join([' '.join([i.index, i.name]) for i in TAXONOMY_GOT.leaves])))
