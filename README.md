@@ -120,6 +120,20 @@ Done
 
 __visualize.py__: draws lifting results from _taxonomy_tree.ete_ on taxonomy tree.
 
+### Usage
+
+```
+python3 visualize.py ete3_file
+```
+
+positional arguments:
+*  ete3_file   lifting results description in *.ete format
+
+optional arguments:
+ * -h, --help  show this help message and exit
+
+### Example
+
 ```
 python3 visualize.py
 ```
