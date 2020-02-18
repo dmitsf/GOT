@@ -4,15 +4,15 @@
 import argparse
 
 from ete3 import TextFace, Tree, TreeStyle, \
-    NodeStyle, RectFace, PieChartFace
+    NodeStyle, RectFace, PieChartFace, TreeNode
 
 
-def layout(node, levels: int=3) -> None:
+def layout(node: TreeNode, levels: int=3) -> None:
     """Layout implementation for a tree node
 
     Parameters
     ----------
-    node : ete3_node
+    node : TreeNode
         the root of the taxonomy tree / sub-tree
     levels : int
         a number of tree levels to draw
