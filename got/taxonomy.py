@@ -88,7 +88,7 @@ class Node(Collection):
             the name of the node
         parent : Union['Node', None]
             the parent of the node
-        children : List['Node']
+        children : List['Node'], default=None
             a list of the all direct descendants (children) of the node
 
         Returns

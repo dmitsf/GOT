@@ -24,7 +24,7 @@ def enumerate_tree_layers(node: Node, current_layer: int = 0) -> None:
     ----------
     node : Node
         the root of the taxonomy tree / sub-tree
-    current_layer : int
+    current_layer : int, default=0
         a layer number (nodes' level) to assign
 
     Returns
@@ -396,7 +396,7 @@ def save_result_table(result_table: List[List[str]], filename: str = "table.csv"
     ----------
     result_table : List[List[str]]
         table for saving
-    filename : str
+    filename : str, default="table.csv"
         name of the file for writing
 
     Returns
@@ -419,7 +419,7 @@ def make_ete3(taxonomy_tree: Node, print_all: bool = True) -> str:
     ----------
     taxonomy_tree : Node
         the root of the taxonomy tree / sub-tree
-    print_all : bool
+    print_all : bool, default=True
         label for printing all the parameters
 
     Returns
@@ -501,7 +501,7 @@ def save_ete3(ete3_desc: str, filename: str = "taxonomy_tree.ete") -> None:
     ----------
     ete3_desc : str
         ete3 representation in a string
-    filename : str
+    filename : str, default="taxonomy_tree.ete"
         name of the file for writing
 
     Returns
@@ -523,9 +523,9 @@ def pargenfs(cluster: Dict[str, float], taxonomy_tree: Taxonomy, \
         the cluster to generalize
     taxonomy_tree : Taxonomy
         the taxonomy tree
-    gamma_v : float
+    gamma_v : float, default=.2
         gamma penalty value
-    lambda_v : float
+    lambda_v : float, default=.2
         lambda penalty value
 
     Returns
