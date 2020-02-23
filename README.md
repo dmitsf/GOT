@@ -43,7 +43,7 @@ positional arguments:
 *  taxonomy_file:  taxonomy description in *.fvtr format
 
 optional arguments:
-*  -h, --help:     show this help message and exit
+*  -h, --help:     show help message and exit
 
 
 ## Generalization
@@ -66,7 +66,7 @@ positional arguments:
 *  cluster_number:   number of cluster for lifting
 
 optional arguments:
-*  -h, --help:       show this help message and exit
+*  -h, --help:       show help message and exit
 
 ## Visualization
 
@@ -80,7 +80,7 @@ positional arguments:
 *  ete3_file:   lifting results description in *.ete format
 
 optional arguments:
- * -h, --help:  show this help message and exit
+ * -h, --help:  show help message and exit
 
 
 # Tutorial
