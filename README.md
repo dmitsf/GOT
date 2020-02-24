@@ -129,7 +129,15 @@ Pruning tree
 Setting gaps
 Other parameters setting
 ParGenFS main steps
-(men's shoes and footwear[&&NHX:p=0:e=1:H={}:u=0.0:v=1.0:G={}:L={}:Hd=0:Ch=0:Sq=0],men's accessories[&&NHX:p=0.265:e=1:H={men's accessories}:u=0.662:v=1.0:G={}:L={}:Hd=1:Ch=0:Sq=1],(men's formal wear...men's underwear and sleepwear 3 items[&&NHX:p=0:e=2:H={}:u=0.0:v=0.75:G={}:L={}:Hd=0:Ch=0:Sq=0],men's outerwear style[&&NHX:p=0.128:e=2:H={men's outerwear style}:u=0.32:v=0.75:G={}:L={}:Hd=1:Ch=0:Sq=1],men's casual wear[&&NHX:p=0.177:e=2:H={men's casual wear}:u=0.443:v=0.75:G={}:L={}:Hd=1:Ch=0:Sq=1],men's business wear[&&NHX:p=0.205:e=2:H={men's business wear}:u=0.514:v=0.75:G={}:L={}:Hd=1:Ch=0:Sq=1])men's clothing style[&&NHX:p=0.511:e=1:H={men's business wear;...;men's outerwear style}:u=0.75:v=1.0:G={men's formal wear;...;men's underwear and sleepwear}:L={}:Hd=0:Ch=1:Sq=0])root[&&NHX:p=0.775:e=0:H={men's accessories;...;men's outerwear style}:u=1.0:v=1.0:G={men's shoes and footwear;...;men's underwear and sleepwear}:L={}:Hd=0:Ch=1:Sq=0];
+(men's shoes and footwear[&&NHX:p=0:e=1:H={}:u=0.0:v=1.0:G={}:L={}:Hd=0:Ch=0:Sq=0],men's accessories[&&NHX:p=0.265:e=1:H=
+{men's accessories}:u=0.662:v=1.0:G={}:L={}:Hd=1:Ch=0:Sq=1],(men's formal wear...men's underwear and sleepwear 3 
+items[&&NHX:p=0:e=2:H={}:u=0.0:v=0.75:G={}:L={}:Hd=0:Ch=0:Sq=0],men's outerwear style[&&NHX:p=0.128:e=2:H={men's outerwear 
+style}:u=0.32:v=0.75:G={}:L={}:Hd=1:Ch=0:Sq=1],men's casual wear[&&NHX:p=0.177:e=2:H={men's casual wear}:u=0.443:v=0.75:G=
+{}:L={}:Hd=1:Ch=0:Sq=1],men's business wear[&&NHX:p=0.205:e=2:H={men's business wear}:u=0.514:v=0.75:G={}:L=
+{}:Hd=1:Ch=0:Sq=1])men's clothing style[&&NHX:p=0.511:e=1:H={men's business wear;...;men's outerwear style}:u=0.75:v=1.0:G=
+{men's formal wear;...;men's underwear and sleepwear}:L={}:Hd=0:Ch=1:Sq=0])root[&&NHX:p=0.775:e=0:H={men's 
+accessories;...;men's outerwear style}:u=1.0:v=1.0:G={men's shoes and footwear;...;men's underwear and sleepwear}:L=
+{}:Hd=0:Ch=1:Sq=0];
 Done
 ```
 
