@@ -1,9 +1,15 @@
 """ Functions for dealing with ete3 for taxonomy representations
 """
 
+try:
+    from got.taxonomy import Taxonomy, Node
+except ImportError as e:
+    from taxonomy import Taxonomy, Node
+
 
 def make_ete3_lifted(taxonomy_tree: Node, print_all: bool = True) -> str:
     """Returns ete3 representation of a taxonomy tree
+       after lifting procedure completed
 
     Parameters
     ----------
@@ -84,6 +90,46 @@ def make_ete3_lifted(taxonomy_tree: Node, print_all: bool = True) -> str:
     return "".join(output)
 
 
+def make_ete3_raw(taxonomy_tree: Node) -> str:
+    """Returns ete3 representation of a taxonomy tree
+       for raw taxonomy
+
+    TODO: Taxonomy or Node as an input
+
+    Parameters
+    ----------
+    taxonomy_tree : Node
+        the root of the taxonomy tree / sub-tree
+
+    Returns
+    -------
+    str
+        resulting ete3 representation
+    """
+
+    def rec_ete3(node):
+        output = []
+
+        if node.is_internal:
+            output.append("(")
+
+            children_len = len(node.children)
+
+            for k, child in enumerate(node.children):
+                output.extend(rec_ete3(child))
+                if k < children_len - 1:
+                    output.append(",")
+
+            output.append(")")
+        output.append(node.name)
+
+        return output
+
+    output = rec_ete3(taxonomy_tree)
+    output.append(";")
+    return "".join(output)
+
+
 def save_ete3(ete3_desc: str, filename: str = "taxonomy_tree_lifted.ete") -> None:
     """Writes resulting ete3 in a file
 
@@ -104,4 +150,7 @@ def save_ete3(ete3_desc: str, filename: str = "taxonomy_tree_lifted.ete") -> Non
 
 
 if __name__ == '__main__':
-    pass
+
+    taxonomy_file = "test_files/taxonomy_iab_fragment.fvtr"
+    taxonomy_tree = Taxonomy(taxonomy_file)
+    print(make_ete3_raw(taxonomy_tree.root))
