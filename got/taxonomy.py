@@ -228,6 +228,8 @@ class Taxonomy:
     """
     A class for taxonomy representing
 
+    TODO: support of rooted and unrooted trees
+
     Initial attributes
     ------------------
     built_from : str
