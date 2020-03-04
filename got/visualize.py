@@ -53,6 +53,33 @@ def layout_lift(node: TreeNode, levels: int=3) -> None:
     node.set_style(nst)
 
 
+def layout_raw(node: TreeNode) -> None:
+    """Layout implementation for a tree node
+
+    Parameters
+    ----------
+    node : TreeNode
+        the root of the taxonomy tree / sub-tree
+    levels : int
+        a number of tree levels to draw
+
+    Returns
+    -------
+    None
+    """
+
+    name = TextFace(node.name, tight_text=True)
+    name.rotation = 270
+    node.add_face(name, column=0, position="branch-right")
+    nst = NodeStyle()
+
+    nst["fgcolor"] = "black"
+    nst["size"] = 20
+    nst["shape"] = "circle"
+
+    node.set_style(nst)
+
+
 def read_ete3_from_file(filename: str) -> str:
     """Reads ete3 representation from the file
 
@@ -149,6 +176,37 @@ def draw_lifting_tree(filename: str) -> None:
     ts.legend.add_face(TextFace("  topic with no membership (u(t)=0)"), column=3)
 
     ts.legend_position = 3
+
+    ete3_desc = read_ete3_from_file(filename)
+    tree = Tree(ete3_desc, format=1)
+
+    tree.show(tree_style=ts)
+
+
+def draw_raw_tree(filename: str) -> None:
+    """Draws a raw tree from ete3 representation
+    stored in a file
+
+    TODO: title shortener
+
+    Parameters
+    ----------
+    filename : str
+        a name of the file
+
+    Returns
+    -------
+    None
+    """
+
+    ts = TreeStyle()
+    ts.show_leaf_name = False
+    ts.layout_fn = layout_raw
+    ts.rotation = 90
+    ts.branch_vertical_margin = 10
+    ts.show_scale = False
+    ts.scale = 50
+    ts.title.add_face(TextFace(" ", fsize=20), column=0)
 
     ete3_desc = read_ete3_from_file(filename)
     tree = Tree(ete3_desc, format=1)
