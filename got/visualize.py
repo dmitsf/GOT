@@ -7,7 +7,7 @@ from ete3 import TextFace, Tree, TreeStyle, \
     NodeStyle, RectFace, PieChartFace, TreeNode
 
 
-def layout(node: TreeNode, levels: int=3) -> None:
+def layout_lift(node: TreeNode, levels: int=3) -> None:
     """Layout implementation for a tree node
 
     Parameters
@@ -70,7 +70,7 @@ def read_ete3_from_file(filename: str) -> str:
         return file_opened.read()
 
 
-def draw_tree(filename: str) -> None:
+def draw_lifting_tree(filename: str) -> None:
     """Draws a tree from ete3 representation
     stored in a file
 
@@ -86,7 +86,7 @@ def draw_tree(filename: str) -> None:
 
     ts = TreeStyle()
     ts.show_leaf_name = False
-    ts.layout_fn = layout
+    ts.layout_fn = layout_lift
     ts.rotation = 90
     ts.branch_vertical_margin = 10
     ts.show_scale = False
@@ -164,4 +164,4 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    draw_tree(args.ete3_file)
+    draw_lifting_tree(args.ete3_file)
