@@ -195,8 +195,6 @@ def draw_raw_tree(filename: str) -> None:
     """Draws a raw tree from ete3 representation
     stored in a file
 
-    TODO: title shortener
-
     Parameters
     ----------
     filename : str
@@ -216,9 +214,7 @@ def draw_raw_tree(filename: str) -> None:
     ts.scale = 50
     ts.title.add_face(TextFace(" ", fsize=20), column=0)
 
-    #ete3_desc = read_ete3_from_file(filename)
-    ete3_desc = ("(((men's jewelry and watches)men's accessories,(men's business wear,men's casual wear,men's formal wear,men's outerwear style,men's sportswear,men's underwear and sleepwear)men's clothing style,men's shoes and footwear)men's fashion)root;")
-
+    ete3_desc = read_ete3_from_file(filename)
     tree = Tree(ete3_desc, format=1)
 
     tree.show(tree_style=ts)
