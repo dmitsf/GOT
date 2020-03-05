@@ -228,8 +228,6 @@ class Taxonomy:
     """
     A class for taxonomy representing
 
-    TODO: support of rooted and unrooted trees
-
     Initial attributes
     ------------------
     built_from : str
@@ -258,6 +256,10 @@ class Taxonomy:
 
     root() (property)
         returns the root of the taxonomy
+
+    get_index_and_name(node_repr) (staticmethod)
+        returns str representations for index and name of node
+
     """
 
     def __init__(self, filename: str) -> None:
@@ -304,6 +306,28 @@ class Taxonomy:
         """
         return self._root
 
+    @staticmethod
+    def get_index_and_name(node_repr: Union["_sre.SRE_Match", "_sre.SRE_Match"]) \
+        -> Union[str, str]:
+        """returns str representations of index and name
+
+        Parameters
+        ----------
+        node : Union["_sre.SRE_Match", "_sre.SRE_Match"]
+            index and name found by regexp
+
+        Returns
+        -------
+        Union[str, str]
+            node index and name
+        """
+        index_s, name_s = node_repr
+        return index_s.group(0)[:-1], \
+            name_s.group(0)[1:].lower() \
+            if (name_s.group(0)[-1].isalpha() or \
+                name_s.group(0)[-1] == "'") \
+                else name_s.group(0)[1:-1].lower()
+
     def get_taxonomy_tree(self, filename: str) -> Node:
         """Builds the taxonomy from its description in the file
 
@@ -318,27 +342,40 @@ class Taxonomy:
         Node
             the root of the taxonomy built
         """
-        tree = Node("", "root", None)
-        curr_parent = tree
-
+        nodes = []
         with open(filename, 'r') as file_opened:
             for line in file_opened:
                 index_s = re.search(r"(^[\.\d]+)[*, ]", line)
                 name_s = re.search(r",([A-Za-z 102\-']+),?", line)
-
                 if index_s and name_s:
-                    index, name = index_s.group(0)[:-1], \
-                                  name_s.group(0)[1:].lower() \
-                                  if (name_s.group(0)[-1].isalpha() or \
-                                      name_s.group(0)[-1] == "'") \
-                                      else name_s.group(0)[1:-1].lower()
-                    while curr_parent.index not in index:
-                        if curr_parent.parent is not None:
-                            curr_parent = curr_parent.parent
+                    nodes.append((index_s, name_s))
 
-                    current_node = Node(index, name, curr_parent)
-                    curr_parent.children.append(current_node)
-                    curr_parent = current_node
+        root_found = True
+        root_index = nodes[0][0].group(0)[:-1]
+
+        for index_s, _ in nodes[1:]:
+            if not index_s.group(0)[:-1].startswith(root_index):
+                root_found = False
+                break
+
+        if root_found:
+            index, name = self.get_index_and_name(nodes[0])
+            tree = Node(index, name, None)
+            nodes = nodes[1:]
+        else:
+            tree = Node("", "root", None)
+
+        curr_parent = tree
+
+        for node in nodes:
+            index, name = self.get_index_and_name(node)
+            while curr_parent.index not in index:
+                if curr_parent.parent is not None:
+                    curr_parent = curr_parent.parent
+
+            current_node = Node(index, name, curr_parent)
+            curr_parent.children.append(current_node)
+            curr_parent = current_node
 
         self.built_from = filename
         self.leaves_extracted = False
