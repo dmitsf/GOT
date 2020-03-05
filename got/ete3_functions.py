@@ -1,20 +1,22 @@
 """ Functions for dealing with ete3 for taxonomy representations
 """
 
+from typing import Union
+
 try:
     from got.taxonomy import Taxonomy, Node
 except ImportError as e:
     from taxonomy import Taxonomy, Node
 
 
-def make_ete3_lifted(taxonomy_tree: Node, print_all: bool = True) -> str:
+def make_ete3_lifted(taxonomy_tree: Union[Node, Taxonomy], print_all: bool = True) -> str:
     """Returns ete3 representation of a taxonomy tree
        after lifting procedure completed
 
     Parameters
     ----------
-    taxonomy_tree : Node
-        the root of the taxonomy tree / sub-tree
+    taxonomy_tree : Union[Node, Taxonomy]
+        the root of the taxonomy tree / sub-tree or taxonomy
     print_all : bool, default=True
         label for printing all the parameters
 
@@ -23,6 +25,8 @@ def make_ete3_lifted(taxonomy_tree: Node, print_all: bool = True) -> str:
     str
         resulting ete3 representation
     """
+    if isinstance(taxonomy_tree, Taxonomy):
+        taxonomy_tree = taxonomy_tree.root
 
     head_subjects = set(t.index for t in taxonomy_tree.H)
 
@@ -90,22 +94,22 @@ def make_ete3_lifted(taxonomy_tree: Node, print_all: bool = True) -> str:
     return "".join(output)
 
 
-def make_ete3_raw(taxonomy_tree: Node) -> str:
+def make_ete3_raw(taxonomy_tree: Union[Node, Taxonomy]) -> str:
     """Returns ete3 representation of a taxonomy tree
        for raw taxonomy
 
-    TODO: Taxonomy or Node as an input
-
     Parameters
     ----------
-    taxonomy_tree : Node
-        the root of the taxonomy tree / sub-tree
+    taxonomy_tree : Union[Node, Taxonomy]
+        the root of the taxonomy tree / sub-tree or taxonomy
 
     Returns
     -------
     str
         resulting ete3 representation
     """
+    if isinstance(taxonomy_tree, Taxonomy):
+        taxonomy_tree = taxonomy_tree.root
 
     def rec_ete3(node):
         output = []
@@ -153,4 +157,4 @@ if __name__ == '__main__':
 
     taxonomy_file = "test_files/taxonomy_iab_fragment.fvtr"
     taxonomy_tree = Taxonomy(taxonomy_file)
-    print(make_ete3_raw(taxonomy_tree.root))
+    print(make_ete3_raw(taxonomy_tree))

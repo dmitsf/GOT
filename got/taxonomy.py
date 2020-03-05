@@ -5,7 +5,7 @@ import re
 import argparse
 
 from collections.abc import Collection
-from typing import List, Generator, Union
+from typing import List, Generator, Union, Tuple
 
 
 class Node(Collection):
@@ -307,13 +307,13 @@ class Taxonomy:
         return self._root
 
     @staticmethod
-    def get_index_and_name(node_repr: Union["_sre.SRE_Match", "_sre.SRE_Match"]) \
+    def get_index_and_name(node_repr: Tuple["_sre.SRE_Match", "_sre.SRE_Match"]) \
         -> Union[str, str]:
         """returns str representations of index and name
 
         Parameters
         ----------
-        node : Union["_sre.SRE_Match", "_sre.SRE_Match"]
+        node : Tuple["_sre.SRE_Match", "_sre.SRE_Match"]
             index and name found by regexp
 
         Returns
