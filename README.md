@@ -87,10 +87,9 @@ optional arguments:
 
 Let us consider working with IAB taxonomy fragment [test_files/taxonomy_iab_fragment.fvtr](https://github.com/dmitsf/GOT/blob/master/got/test_files/taxonomy_iab_fragment.fvtr).
 
-<center>
 ![Taxonomy fragment](https://raw.githubusercontent.com/dmitsf/GOT/master/got/got_results/iab_fragment.png)
-</center>
-<center>Fig. 1</center>
+
+Fig. 1: Taxonomy fragment
 
 ## Working with a taxonomy
 
@@ -151,3 +150,4 @@ python3 visualize.py
 
 ![Visualization result](https://raw.githubusercontent.com/dmitsf/GOT/master/got/got_results/result_iab_fragment.png)
 
+Fig. 2: Visualization result
