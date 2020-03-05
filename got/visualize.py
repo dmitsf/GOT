@@ -53,24 +53,32 @@ def layout_lift(node: TreeNode, levels: int=3) -> None:
     node.set_style(nst)
 
 
-def layout_raw(node: TreeNode) -> None:
+def layout_raw(node: TreeNode, tight_mode: bool = True) -> None:
     """Layout implementation for a tree node
 
     Parameters
     ----------
     node : TreeNode
         the root of the taxonomy tree / sub-tree
-    levels : int
-        a number of tree levels to draw
+    tight_mode : bool, default=True
+        a mode to print node names more tightly
 
     Returns
     -------
     None
     """
 
-    name = TextFace(node.name, tight_text=True)
-    name.rotation = 270
-    node.add_face(name, column=0, position="branch-right")
+    if tight_mode:
+        name_segments = node.name.split(' ')
+        for i, name_segment in enumerate(name_segments):
+            name_face = TextFace(name_segment, tight_text=True)
+            name_face.rotation = 270
+            node.add_face(name_face, column=i, position="branch-right")
+    else:
+        name_face = TextFace(node.name, tight_text=True)
+        name_face.rotation = 270
+        node.add_face(name_face, column=0, position="branch-right")
+
     nst = NodeStyle()
 
     nst["fgcolor"] = "black"
@@ -208,13 +216,17 @@ def draw_raw_tree(filename: str) -> None:
     ts.scale = 50
     ts.title.add_face(TextFace(" ", fsize=20), column=0)
 
-    ete3_desc = read_ete3_from_file(filename)
+    #ete3_desc = read_ete3_from_file(filename)
+    ete3_desc = ("(((men's jewelry and watches)men's accessories,(men's business wear,men's casual wear,men's formal wear,men's outerwear style,men's sportswear,men's underwear and sleepwear)men's clothing style,men's shoes and footwear)men's fashion)root;")
+
     tree = Tree(ete3_desc, format=1)
 
     tree.show(tree_style=ts)
 
 
 if __name__ == "__main__":
+
+    draw_raw_tree('')
 
     parser = argparse.ArgumentParser(description="Visualization of lifting.")
     parser.add_argument("ete3_file", type=str,
