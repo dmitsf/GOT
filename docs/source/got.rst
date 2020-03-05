@@ -28,6 +28,13 @@ got.visualize module
     :undoc-members:
     :show-inheritance:
 
+got.ete3_functions module
+--------------------
+
+.. automodule:: got.ete3_functions
+    :members:
+    :undoc-members:
+    :show-inheritance:
 
 Module contents
 ---------------
