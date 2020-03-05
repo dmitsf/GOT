@@ -307,13 +307,13 @@ class Taxonomy:
         return self._root
 
     @staticmethod
-    def get_index_and_name(node_repr: Tuple["_sre.SRE_Match", "_sre.SRE_Match"]) \
-        -> Union[str, str]:
+    def get_index_and_name(node_repr: Tuple[re.Match, re.Match]) \
+        -> Tuple[str, str]:
         """returns str representations of index and name
 
         Parameters
         ----------
-        node : Tuple["_sre.SRE_Match", "_sre.SRE_Match"]
+        node : Tuple[re.Match, re.Match]
             index and name found by regexp
 
         Returns
