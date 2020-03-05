@@ -87,10 +87,10 @@ optional arguments:
 
 Let us consider working with IAB taxonomy fragment [test_files/taxonomy_iab_fragment.fvtr](https://github.com/dmitsf/GOT/blob/master/got/test_files/taxonomy_iab_fragment.fvtr).
 
-      <center>
-      ![Taxonomy fragment](https://raw.githubusercontent.com/dmitsf/GOT/master/got/got_results/iab_fragment.png)
-      </center>
-      <center>Fig. 1</center>
+<center>
+![Taxonomy fragment](https://raw.githubusercontent.com/dmitsf/GOT/master/got/got_results/iab_fragment.png)
+</center>
+<center>Fig. 1</center>
 
 ## Working with a taxonomy
 
