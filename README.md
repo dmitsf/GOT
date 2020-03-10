@@ -89,6 +89,7 @@ Let us consider working with IAB taxonomy fragment [test_files/taxonomy_iab_frag
 
 ![Taxonomy fragment](https://raw.githubusercontent.com/dmitsf/GOT/master/got/got_results/iab_fragment.png)
 
+Fig. 1: Taxonomy fragment
 
 ## Working with a taxonomy
 
@@ -149,3 +150,4 @@ python3 visualize.py
 
 ![Visualization result](https://raw.githubusercontent.com/dmitsf/GOT/master/got/got_results/result_iab_fragment.png)
 
+Fig. 2: Visualization result
