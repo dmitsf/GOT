@@ -7,7 +7,7 @@ from ete3 import TextFace, Tree, TreeStyle, \
     NodeStyle, RectFace, PieChartFace, TreeNode
 
 
-def layout_lift(node: TreeNode, levels: int=3) -> None:
+def layout_lift(node: TreeNode, levels: int = 3) -> None:
     """Layout implementation for a tree node
 
     Parameters
@@ -221,8 +221,6 @@ def draw_raw_tree(filename: str) -> None:
 
 
 if __name__ == "__main__":
-
-    draw_raw_tree('')
 
     parser = argparse.ArgumentParser(description="Visualization of lifting.")
     parser.add_argument("ete3_file", type=str,
