@@ -456,5 +456,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     TAXONOMY_GOT = Taxonomy(args.taxonomy_file)
+    print(f"Taxonomy was built from file: {args.taxonomy_file}.")
     print(f"Taxonomy leaves for {args.taxonomy_file}:")
     print(('\n'.join([' '.join([i.index, i.name]) for i in TAXONOMY_GOT.leaves])))

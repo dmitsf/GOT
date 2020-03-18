@@ -413,6 +413,8 @@ def save_result_table(result_table: List[List[str]], filename: str = "table.csv"
         for table_row in result_table:
             file_opened.write('\t'.join(table_row) + '\n')
 
+    print(f"Table saved in the file: {filename}")
+
 
 def pargenfs(cluster: Dict[str, float], taxonomy_tree: Taxonomy, \
              gamma_v: float = .2, lambda_v: float = .2) -> None:
@@ -457,29 +459,31 @@ def pargenfs(cluster: Dict[str, float], taxonomy_tree: Taxonomy, \
     print("Setting weights for internal nodes")
     root_u = set_internal_weights(taxonomy_tree.root)
     print(f"Membership in root: {root_u:.5f}")
-    print("Pruning tree")
+    print("Pruning tree...")
     prune_tree(taxonomy_tree.root)
 
-    print("Setting gaps")
+    print("Setting gaps...")
     set_gaps_for_tree(taxonomy_tree.root)
 
-    print("Other parameters setting")
+    print("Other parameters setting...")
     set_parameters(taxonomy_tree.root)
     reduce_edges(taxonomy_tree.root)
 
-    print("ParGenFS main steps")
+    print("ParGenFS main steps...")
     make_init_step(taxonomy_tree.root, gamma_v)
     make_recursive_step(taxonomy_tree.root, gamma_v, lambda_v)
 
     indicate_offshoots(taxonomy_tree.root)
 
+    print("Done. Saving...")
     result_table = make_result_table(taxonomy_tree.root)
     save_result_table(result_table)
 
     ete3_desc = make_ete3_lifted(taxonomy_tree.root)
     save_ete3(ete3_desc)
+    print("ete representation:")
     print(ete3_desc)
-    print("Done")
+    print("Done.")
 
 
 def run(taxonomy_file: str, taxonomy_leaves: str, clusters: str, cluster_number: int) -> None:

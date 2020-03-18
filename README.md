@@ -48,7 +48,7 @@ optional arguments:
 
 ## Generalization
 
-__pargensf.py__: lifts the leaf cluster over a taxonomy tree. Produces two files:
+__pargenfs.py__: lifts the leaf cluster over a taxonomy tree. Produces two files:
 * _table.csv_: table with all the variables' values
 * _taxonomy\_tree.ete_: lifting result on the taxonomy tree in ete3 format.
 

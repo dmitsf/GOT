@@ -152,6 +152,8 @@ def save_ete3(ete3_desc: str, filename: str = "taxonomy_tree_lifted.ete") -> Non
     with open(filename, 'w') as file_opened:
         file_opened.write(ete3_desc)
 
+    print(f"ete representation saved in the file: {filename}")
+
 
 if __name__ == '__main__':
 
