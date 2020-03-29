@@ -346,7 +346,7 @@ class Taxonomy:
         with open(filename, 'r') as file_opened:
             for line in file_opened:
                 index_s = re.search(r"(^[\.\d]+)[*, ]", line)
-                name_s = re.search(r",([A-Za-z 102\-']+),?", line)
+                name_s = re.search(r",([A-Za-zА-Яа-я 102\-']+),?", line)
                 if index_s and name_s:
                     nodes.append((index_s, name_s))
 
@@ -459,3 +459,4 @@ if __name__ == '__main__':
     print(f"Taxonomy was built from file: {args.taxonomy_file}.")
     print(f"Taxonomy leaves for {args.taxonomy_file}:")
     print(('\n'.join([' '.join([i.index, i.name]) for i in TAXONOMY_GOT.leaves])))
+    print("Number of leaves:", len(TAXONOMY_GOT.leaves))

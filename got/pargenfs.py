@@ -14,8 +14,8 @@ except ImportError as e:
     from ete3_functions import make_ete3_lifted, save_ete3
 
 
-LIMIT = .2
-GAMMA = .4
+LIMIT = .1
+GAMMA = .9
 LAMBDA = .1
 
 
@@ -328,6 +328,7 @@ def make_recursive_step(node: Node, gamma_v: float, lambda_v: float) -> None:
 
         if not node.o:
             sum_penalty = sum([t.p if t.p is not None else 0 for t in node], .0)
+            print("sp", node.u + lambda_v * node.V, sum_penalty)
 
             if node.u + lambda_v * node.V < sum_penalty:
                 node.H = [node]
@@ -449,6 +450,11 @@ def pargenfs(cluster: Dict[str, float], taxonomy_tree: Taxonomy, \
         print(f"{i:<60} {weight:.5f}")
 
     summ_after_trunc = truncate_weights(taxonomy_tree.root, LIMIT)
+
+    if summ_after_trunc == 0:
+        print("The threshold is too large. Try a smaller one.")
+        return
+
     updated_leaf_weights = normalize_and_return_leaf_weights(taxonomy_tree.root, summ_after_trunc)
     print("After transformation:")
     for weight, i in sorted(updated_leaf_weights, key=itemgetter(0), reverse=True):
@@ -514,11 +520,7 @@ def run(taxonomy_file: str, taxonomy_leaves: str, clusters: str, cluster_number:
         for i in file_opened.readlines():
             splitted = i.split('\t')
             if len(splitted) > 1:
-                node_names.append(splitted[1].strip().replace("ju", "yu").\
-                                  replace("ja", "ya").lower().replace("hor", "khor").\
-                                  replace("kuh", "kukh").replace("eha", "ekha").\
-                                  replace("hrom", "khrom").replace("yh", "ykh").\
-                                  replace("hol", "khol").replace("oh", "okh"))
+                node_names.append(splitted[1].strip())
             else:
                 node_names.append(splitted[0].strip())
 
