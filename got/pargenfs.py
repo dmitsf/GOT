@@ -15,8 +15,8 @@ except ImportError as e:
 
 
 LIMIT = .1
-GAMMA = .9
-LAMBDA = .1
+GAMMA = .7
+LAMBDA = .3
 
 
 def enumerate_tree_layers(node: Node, current_layer: int = 0) -> None:
