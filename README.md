@@ -4,7 +4,7 @@ The repository includes ParGenFS and related algorithms implementations.
 
 Read more about the algorithm and the related definitions in the recent article: https://doi.org/10.1016/j.ins.2019.09.082
 
-See related documentation here: https://got-docs.readthedocs.io/
+See a technical documentation here: https://got-docs.readthedocs.io/
 
 
 # Installation
