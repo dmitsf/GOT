@@ -1,6 +1,6 @@
-GOT (generalization over taxonomies) software package.
+__GOT__ (__G__ eneralization __O__ ver __T__ axonomies) software package.
 
-Includes ParGenFS and related algorithms implementation.
+The repository includes ParGenFS and related algorithms implementations.
 
 Read more about the algorithm and the related definitions in the recent article: https://doi.org/10.1016/j.ins.2019.09.082
 
