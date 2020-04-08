@@ -2,18 +2,26 @@ GOT (generalization over taxonomies) software package.
 
 Includes ParGenFS and related algorithms implementation.
 
-Read more in the recent article: https://doi.org/10.1016/j.ins.2019.09.082
+Read more about the algorithm and the related definitions in the recent article: https://doi.org/10.1016/j.ins.2019.09.082
 
 See related documentation here: https://got-docs.readthedocs.io/
 
 
 # Installation
 
-Download the repository and run from the repository folder:
+For basic usage you may skip the installation: it will be sufficient to clone the repository and run programs form the repository folder.
+
+If you would like to import GOT modules in your Python code, you may install the package.
+To install, you should run from the repository folder:
 
 ```
 [sudo] python3 setup.py install 
 ```
+
+The install command may be slightly different - this depends on your Python interpreter setup.
+
+
+# Requirements
 
 For visualization you should install ete3 package (http://etetoolkit.org/download/):
 
@@ -21,13 +29,16 @@ For visualization you should install ete3 package (http://etetoolkit.org/downloa
 [sudo] pip3 install --upgrade ete3
 ```
 
-
 These modules may be needed also:
 
 ```
 [sudo] apt-get install python3-pyqt5.qtsvg
 [sudo] apt-get install python3-pyqt5.qtopengl
 ```
+
+# Taxonomy format: _.fvtr_
+
+We use _.fvtr_ (flat-view taxonomy representation) format. It relies on a representation of ACM CCS taxonomy (https://www.acm.org/publications/class-2012). You can see examples of files in [test_files/](https://github.com/dmitsf/GOT/blob/master/got/test_files/) folder.
 
 # Usage
 
