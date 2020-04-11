@@ -15,8 +15,8 @@ except ImportError as e:
 
 
 LIMIT = .1
-GAMMA = .7
-LAMBDA = .3
+GAMMA = .9
+LAMBDA = .2
 
 
 def enumerate_tree_layers(node: Node, current_layer: int = 0) -> None:
@@ -328,7 +328,6 @@ def make_recursive_step(node: Node, gamma_v: float, lambda_v: float) -> None:
 
         if not node.o:
             sum_penalty = sum([t.p if t.p is not None else 0 for t in node], .0)
-            print("sp", node.u + lambda_v * node.V, sum_penalty)
 
             if node.u + lambda_v * node.V < sum_penalty:
                 node.H = [node]
@@ -527,7 +526,10 @@ def run(taxonomy_file: str, taxonomy_leaves: str, clusters: str, cluster_number:
     membership_matrix = []
     with open(clusters, 'r') as file_opened:
         for line in file_opened.readlines():
-            membership_vector = list(map(float, line.split('\t')))
+            try:
+                membership_vector = list(map(float, line.split('\t')))
+            except ValueError:
+                membership_vector = list(map(float, line.split(' ')))
             membership_matrix.append(membership_vector)
 
     tree_leaves = taxonomy_tree.leaves
