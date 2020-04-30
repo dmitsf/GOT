@@ -446,6 +446,24 @@ def extract_leaves(tree: Node) -> List[Node]:
 
     return leaves
 
+def save_leaves(leaves: List[Node], filename: str = "taxonomy_leaves.txt") -> None:
+    """Saves all the leaves of the tree / sub-tree
+
+       Parameters
+       ----------
+       leaves : List[Node]
+           the list of leaves
+
+       Returns
+       -------
+       None
+    """
+
+    with open(filename, "w") as file_opened:
+        for node in leaves:
+            file_opened.write(node.name)
+            file_opened.write("\n")
+
 
 if __name__ == '__main__':
 
@@ -460,3 +478,4 @@ if __name__ == '__main__':
     print(f"Taxonomy leaves for {args.taxonomy_file}:")
     print(('\n'.join([' '.join([i.index, i.name]) for i in TAXONOMY_GOT.leaves])))
     print("Number of leaves:", len(TAXONOMY_GOT.leaves))
+    save_leaves(TAXONOMY_GOT.leaves)
