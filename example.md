@@ -2,7 +2,7 @@
 
 Let us consider the analysis of a text collection with the help of GoT software package. We will consider Data Science Taxonomy (DST, published in [this preprint](https://wp.hse.ru/data/2019/01/13/1146987922/WP7_2018_04_______.pdf)) and collection of abstracts of research papers on Data Science (may be downloaded from a [webpage of "Concept" research group, HSE University](https://cs.hse.ru/concept/taxonomies)). The collection under consideration was obtained from 80 Elsevier and Springer journals related to Data Science. The collection is available at a [webpage of "Concept" research group](https://cs.hse.ru/concept/datasets).
 
-Our final aim is to extract and understand the main research directions in the Data Science area.
+Our final aim here is to obtain and visualize the main research directions in the Data Science area that we can extract using the collection and the taxonomy.
 
 We will follow the steps below:
 
@@ -317,7 +317,7 @@ ete representation saved.
 Done.
 ```
 
-All the variables' values ware saved in _table.csv_ file. Let's take a look. We can see 11 head subjects: 
+All the variables' values ware saved in _table.csv_ file. Let's take a look. We can see 11 head subjects, devoted mainly to Machine Learning and Information Systems: 
 
 ```
 1.1.1.6. bayesian analysis; 
@@ -348,5 +348,25 @@ For cluster 2, we obtainded the following fugure.
 
 ![](https://github.com/dmitsf/GOT/blob/dev/got/got_results/cluster_1.png "Cluster 1 generalization visualization.")
 Fig. 2: Cluster 1 generalization.
+
+The 15 head subjects were obtained here, which is devoted mainly to Databases, Visualization and Implementation:
+
+```
+1.1.1.15. semi-supervised learning; 
+1.1.2.9. data integration; 
+2.1.3.2. loopy belief propagation; 
+3.1.1.4. physical data models; 
+3.1.3.3.3. database recovery; 
+3.1.4.4. call level interfaces; 
+3.1.5.5. wrappers; 
+3.2.1.7 graph mining; 
+3.3.1.3.2. surfacing; 
+3.4.5.8. clustering and classification; 
+4.1.3.1. scientific visualization; 
+4.1.4. visualization systems and tools; 
+5.2.3.1.1 parallel implementation; 
+5.2.3.7.6. latent dirichlet allocation; 
+5.2.4.3. spectral methods
+```
 
 We can complete the same steps for all the clusters obtained.
