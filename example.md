@@ -132,7 +132,7 @@ print(abstracts[:2])
 
 To construct text-to-topic relevance matrix, we will follow Annotated Suffix Tree (AST) approach. [This approach](https://bijournal.hse.ru/en/2012--3(21)/63370530.html) relies on fragment text representation and shows excellent results on many text analysis and retrieval problems.
 
-We will use AST implementation from [EAST package](https://github.com/dmitsf/AST-text-analysis), developed by M.Dubov and improved by A.Vlasov and D.Frolov. In the code snippet below, we use a common text processing pipeline from [this example](https://github.com/dmitsf/AST-text-analysis/blob/master/examples/relevances.py).
+We will use AST implementation from [EAST package](https://github.com/dmitsf/AST-text-analysis), developed by M.Dubov and improved by A.Vlasov and D.Frolov. In the code snippet below, we use a common text processing pipeline from [this example](https://github.com/dmitsf/AST-text-analysis/blob/master/examples/relevances.py). For a subcollection consisting of 500 samples calculations may take several minutes, it depends on your computer.
 
 ```
 import re
@@ -194,5 +194,48 @@ The text-to-topic relevance matrix is saved in _relevance_matrix.txt_ file.
 
 ## 2. Obtaining fuzzy thematic clusters using FADDIS algorithm.
 
-To obtain fuzzy thematic clusters we will use [FADDIS algorithm](https://www.sciencedirect.com/science/article/pii/S0020025511004592) and it's pythonic implementation [PyFADDIS](https://github.com/dmitsf/PyFADDIS). 
+To obtain fuzzy thematic clusters we will use [FADDIS algorithm](https://www.sciencedirect.com/science/article/pii/S0020025511004592) and it's pythonic implementation [PyFADDIS](https://github.com/dmitsf/PyFADDIS). We will follow the pipeline with LAPIN transform from the [example](https://github.com/dmitsf/PyFADDIS/blob/master/example_clustering.py).
+
+```
+import numpy as np
+from lapin import lapin
+from faddis import faddis
+
+from operator import itemgetter
+
+NUM_EL = 15
+
+
+if __name__ == "__main__":
+    relevance_matrix = np.loadtxt("relevance_matrix.txt")
+    print(relevance_matrix.shape)
+    tc = relevance_matrix.dot(relevance_matrix.T)
+    print(tc.shape)
+
+    tc_transformed = lapin(tc)
+    B, member, contrib, intensity, lat, tt = faddis(tc_transformed)
+    np.savetxt("clusters.dat", member)
+
+    with open("taxonomy_leaves.txt") as fn:
+        annotations = [l.strip() for l in fn]
+
+    for cluster in member.T:
+        print(list(sorted(zip(annotations, cluster.flat),
+                          key=itemgetter(1), reverse=True))[:NUM_EL])
+                          
+# Outputs:
+# [('gaussian processes', 0.5797048882008996), ('boosting', 0.5481740449484693), 
+# ('online learning theory', 0.49649238052543937), ('query learning', 0.29972568516128634), 
+# ('modelling', 0.16035911816266413), ('sample complexity and generalization bounds', 0.028083528546619597), 
+# ('bayesian analysis', 0.02456740568435398), ('boolean function learning', 0.0),
+# ('unsupervised learning and clustering', 0.0), ('support vector machines', 0.0), ('inductive inference', 0.0),
+# ('multi-agent learning', 0.0), ('models of learning', 0.0)]
+# [('inductive inference', 0.7036691642201909), ('boolean function learning', 0.4708936191239057), 
+# ('unsupervised learning and clustering', 0.4271583918603897), ('multi-agent learning', 0.3105183398625311),
+# ('models of learning', 0.06434838666427031), ('support vector machines', 0.009069773978266147),
+# ('sample complexity and generalization bounds', 0.0), ('gaussian processes', 0.0), ('modelling', 0.0),
+# ('boosting', 0.0), ('bayesian analysis', 0.0), ('online learning theory', 0.0), ('query learning', 0.0)]
+# ...
+# (9 clusters)
+```
 
