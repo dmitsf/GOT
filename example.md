@@ -1,6 +1,6 @@
 # Example: using a taxonomy to analyse a text collection
 
-Let us consider analysis of a text collection with a help of GoT software package. We will consider Data Science Taxonomy (DST, published in [this preprint](https://wp.hse.ru/data/2019/01/13/1146987922/WP7_2018_04_______.pdf)) and collection of abstracts of research papers on Data Science (may be downloaded from a [webpage of "Concept" research group, HSE University](https://cs.hse.ru/concept/taxonomies)). The collection under consideration was obtained from 80 Elsevier and Springer journals related to Data Science. The collection is available at a [webpage of "Concept" research group](https://cs.hse.ru/concept/datasets).
+Let us consider the analysis of a text collection with the help of GoT software package. We will consider Data Science Taxonomy (DST, published in [this preprint](https://wp.hse.ru/data/2019/01/13/1146987922/WP7_2018_04_______.pdf)) and collection of abstracts of research papers on Data Science (may be downloaded from a [webpage of "Concept" research group, HSE University](https://cs.hse.ru/concept/taxonomies)). The collection under consideration was obtained from 80 Elsevier and Springer journals related to Data Science. The collection is available at a [webpage of "Concept" research group](https://cs.hse.ru/concept/datasets).
 
 Our final aim is to extract and understand the main research directions in the Data Science area.
 
@@ -16,26 +16,26 @@ Let's start.
 ## 0. Downloading and preparing the text collection and the taxonomy.
 
 We can download the collection via browser from a [webpage of "Concept" research group](https://cs.hse.ru/concept/datasets)
-or via commandline:
+or via command line:
 
 ```
 $ wget https://cs.hse.ru/data/2019/05/19/1506729559/papers_parsed_relevant.zip
 ```
 
-After that, we should unzip the archive:
+After that, we should unzip the archive downloaded:
 
 ```
 $ unzip papers_parsed_relevant.zip
 ```
 
 We can download the DST taxonomy via browser from a [webpage of "Concept" research group](https://cs.hse.ru/concept/taxonomies)
-or via commandline:
+or via command line:
 
 ```
 $ wget https://cs.hse.ru/data/2019/12/18/1523118089/Data_Science_taxonomy.xlsx
 ```
 
-Since the taxonomy have _.xlsx_ format, we should transform the taxonomy to _.csv_. One may do this using Miscrosoft Excel, OpenOffice/LibreOffice Calc or via commandline:
+Since the taxonomy has _.xlsx_ format, we should transform the taxonomy to _.csv_. One may do this using Microsoft Excel, OpenOffice/LibreOffice Calc, or via command line:
 
 ```
 $ libreoffice --headless --convert-to csv Data_Science_taxonomy.xlsx
@@ -86,7 +86,7 @@ print(df.shape)
 # Ouputs: (26823, 13)
 ```
 
-We can see our collection contains 26823 samples. For the sake of simplisity, lets's use a subcollection constains 500 samples. To make the subcollection:
+We can see our collection contains 26823 samples. For the sake of simplicity, let's use a subcollection contains 500 samples. To make the subcollection:
 
 ```
 sub_df = df.sample(500)
@@ -113,7 +113,7 @@ print(sub_df['abstract'])
 # Name: abstract, Length: 500, dtype: object
 ```
 
-We see we should trim "Abstract" word from the beginning of each abstract. Let's do this:
+We see we should trim "Abstract" words from the beginning of each abstract. Let's do this:
 
 ```
 abstracts = []
@@ -130,7 +130,7 @@ print(abstracts[:2])
 # ['In Data Mining, during the preprocessing step, there is a considerable diversity ... 
 ```
 
-To construct text-to-topic relevance matrix, we will follow Annotated Suffix Tree (AST) approach. [This approach](https://bijournal.hse.ru/en/2012--3(21)/63370530.html) relies on fragment text representation and shows excellent results on many text analysis and retrieval problems.
+To construct text-to-topic relevance matrix, we will follow the Annotated Suffix Tree (AST) approach. [This approach](https://bijournal.hse.ru/en/2012--3(21)/63370530.html) relies on fragment text representation and shows excellent results on many text analysis and retrieval problems.
 
 We will use AST implementation from [EAST package](https://github.com/dmitsf/AST-text-analysis), developed by M.Dubov and improved by A.Vlasov and D.Frolov. In the code snippet below, we use a common text processing pipeline from [this example](https://github.com/dmitsf/AST-text-analysis/blob/master/examples/relevances.py). For a subcollection consisting of 500 samples calculations may take several minutes, it depends on your computer.
 
