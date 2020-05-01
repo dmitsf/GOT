@@ -86,7 +86,7 @@ print(df.shape)
 # Ouputs: (26823, 13)
 ```
 
-We can see our collection contains 26823 samples. For the sake of simplisity, lets's use a subcollection from 500 samples. To make the subcollection:
+We can see our collection contains 26823 samples. For the sake of simplisity, lets's use a subcollection constains 500 samples. To make the subcollection:
 
 ```
 sub_df = df.sample(500)
@@ -119,25 +119,74 @@ We see we should trim "Abstract" word from the beginning of each abstract. Let's
 abstracts = []
 ln = len('Abstract ')
 
-for a in sampled['abstract']:
+for a in sub_df['abstract']:
     if a.startswith('Abstract '):
         abstracts.append(a[ln:])
 
-print(abstracts[:3])
+print(abstracts[:2])
 
 # Outputs:
 #
 # ['In Data Mining, during the preprocessing step, there is a considerable diversity ... 
 ```
 
-
 To construct text-to-topic relevance matrix, we will follow Annotated Suffix Tree (AST) approach. [This approach](https://bijournal.hse.ru/en/2012--3(21)/63370530.html) relies on fragment text representation and shows excellent results on many text analysis and retrieval problems.
 
-We will use AST implementation from [EAST package](https://github.com/dmitsf/AST-text-analysis), developed by M.Dubov and improved by A.Vlasov and D.Frolov.
-
-
+We will use AST implementation from [EAST package](https://github.com/dmitsf/AST-text-analysis), developed by M.Dubov and improved by A.Vlasov and D.Frolov. In the code snippet below, we use a common text processing pipeline from [this example](https://github.com/dmitsf/AST-text-analysis/blob/master/examples/relevances.py).
 
 ```
+import re
+
+import numpy as np
+
+from east.asts import base
+
+
+def clear_text(text, lowerize=True):
+
+    pat = re.compile(r'[^A-Za-z0-9 \-\n\r.,;!?А-Яа-я]+')
+    cleared_text = re.sub(pat, ' ', text)
+
+    if lowerize:
+        cleared_text = cleared_text.lower()
+
+    tokens = cleared_text.split()
+    return tokens
+
+
+def make_substrings(tokens, k=4):
+
+    for i in range(max(len(tokens) - k + 1, 1)):
+        yield ' '.join(tokens[i:i + k])
+
+
+def get_relevance_matrix(texts, strings):
+
+    matrix = np.empty((0, len(strings)), float)
+    prepared_text_tokens = [clear_text(t) for t in texts]
+
+    prepared_string_tokens = [clear_text(s) for s in strings]
+    prepared_strings = [' '.join(t) for t in prepared_string_tokens]
+
+    for text_tokens in prepared_text_tokens:
+        ast = base.AST.get_ast(list(make_substrings(text_tokens)))
+        row = np.array([ast.score(s) for s in prepared_strings])
+        matrix = np.append(matrix, [row], axis=0)
+
+    return matrix
+
+
+def save_matrix(matrix):
+    np.savetxt("relevance_matrix.txt", matrix)
+
+
+if __name__ == "__main__":
+
+    with open("taxonomy_leaves.txt") as f:
+        strings = [l.strip() for l in f.readlines()]
+
+    relevance_matrix = get_relevance_matrix(abstracts, strings)
+    save_matrix(relevance_matrix)
 
 ```
 
