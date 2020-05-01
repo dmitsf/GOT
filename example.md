@@ -317,10 +317,20 @@ ete representation saved.
 Done.
 ```
 
-All the variables' values ware saved in _table.csv_ file. Let's take a look. We can see a head subjects: 
+All the variables' values ware saved in _table.csv_ file. Let's take a look. We can see 11 head subjects: 
 
 ```
-1.1.1.6. bayesian analysis; 1.1.2.6. database interoperability; 2.1.1.4. decision diagrams; 2.1.5.3. regression analysis; 3. information systems; 5.2.1.2.7.1 graph embedding; 5.2.1.4.3. learning under covariate shift; 5.2.3.3.3.2 fuzzy representation; 5.2.3.8. rule learning; 5.2.3.9. instance-based learning; 5.2.4.1.2. q-learning
+1.1.1.6. bayesian analysis; 
+1.1.2.6. database interoperability; 
+2.1.1.4. decision diagrams; 
+2.1.5.3. regression analysis; 
+3. information systems; 
+5.2.1.2.7.1 graph embedding; 
+5.2.1.4.3. learning under covariate shift; 
+5.2.3.3.3.2 fuzzy representation; 
+5.2.3.8. rule learning; 
+5.2.3.9. instance-based learning; 
+5.2.4.1.2. q-learning
 ```
 
 A Ete representation of the cluster generalization in the taxonomy was saved in _taxonomy_tree_lifted.ete_ file. Let's visualize the result using _visualize.py_ module.
@@ -329,6 +339,14 @@ A Ete representation of the cluster generalization in the taxonomy was saved in 
 $ python3 visualize.py taxonomy_tree_lifted.ete
 ```
 
-We can see the figure.
+We can see the figure - the same as posted below. To look in details, you can click the figure.
 
 ![](https://github.com/dmitsf/GOT/blob/dev/got/got_results/cluster_0.png "Cluster 0 generalization visualization.")
+Fig. 1: Cluster 0 generalization.
+
+For cluster 2, we obtainded the following fugure.
+
+![](https://github.com/dmitsf/GOT/blob/dev/got/got_results/cluster_1.png "Cluster 1 generalization visualization.")
+Fig. 2: Cluster 1 generalization.
+
+We can complete the same steps for all the clusters obtained.
