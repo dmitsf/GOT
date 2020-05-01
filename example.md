@@ -313,11 +313,10 @@ ParGenFS main steps...
 Done. Saving...
 Table saved in the file: table.csv
 ete representation saved in the file: taxonomy_tree_lifted.ete
-ete representation saved.
 Done.
 ```
 
-All the variables' values ware saved in _table.csv_ file. Let's take a look. We can see 11 head subjects, devoted mainly to Machine Learning and Information Systems: 
+All the variables' values ware saved in _table.csv_ file. The table contains all the penalty values, gaps, offshoots, and head subjects for all the steps of the algorithm's execution. Let's take a look. As a result of algorithm's execution, we can see 11 head subjects, devoted mainly to Machine Learning and Information Systems: 
 
 ```
 1.1.1.6. bayesian analysis; 
@@ -343,6 +342,7 @@ We can see the figure - the same as posted below. To look in details, you can cl
 
 ![](https://github.com/dmitsf/GOT/blob/dev/got/got_results/cluster_0.png "Cluster 0 generalization visualization.")
 Fig. 1: Cluster 0 generalization.
+
 
 For cluster 2, we obtainded the following fugure.
 
