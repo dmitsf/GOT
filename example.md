@@ -224,18 +224,34 @@ if __name__ == "__main__":
                           key=itemgetter(1), reverse=True))[:NUM_EL])
                           
 # Outputs:
-# [('gaussian processes', 0.5797048882008996), ('boosting', 0.5481740449484693), 
-# ('online learning theory', 0.49649238052543937), ('query learning', 0.29972568516128634), 
-# ('modelling', 0.16035911816266413), ('sample complexity and generalization bounds', 0.028083528546619597), 
-# ('bayesian analysis', 0.02456740568435398), ('boolean function learning', 0.0),
-# ('unsupervised learning and clustering', 0.0), ('support vector machines', 0.0), ('inductive inference', 0.0),
-# ('multi-agent learning', 0.0), ('models of learning', 0.0)]
-# [('inductive inference', 0.7036691642201909), ('boolean function learning', 0.4708936191239057), 
-# ('unsupervised learning and clustering', 0.4271583918603897), ('multi-agent learning', 0.3105183398625311),
-# ('models of learning', 0.06434838666427031), ('support vector machines', 0.009069773978266147),
-# ('sample complexity and generalization bounds', 0.0), ('gaussian processes', 0.0), ('modelling', 0.0),
-# ('boosting', 0.0), ('bayesian analysis', 0.0), ('online learning theory', 0.0), ('query learning', 0.0)]
+# [('instance-based learning', 0.20771581404136386), ('content analysis and feature selection', 0.18967568803261997), 
+# ('database interoperability', 0.1788892447738294), ('fuzzy representation', 0.16067391344470527),
+# ('ontologies', 0.15130289387272605), ('neuro-fuzzy approach', 0.1496424373875215),
+# ('structured text search', 0.1403321558987256), ('robust regression', 0.13734017658793016),
+# ('decision diagrams', 0.13489637787773734), ('multidimensional range search', 0.13272601213805382),
+# ('multi-agent reinforcement learning', 0.1297804717368329), ('relevance assessment', 0.12848786685817676),
+# ('default reasoning and belief revision', 0.12342181824121827), ('bayesian analysis', 0.1219749038419412),
+# ('apprenticeship learning', 0.12023676186324098)]
+# [('database recovery', 0.19132381678822608), ('latent dirichlet allocation', 0.1767176922782787),
+# ('clustering and classification', 0.14762655820331685), ('frequent graph mining', 0.1432865199559833),
+# ('graph partitioning', 0.1405635466934665), ('scientific visualization', 0.1393156862863722),
+# ('semi-supervised learning', 0.13404581869787371), ('parallel implementation', 0.12742329189956983),
+# ('spectral clustering', 0.11767981069558497), ('physical data models', 0.11529847572171881),
+# ('visualization toolkits', 0.1151370689138779), ('surfacing', 0.1150003615924787),
+# ('data integration', 0.10885533917409053), ('call level interfaces', 0.1071431128087069),
+# ('wrappers', 0.10551240594293687)]
 # ...
-# (9 clusters)
+# (5 clusters)
 ```
 
+All the fuzzy clusters are saved in _clusters.dat_ file. We are ready to generalize them with GoT.
+
+## 3. Generalizing the clusters and visualizing them with the help of GoT.
+
+Let's generalize the 0-th cluster:
+
+```
+$ python3 pargenfs.py Data_Science_taxonomy.csv taxonomy_leaves.txt clusters.dat 0
+```
+
+We see 
