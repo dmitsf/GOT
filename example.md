@@ -1,6 +1,6 @@
 # Example: using a taxonomy to analyse a text collection
 
-Let us consider the analysis of a text collection with the help of GoT software package. We will consider Data Science Taxonomy (DST, published, for example, in [this preprint](https://wp.hse.ru/data/2019/01/13/1146987922/WP7_2018_04_______.pdf)) and collection of abstracts of research papers on Data Science (may be downloaded from a [webpage of "Concept" research group, HSE University](https://cs.hse.ru/concept/taxonomies)). The collection under consideration was obtained from 80 Elsevier and Springer journals related to Data Science. The collection is available at a [webpage of "Concept" research group](https://cs.hse.ru/concept/datasets).
+Let us consider the analysis of a text collection with the help of GoT software package. We will consider Data Science Taxonomy (DST, published, for example, in [this preprint](https://wp.hse.ru/data/2019/01/13/1146987922/WP7_2018_04_______.pdf)) and collection of abstracts of research papers on Data Science (may be downloaded from the [webpage of "Concept" research group, HSE University](https://cs.hse.ru/concept/taxonomies)). The collection under consideration was obtained from 80 Elsevier and Springer journals related to Data Science. The collection is available at the [webpage of "Concept" research group](https://cs.hse.ru/concept/datasets).
 
 Our final aim here is to obtain and visualize the main research directions in the Data Science area that we can extract using the collection and the taxonomy.
 
@@ -15,7 +15,7 @@ Let's start.
 
 ## 0. Downloading and preparing the text collection and the taxonomy.
 
-We can download the collection via browser from a [webpage of "Concept" research group](https://cs.hse.ru/concept/datasets)
+We can download the collection via browser from the [webpage of "Concept" research group](https://cs.hse.ru/concept/datasets)
 or via command line:
 
 ```
@@ -28,7 +28,7 @@ After that, we should unzip the archive downloaded:
 $ unzip papers_parsed_relevant.zip
 ```
 
-We can download the DST taxonomy via browser from a [webpage of "Concept" research group](https://cs.hse.ru/concept/taxonomies)
+We can download the DST taxonomy via browser from the [webpage of "Concept" research group](https://cs.hse.ru/concept/taxonomies)
 or via command line:
 
 ```
@@ -83,10 +83,10 @@ print(df.columns)
 
 print(df.shape)
 
-# Ouputs: (26823, 13)
+# Outputs: (26823, 13)
 ```
 
-We can see our collection contains 26823 samples. For the sake of simplicity, let's use a subcollection contains 500 samples. To make the subcollection:
+We can see our collection contains 26823 samples. For the sake of simplicity, let's create a subcollection contains 500 samples. To make the subcollection:
 
 ```
 sub_df = df.sample(500)
