@@ -190,3 +190,9 @@ if __name__ == "__main__":
 
 ```
 
+The text-to-topic relevance matrix is saved in _relevance_matrix.txt_ file.
+
+## 2. Obtaining fuzzy thematic clusters using FADDIS algorithm.
+
+To obtain fuzzy thematic clusters we will use [FADDIS algorithm](https://www.sciencedirect.com/science/article/pii/S0020025511004592) and it's pythonic implementation [PyFADDIS](https://github.com/dmitsf/PyFADDIS). 
+
