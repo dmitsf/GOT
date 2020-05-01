@@ -7,8 +7,8 @@ Our final aim is to extract and understand the main research directions in the D
 We will follow the steps below:
 
 0. Downloading and preparing the text collection and the taxonomy.
-1. Obtaining text-to-topic relevance matrix using Annotated Suffix Tree approach [].
-2. Obtaining fuzzy thematic clusters using FADDIS algorithm [].
+1. Obtaining text-to-topic relevance matrix using Annotated Suffix Tree approach.
+2. Obtaining fuzzy thematic clusters using FADDIS algorithm.
 3. Generalizing the clusters and visualizing them with the help of GoT.
 
 Let's start.
@@ -18,21 +18,54 @@ Let's start.
 We can download the collection via browser from a [webpage of "Concept" research group](https://cs.hse.ru/concept/datasets)
 or via commandline:
 
-```wget https://cs.hse.ru/data/2019/05/19/1506729559/papers_parsed_relevant.zip```
+```
+wget https://cs.hse.ru/data/2019/05/19/1506729559/papers_parsed_relevant.zip
+```
 
 After that, we should unzip the archive:
 
-```unzip papers_parsed_relevant.zip```
+```
+unzip papers_parsed_relevant.zip
+```
 
 We can download the DST taxonomy via browser from a [webpage of "Concept" research group](https://cs.hse.ru/concept/taxonomies)
 or via commandline:
 
-```wget https://cs.hse.ru/data/2019/12/18/1523118089/Data_Science_taxonomy.xlsx```
+```
+wget https://cs.hse.ru/data/2019/12/18/1523118089/Data_Science_taxonomy.xlsx
+```
 
-Since the taxonomy have .xlsx format, we should transform the taxonomy to .csv. One may do this using Miscrosoft Excel, OpenOffice/LibreOffice Calc or via commandline:
+Since the taxonomy have _.xlsx_ format, we should transform the taxonomy to _.csv_. One may do this using Miscrosoft Excel, OpenOffice/LibreOffice Calc or via commandline:
 
-```libreoffice --headless --convert-to csv Data_Science_taxonomy.xlsx```
+```
+libreoffice --headless --convert-to csv Data_Science_taxonomy.xlsx
+```
 
 Now we have all the files prepared.
 
-.
+
+## 1. Obtaining text-to-topic relevance matrix using Annotated Suffix Tree approach.
+
+To construct text-to-taxonomy\_topic relevance matrix, we should extract all the leaves from a taxonomy. To do this, we can use _taxonomy.py_ module from GoT:
+
+```
+python3 taxonomy.py Data_Science_taxonomy.csv
+```
+
+Now all the leaves are saved in _taxonomy\_leaves.txt_ file. We can ensure this fact using _less_ command:
+
+```
+less taxonomy_leaves.txt
+
+sample complexity and generalization bounds
+boolean function learning
+unsupervised learning and clustering
+support vector machines
+gaussian processes
+modelling
+boosting
+bayesian analysis
+inductive inference
+online learning theory
+```
+
