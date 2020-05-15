@@ -14,9 +14,9 @@ except ImportError as e:
     from ete3_functions import make_ete3_lifted, save_ete3
 
 
-LIMIT = .1
+LIMIT = .14
 GAMMA = .9
-LAMBDA = .2
+LAMBDA = .1
 
 
 def enumerate_tree_layers(node: Node, current_layer: int = 0) -> None:
@@ -486,8 +486,8 @@ def pargenfs(cluster: Dict[str, float], taxonomy_tree: Taxonomy, \
 
     ete3_desc = make_ete3_lifted(taxonomy_tree.root)
     save_ete3(ete3_desc)
-    print("ete representation:")
-    print(ete3_desc)
+    print("ete representation saved.")
+    #print(ete3_desc)
     print("Done.")
 
 
