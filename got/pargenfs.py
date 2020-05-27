@@ -14,9 +14,9 @@ except ImportError as e:
     from ete3_functions import make_ete3_lifted, save_ete3
 
 
-LIMIT = .14
+LIMIT = .15
 GAMMA = .9
-LAMBDA = .1
+LAMBDA = .2
 
 
 def enumerate_tree_layers(node: Node, current_layer: int = 0) -> None:

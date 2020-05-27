@@ -347,8 +347,7 @@ class Taxonomy:
             for line in file_opened:
                 index_s = re.search(r"(^[\.\d]+)[*, ]", line)
                 name_s = re.search(r",([A-Za-zА-Яа-я 102\-']+),?", line)
-
-                if not index_s or name_s:
+                if not index_s:
                     index_s = re.search(r"([\.\d]+.?) ", line)
                     name_s = re.search(r" ([A-Za-zА-Яа-я 102\-']+),?", line)
                 if index_s and name_s:
