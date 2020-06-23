@@ -4,19 +4,18 @@
 
 __pargenfs.py__: lifts the leaf cluster over a taxonomy tree. Produces two files:
 * _table.csv_: table with all the variables' values
-* _taxonomy\_tree.ete_: lifting result on the taxonomy tree in ete3 format.
+* _taxonomy\_tree.ete_: lifting result on the taxonomy tree in _*.ete3_ format.
 
 ### Usage
 
 ```
 $ python3 pargenfs.py taxonomy_file taxonomy_leaves clusters cluster_number
-
 ```
 
 positional arguments:
-*  taxonomy_file:    taxonomy description in *.fvtr format
-*  taxonomy_leaves:  taxonomy leaves in *.txt format
-*  clusters:         clusters' membership table in *.dat format
+*  taxonomy_file:    taxonomy description in _*.fvtr_ format
+*  taxonomy_leaves:  taxonomy leaves in _*.txt_ format
+*  clusters:         clusters' membership table in _*.dat_ format
 *  cluster_number:   number of cluster for lifting
 
 optional arguments:
@@ -24,35 +23,35 @@ optional arguments:
 
 ## 2. __taxonomy.py__
 
-__taxonomy.py__: parses a taxonomy file in _.fvtr_ format, prepares a basic data structure for working with the taxonomy tree.
+__taxonomy.py__: parses a taxonomy file in _*.fvtr_ format, prepares a basic data structure for working with the taxonomy tree.
 
 ```
 $ python3 taxonomy.py taxonomy_file
 ```
 
 positional arguments:
-*  taxonomy_file:  taxonomy description in *.fvtr format
+*  taxonomy_file:  taxonomy description in _*.fvtr_ format
 
 optional arguments:
 *  -h, --help:     show help message and exit
 
 ## 3. __visualize.py__
 
-__visualize.py__: draws lifting results from _taxonomy_tree.ete_ on taxonomy tree.
+__visualize.py__: draws lifting results from _taxonomy_tree.ete_ on taxonomy tree. After the start, shows an image than can be saved as _*.pdf_ file from the image menu.
 
 ```
 $ python3 visualize.py ete3_file
 ```
 
 positional arguments:
-*  ete3_file:   lifting results description in *.ete format
+*  ete3_file:   lifting results description in _*.ete_ format
 
 optional arguments:
  * -h, --help:  show help message and exit
 
 ## 4. __ete3_functions.py__
 
-__ete3_functions.py__: contains auxiliary functions for working with ete3 format. 
+__ete3_functions.py__: contains auxiliary functions for working with ete3 format.
 
 ## 5. __util/__
 
@@ -67,11 +66,10 @@ __lapin.py__: LAPIN transform implementation. Produces a file:
 
 ```
 $ python3 lapin.py matrix_file
-
 ```
 
 positional arguments:
-*  matrix_file:      a matrix to transform in *.dat format
+*  matrix_file:      a matrix to transform in _*.dat_ format
 
 optional arguments:
 *  -h, --help:       show help message and exit
@@ -85,11 +83,10 @@ __faddis.py__: FADDIS clustering implementation in Python. Produces a file:
 
 ```
 $ python3 faddis.py matrix_file
-
 ```
 
 positional arguments:
-*  matrix_file:      a matrix to cluster in *.dat format
+*  matrix_file:      a matrix to cluster in _*.dat_ format
 
 optional arguments:
 *  -h, --help:       show help message and exit
@@ -119,4 +116,4 @@ __ast/__: a folder containing AST implementation.
 
 ### 6.1. __base_ast.py__
 
-__base_ast.py__: annotated suffix tree implementation.
+__base_ast.py__: annotated suffix tree implementation. Used by the _relevance.py_ program.
