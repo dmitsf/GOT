@@ -23,7 +23,7 @@ optional arguments:
 
 ## 2. __taxonomy.py__
 
-__taxonomy.py__: parses a taxonomy file in _*.fvtr_ format, prepares a basic data structure for working with the taxonomy tree.
+__taxonomy.py__: parses a taxonomy file in _*.fvtr_ format, prepares a basic data structure for working with the taxonomy tree. Produces a list of the taxonomy leaves in `taxonomy_leaves.txt` file.
 
 ```
 $ python3 taxonomy.py taxonomy_file
