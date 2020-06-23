@@ -21,6 +21,7 @@ positional arguments:
 optional arguments:
 *  -h, --help:       show help message and exit
 
+
 ## 2. __taxonomy.py__
 
 __taxonomy.py__: parses a taxonomy file in _*.fvtr_ format, prepares a basic data structure for working with the taxonomy tree. Produces a list of the taxonomy leaves in `taxonomy_leaves.txt` file.
@@ -34,6 +35,7 @@ positional arguments:
 
 optional arguments:
 *  -h, --help:     show help message and exit
+
 
 ## 3. __visualize.py__
 
@@ -49,9 +51,11 @@ positional arguments:
 optional arguments:
  * -h, --help:  show help message and exit
 
+
 ## 4. __ete3_functions.py__
 
 __ete3_functions.py__: contains auxiliary functions for working with ete3 format.
+
 
 ## 5. __util/__
 
@@ -74,6 +78,7 @@ positional arguments:
 optional arguments:
 *  -h, --help:       show help message and exit
 
+
 ### 5.2. __faddis.py__
 
 __faddis.py__: FADDIS clustering implementation in Python. Produces a file:
@@ -90,6 +95,7 @@ positional arguments:
 
 optional arguments:
 *  -h, --help:       show help message and exit
+
 
 ### 5.3. __relevances.py__
 
@@ -109,6 +115,7 @@ positional arguments:
 
 optional arguments:
 *  -h, --help:       show help message and exit
+
 
 ## 6. __ast/__
 
