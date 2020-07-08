@@ -144,7 +144,7 @@ def draw_lifting_tree(filename: str) -> None:
     ts.legend.add_face(TextFace("  "), column=3)
 
     ts.legend.add_face(PieChartFace([100], 20, 20, colors=['white'], line_color='black'), column=0)
-    ts.legend.add_face(TextFace("  topics that relate to the cluster"), column=1)
+    ts.legend.add_face(TextFace("  topic that relates to the cluster"), column=1)
 
     ts.legend.add_face(RectFace(30, 10, "#90ee90", "#90ee90"), column=2)
     ts.legend.add_face(TextFace("  topic with minor membership 0<u(t)<=0.2"), column=3)
@@ -166,7 +166,7 @@ def draw_lifting_tree(filename: str) -> None:
     ts.legend.add_face(TextFace("  "), column=3)
 
     ts.legend.add_face(RectFace(20, 20, "black", "white"), column=0)
-    ts.legend.add_face(TextFace("  topics that don't refer to cluster                     "), \
+    ts.legend.add_face(TextFace("  topic that doesn't relate to cluster                     "), \
                        column=1)
 
     ts.legend.add_face(RectFace(30, 10, "#004000", "#004000"), column=2)
