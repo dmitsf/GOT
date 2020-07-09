@@ -4,7 +4,7 @@
 from typing import Union
 
 try:
-    from got.taxonomy import Taxonomy, Node
+    from got.taxonomies.taxonomy import Taxonomy, Node
 except ImportError as e:
     from taxonomy import Taxonomy, Node
 

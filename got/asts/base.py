@@ -1,9 +1,9 @@
 import abc
 import inspect
 
-import consts
-import exceptions
-import utils
+from got.asts import consts
+from got.asts import exceptions
+from got.asts import utils
 
 
 class AST(abc.ABC):

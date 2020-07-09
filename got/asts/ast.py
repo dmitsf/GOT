@@ -1,9 +1,9 @@
 import itertools
 import numpy as np
 
-import base
-import utils
-import consts
+from got.asts import base
+from got.asts import utils
+from got.asts import consts
 
 
 class EASA(base.AST):

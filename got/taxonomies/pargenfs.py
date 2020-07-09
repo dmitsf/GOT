@@ -7,8 +7,8 @@ from math import sqrt
 from typing import Dict, List, Set, Union
 
 try:
-    from got.taxonomy import Taxonomy, Node
-    from got.ete3_functions import make_ete3_lifted, save_ete3
+    from got.taxonomies.taxonomy import Taxonomy, Node
+    from got.taxonomies.ete3_functions import make_ete3_lifted, save_ete3
 except ImportError as e:
     from taxonomy import Taxonomy, Node
     from ete3_functions import make_ete3_lifted, save_ete3

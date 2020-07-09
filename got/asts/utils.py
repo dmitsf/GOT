@@ -4,7 +4,7 @@ import random
 import re
 import sys
 
-import consts
+from got.asts import consts
 
 
 class ImmutableMixin(object):
