@@ -1,3 +1,4 @@
 m2r
 pyqt5
 ete3
+numpy
