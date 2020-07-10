@@ -46,7 +46,7 @@ class EASA(base.AST):
         n = len(self.suftab)
         root = [0, 0, n - 1, ""]  # <l, i, j, char>
 
-        def _traverse_top_down(interval):  # TODO: Rewrite with stack? As in bottom-up
+        def _traverse_top_down(interval):
             callback(interval)
             i, j = interval[1], interval[2]
             if i != j:
@@ -62,12 +62,9 @@ class EASA(base.AST):
 
         Kasai et. al. (2001), Abouelhoda et al. (2004).
         """
-        # a. Reimplement without python lists?..
-        # b. Interface will require it to have not internal nodes only?..
-        #    (but actually this implementation gives a ~2x gain of performance)
         last_interval = None
         n = len(self.suftab)
-        stack = [[0, 0, None, []]]  # <l, i, j, children>
+        stack = [[0, 0, None, []]]
         for i in range(1, n):
             lb = i - 1
             while self.lcptab[i] < stack[-1][0]:
@@ -110,7 +107,6 @@ class EASA(base.AST):
             child_node = self._get_child_interval(parent_node[1], parent_node[2], suffix[0])
             while child_node:
                 nodes_matched += 1
-                # TODO: Use structs??? child_node[1] is actually cn.i; parent_node[0] == pn.l
                 substr_start = self.suftab[child_node[1]] + parent_node[0]
                 if self._is_leaf(child_node):
                     substr_end = n
@@ -276,7 +272,7 @@ class EASA(base.AST):
         last_index = -1
         stack = [0]
         n = len(lcptab)
-        childtab_up = np.zeros(n, dtype=np.int)  # Zeros / -1 ?
+        childtab_up = np.zeros(n, dtype=np.int)
         childtab_down = np.zeros(n, dtype=np.int)
         for i in range(n):
             while lcptab[i] < lcptab[stack[-1]]:
@@ -296,7 +292,7 @@ class EASA(base.AST):
         """
         stack = [0]
         n = len(lcptab)
-        childtab_next_l_index = np.zeros(n, dtype=np.int)  # Zeros / -1 ?
+        childtab_next_l_index = np.zeros(n, dtype=np.int)
         for i in range(n):
             while lcptab[i] < lcptab[stack[-1]]:
                 stack.pop()
@@ -312,11 +308,9 @@ class EASA(base.AST):
         Based on ideas from Abouelhoda et al. (2004) and Dubov & Chernyak (2013).
         """
         n = len(suftab)
-        anntab = np.zeros(n, dtype=np.int)  # Zeros / -1 ?
+        anntab = np.zeros(n, dtype=np.int)
 
         def process_node(node):
-            # NOTE(msdubov): Assumes that child l-[i..j] lcp intervals come in the ascending
-            #                order (by i). This allows to handle the leafs properly.
             i = node[1]
             for child_node in node[3]:
                 if i < child_node[1]:
@@ -327,8 +321,6 @@ class EASA(base.AST):
                 anntab[self._interval_index(node)] += node[2] - i + 1
 
         self.traverse_depth_first_post_order(process_node)
-        # NOTE(msdubov): Removing the "degenerate" 1st-level leafs
-        #                with the auxiliary symbol in the arc.
         anntab[0] -= len(self.strings_collection)
 
         return anntab
@@ -352,7 +344,7 @@ class EASA(base.AST):
     def _lcp_value(self, i, j):
         n = len(self.suftab)
         if (i == 0 or i == n - 1) and j == n - 1:
-            return 0  # TODO: Verify the correctness of this step.
+            return 0
         elif i < self.childtab_up[j + 1] <= j:
             return self.lcptab[self.childtab_up[j + 1]]
         else:
@@ -365,7 +357,7 @@ class EASA(base.AST):
         l = self._lcp_value(i, j)
         intervals = []
         if i == 0 and j == n - 1:
-            i1 = 0  # TODO: Verify the correctness of this step.
+            i1 = 0
         else:
             if i < self.childtab_up[j + 1]:
                 i1 = self.childtab_up[j + 1]
