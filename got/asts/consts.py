@@ -1,4 +1,7 @@
-from got.asts import utils
+try:
+    from got.asts import utils
+except ImportError:
+    import utils
 
 
 class _TraversalOrder(utils.ImmutableMixin, utils.EnumMixin):

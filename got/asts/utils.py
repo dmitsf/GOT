@@ -4,7 +4,10 @@ import random
 import re
 import sys
 
-from got.asts import consts
+try:
+    from got.asts import consts
+except ImportError:
+    import consts
 
 
 class ImmutableMixin(object):
@@ -33,52 +36,6 @@ def prepare_text(text):
 
 def tokenize(text):
     return re.findall(re.compile("[\w']+", re.U), text)
-
-
-def tokenize_and_filter(text, min_word_length=3, stopwords=None):
-    tokens = tokenize(text)
-    stopwords = stopwords or set(word.upper() for word in nltk_stopwords.words("english"))
-    return [token for token in tokens
-            if len(token) >= min_word_length and token not in stopwords]
-
-
-def text_to_strings_collection(text, words=3):
-    
-    text = prepare_text(text)
-    strings_collection = tokenize(text)
-    strings_collection = [s for s in strings_collection if len(s) > 2 and not s.isdigit()]
-        
-    i = 0
-    strings_collection_grouped = []
-    while i < len(strings_collection):
-        group = ''
-        for j in range(words):
-            if i + j < len(strings_collection):
-                group += strings_collection[i+j]
-        strings_collection_grouped.append(group)
-        i += words
-
-    if not strings_collection_grouped:
-        strings_collection_grouped = [" "]
-        
-    return strings_collection_grouped
-
-
-def text_collection_to_string_collection(text_collection, words=3):
-    return flatten([text_to_strings_collection(text) for text in text_collection])
-
-
-def random_string(length):
-    string = "".join([chr(ord("A") + random.randint(0, 25)) for _ in range(length - 2)])
-    return string
-
-
-def flatten(lst):
-    return list(itertools.chain.from_iterable(lst))
-
-
-def output_is_redirected():
-    return os.fstat(0) != os.fstat(1)
 
 
 def itersubclasses(cls, _seen=None):

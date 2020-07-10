@@ -1,9 +1,14 @@
 import itertools
 import numpy as np
 
-from got.asts import base
-from got.asts import utils
-from got.asts import consts
+try:
+    from got.asts import base
+    from got.asts import utils
+    from got.asts import consts
+except ImportError:
+    import base
+    import utils
+    import consts
 
 
 class EASA(base.AST):
