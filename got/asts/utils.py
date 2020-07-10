@@ -19,7 +19,7 @@ class ImmutableMixin(object):
     def __setattr__(self, key, value):
         if self._inited:
             raise NotImplementedError
-        super(ImmutableMixin, self).__setattr__(key, value)
+        super().__setattr__(key, value)
 
 
 class EnumMixin(object):
@@ -27,11 +27,6 @@ class EnumMixin(object):
         for k, v in map(lambda x: (x, getattr(self, x)), dir(self)):
             if not k.startswith('_'):
                 yield v
-
-
-def prepare_text(text):
-    text = text.upper()
-    return text
 
 
 def tokenize(text):
@@ -46,7 +41,7 @@ def itersubclasses(cls, _seen=None):
     _seen = _seen or set()
     try:
         subs = cls.__subclasses__()
-    except TypeError:   # fails only when cls is type
+    except TypeError:
         subs = cls.__subclasses__(cls)
     for sub in subs:
         if sub not in _seen:

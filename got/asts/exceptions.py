@@ -18,7 +18,7 @@ class EastException(Exception):
             except KeyError as e:
                 message = self.msg_fmt
 
-        super(EastException, self).__init__(message)
+        super().__init__(message)
 
     def format_message(self):
         if self.__class__.__name__.endswith('_Remote'):
