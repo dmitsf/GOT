@@ -44,7 +44,7 @@ class EASA(base.AST):
         Based on Abouelhoda et al. (2004).
         """
         n = len(self.suftab)
-        root = [0, 0, n - 1, ""]  # <l, i, j, char>
+        root = [0, 0, n - 1, ""]
 
         def _traverse_top_down(interval):
             callback(interval)
