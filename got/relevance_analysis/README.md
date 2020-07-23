@@ -1,6 +1,8 @@
-# Obtaining text-to-topic relevance matrix using Annotated Suffix Tree approach.
+# Obtaining text-to-string relevance matrix using Annotated Suffix Tree approach.
 
-To construct text-to-taxonomy\_topic relevance matrix, we should extract all the leaves from a taxonomy. To do this, we can use _taxonomy.py_ module from GoT:
+Let's construct text-to-string relevance matrix. We will use a collection of scientific papers' abstracts as texts and Data Science Taxonomy topics as strings.
+
+At first, we should extract all the leaves from a taxonomy. To do this, we can use _taxonomy.py_ module from GoT:
 
 ```
 $ python3 taxonomy.py Data_Science_taxonomy.csv
@@ -86,14 +88,14 @@ print(abstracts[:2])
 
 To construct text-to-topic relevance matrix, we will follow the Annotated Suffix Tree (AST) approach. [This approach](https://bijournal.hse.ru/en/2012--3(21)/63370530.html) relies on fragment text representation and shows excellent results on many text analysis and retrieval problems.
 
-We will use AST implementation from [EAST package](https://github.com/dmitsf/AST-text-analysis), developed by M.Dubov and improved by A.Vlasov and D.Frolov. In the code snippet below, we use a common text processing pipeline from [this example](https://github.com/dmitsf/AST-text-analysis/blob/master/examples/relevances.py). For a subcollection consisting of 500 samples calculations may take several minutes, it depends on your computer.
+In the code snippet below, we use a common text processing pipeline from [this example](https://github.com/dmitsf/AST-text-analysis/blob/master/examples/relevances.py). For a subcollection consisting of 500 samples calculations may take several minutes, it depends on your computer.
 
 ```
 import re
 
 import numpy as np
 
-from east.asts import base
+from asts import ast
 
 
 def clear_text(text, lowerize=True):
@@ -123,7 +125,7 @@ def get_relevance_matrix(texts, strings):
     prepared_strings = [' '.join(t) for t in prepared_string_tokens]
 
     for text_tokens in prepared_text_tokens:
-        ast = base.AST.get_ast(list(make_substrings(text_tokens)))
+        ast = ast.AST(list(make_substrings(text_tokens)))
         row = np.array([ast.score(s) for s in prepared_strings])
         matrix = np.append(matrix, [row], axis=0)
 
