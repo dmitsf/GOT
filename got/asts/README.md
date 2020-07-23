@@ -16,3 +16,14 @@ Let's consider an example.
 >>> 
 ```
 
+If the text is too long, we can split the text into strings and pass them in the `AST()` constructor as a list:
+
+```
+>>> a = ast.AST(["xabxac hi", "hello ok"])
+>>> a.score('dsaasddffd')
+0.02352941176470589
+```
+
+# Data structures
+
+Class `AST` (_ast.py_ file) - internal Python data structure for abstract suffix tree representing.
