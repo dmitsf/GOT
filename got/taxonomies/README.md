@@ -92,14 +92,14 @@ $ python3 visualize.py taxonomy_tree_lifted.ete
 
 We can see the figure - the same as posted below. To look in details, you can click on the figure and open full-size.
 
-![](https://raw.githubusercontent.com/dmitsf/GOT/master/got/relevance_analysis/got_results/cluster_0.png "Cluster 0 generalization visualization.")
+![](https://raw.githubusercontent.com/dmitsf/GOT/master/got/taxonomies/got_results/cluster_0.png "Cluster 0 generalization visualization.")
 
 Fig. 3: Cluster 0 generalization.
 
 
 For cluster 2, we obtainded the following fugure.
 
-![](https://raw.githubusercontent.com/dmitsf/GOT/master/got/relevance_analysis/got_results/cluster_1.png "Cluster 1 generalization visualization.")
+![](https://raw.githubusercontent.com/dmitsf/GOT/master/got/taxonomies/got_results/cluster_1.png "Cluster 1 generalization visualization.")
 
 Fig. 4: Cluster 1 generalization.
 
@@ -124,3 +124,21 @@ The 15 head subjects were obtained here, which is devoted mainly to Databases, V
 ```
 
 We can complete the same steps for all the clusters obtained.
+
+# Data structures
+
+## fvtr format
+
+tab-separated (tsv)-like format to store taxonomies.
+
+example:
+
+
+
+
+## 
+
+##
+
+##
+
