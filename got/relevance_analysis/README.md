@@ -147,3 +147,60 @@ if __name__ == "__main__":
 ```
 
 The text-to-topic relevance matrix is saved in _relevance_matrix.txt_ file.
+
+# Obtaining fuzzy thematic clusters using FADDIS algorithm.
+
+To obtain fuzzy thematic clusters we will use [FADDIS algorithm](https://www.sciencedirect.com/science/article/pii/S0020025511004592) and it's pythonic implementation [PyFADDIS](https://github.com/dmitsf/PyFADDIS). We will follow the pipeline with LAPIN transform from the [example](https://github.com/dmitsf/PyFADDIS/blob/master/example_clustering.py).
+
+```
+import numpy as np
+from lapin import lapin
+from faddis import faddis
+
+from operator import itemgetter
+
+NUM_EL = 15
+
+
+if __name__ == "__main__":
+    relevance_matrix = np.loadtxt("relevance_matrix.txt")
+    print(relevance_matrix.shape)
+    tc = relevance_matrix.dot(relevance_matrix.T)
+    print(tc.shape)
+
+    tc_transformed = lapin(tc)
+    B, member, contrib, intensity, lat, tt = faddis(tc_transformed)
+    np.savetxt("clusters.dat", member)
+
+    with open("taxonomy_leaves.txt") as fn:
+        annotations = [l.strip() for l in fn]
+
+    for cluster in member.T:
+        print(list(sorted(zip(annotations, cluster.flat),
+                          key=itemgetter(1), reverse=True))[:NUM_EL])
+                          
+# Outputs:
+# [('instance-based learning', 0.20771581404136386), ('content analysis and feature selection', 0.18967568803261997), 
+# ('database interoperability', 0.1788892447738294), ('fuzzy representation', 0.16067391344470527),
+# ('ontologies', 0.15130289387272605), ('neuro-fuzzy approach', 0.1496424373875215),
+# ('structured text search', 0.1403321558987256), ('robust regression', 0.13734017658793016),
+# ('decision diagrams', 0.13489637787773734), ('multidimensional range search', 0.13272601213805382),
+# ('multi-agent reinforcement learning', 0.1297804717368329), ('relevance assessment', 0.12848786685817676),
+# ('default reasoning and belief revision', 0.12342181824121827), ('bayesian analysis', 0.1219749038419412),
+# ('apprenticeship learning', 0.12023676186324098)]
+# [('database recovery', 0.19132381678822608), ('latent dirichlet allocation', 0.1767176922782787),
+# ('clustering and classification', 0.14762655820331685), ('frequent graph mining', 0.1432865199559833),
+# ('graph partitioning', 0.1405635466934665), ('scientific visualization', 0.1393156862863722),
+# ('semi-supervised learning', 0.13404581869787371), ('parallel implementation', 0.12742329189956983),
+# ('spectral clustering', 0.11767981069558497), ('physical data models', 0.11529847572171881),
+# ('visualization toolkits', 0.1151370689138779), ('surfacing', 0.1150003615924787),
+# ('data integration', 0.10885533917409053), ('call level interfaces', 0.1071431128087069),
+# ('wrappers', 0.10551240594293687)]
+# ...
+# (5 clusters)
+```
+
+All the fuzzy clusters are saved in _clusters.dat_ file.
+
+# Data sctuctures
+
