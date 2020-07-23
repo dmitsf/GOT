@@ -1,6 +1,6 @@
-# Obtaining text-to-string relevance matrix using Annotated Suffix Tree approach.
+# Obtaining string-to-text relevance matrix using Annotated Suffix Tree approach.
 
-Let's construct text-to-string relevance matrix. We will use a collection of scientific papers' abstracts as texts and Data Science Taxonomy topics as strings.
+Let's construct string-to-text relevance matrix. We will use a collection of scientific papers' abstracts as texts and Data Science Taxonomy topics as strings.
 
 At first, we should extract all the leaves from a taxonomy. To do this, we can use _taxonomy.py_ module from GoT:
 
