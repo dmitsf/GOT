@@ -26,4 +26,4 @@ If the text is too long, we can split the text into strings and pass them in the
 
 # Data structures
 
-Class `AST` (_ast.py_ file) - internal Python data structure for abstract suffix tree representing.
+Class `AST` (_ast.py_ file) - internal Python data structure for abstract suffix tree representation.
