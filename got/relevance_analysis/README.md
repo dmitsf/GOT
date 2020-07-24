@@ -204,3 +204,4 @@ All the fuzzy clusters are saved in _clusters.dat_ file.
 
 # Data sctuctures
 
+These modules don't introduce data structures. All calculations use [Numpy matrices](https://numpy.org/doc/stable/reference/generated/numpy.matrix.html) and [Numpy arrays](https://numpy.org/doc/stable/reference/generated/numpy.array.html).
