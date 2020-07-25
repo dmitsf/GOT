@@ -1,3 +1,5 @@
+# OVERVIEW
+
 __GOT__ (__G__ eneralization __O__ ver __T__ axonomies) software package.
 
 The repository includes ParGenFS and related algorithms implementations.
