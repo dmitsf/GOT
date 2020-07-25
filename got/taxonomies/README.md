@@ -2,7 +2,7 @@
 
 ## __taxonomy.py__: working with a taxonomy
 
-__taxonomy.py__: parses a taxonomy file in _.fvtr_ format, prepares a basic data structure for working with the taxonomy tree. Prints all the leaves and saves them into __result.csv__ file.
+__taxonomy.py__: parses a taxonomy file in _.fvtr_ format, prepares a basic data structure for working with the taxonomy tree. Prints all the leaves and saves them into _taxonomy_leaves.csv_ file.
 
 ### Usage
 
@@ -220,14 +220,14 @@ We can see the figure - the same as posted below. To look in details, you can cl
 
 ![](https://raw.githubusercontent.com/dmitsf/GOT/master/got/taxonomies/got_results/cluster_0.png "Cluster 0 generalization visualization.")
 
-Fig. 3: Cluster 0 generalization.
+Fig. 2: Cluster 0 generalization.
 
 
 For cluster 2, we obtainded the following fugure.
 
 ![](https://raw.githubusercontent.com/dmitsf/GOT/master/got/taxonomies/got_results/cluster_1.png "Cluster 1 generalization visualization.")
 
-Fig. 4: Cluster 1 generalization.
+Fig. 3: Cluster 1 generalization.
 
 The 15 head subjects were obtained here, which is devoted mainly to Databases, Visualization and Implementation:
 
@@ -273,15 +273,42 @@ Example -  IAB taxonomy fragment:
 579.589.,,Men's Shoes and Footwear,
 ```
 
-represents the taxonomy shown at Fig. 5.
+represents the taxonomy shown at Fig. 4.
 
 ![Taxonomy fragment](https://raw.githubusercontent.com/dmitsf/GOT/master/got/taxonomies/got_results/iab_fragment.png)
 
-Fig. 5: IAB taxonomy fragment
+Fig. 4: IAB taxonomy fragment
 
 ## ete3
 
-A format for taxonomy tree storing used in [ETE toolkit](http://etetoolkit.org/docs/latest/tutorial/tutorial_trees.html#understanding-ete-trees) and other tools.
+A format for taxonomy tree storing used in [ETE toolkit](http://etetoolkit.org/docs/latest/tutorial/tutorial_trees.html#understanding-ete-trees) and other tools. Allows to define a tree topology alongside with the tree nodes' attributes.
+
+Some examples from [ETE toolkit docs](http://etetoolkit.org/docs/latest/tutorial/tutorial_trees.html):
+
+```
+"(A,B,(C,D));"
+
+#
+#     /-A
+#    |
+#----|--B
+#    |
+#    |     /-C
+#     \---|
+#          \-D
+
+"((A,B),(C,D));"
+
+#
+#          /-A
+#     /---|
+#    |     \-B
+#----|
+#    |     /-C
+#     \---|
+#          \-D
+
+```
 
 ## Tree
 
@@ -392,7 +419,12 @@ A class representing a taxonomy tree node.
         checks whether the node is a root of the tree
 
 
-
-
 ## result table
 
+A table with the result of the lifting obtaing during __pargenfs.py__ execution. The table is a comma-separated (_*.csv_) file with the following columns:
+
+```
+"index", "name", "u", "p", "V", "G", "H", "L"
+```
+
+The columns contain values obtained for each node of the taxonomy tree.
