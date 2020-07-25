@@ -384,8 +384,8 @@ def make_result_table(node: Node) -> List[List[str]]:
 
     table.append([node.index.rstrip(".") or "", node.name, str(round(node.u, 3)),
                   str(round(node.p, 3)), str(round(node.V, 3)),
-                  "; ".join([" ".join([s.index, s.name]) for s in (node.H or [])]),
                   "; ".join([" ".join([s.index, s.name]) for s in (node.G or [])]),
+                  "; ".join([" ".join([s.index, s.name]) for s in (node.H or [])]),
                   "; ".join([" ".join([s.index, s.name]) for s in (node.L or [])])])
 
     return table
@@ -407,7 +407,7 @@ def save_result_table(result_table: List[List[str]], filename: str = "table.csv"
     """
 
     result_table = sorted(result_table, key=lambda x: (len(x), x))
-    result_table = [["index", "name", "u", "p", "V", "H", "G", "L"]] + result_table
+    result_table = [["index", "name", "u", "p", "V", "G", "H", "L"]] + result_table
 
     with open(filename, 'w') as file_opened:
         for table_row in result_table:
