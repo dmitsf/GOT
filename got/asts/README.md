@@ -1,4 +1,6 @@
-# Calculating string-to-text relevance matrix using annotated suffix tree (AST).
+# Usage and examples
+
+## __ast.py__: calculating string-to-text relevance matrix using annotated suffix tree (AST).
 
 To calculate string-to-text relevance matrix, we should:
 
@@ -6,7 +8,6 @@ To calculate string-to-text relevance matrix, we should:
 2. Call method `score()`.
 
 Let's consider an example.
-
 
 ```
 >>> import ast
@@ -24,7 +25,7 @@ If the text is too long, we can split the text into strings and pass them in the
 0.02352941176470589
 ```
 
-# Data structures
+## Data structures
 
 Class `AST` (_ast.py_ file) - internal Python data structure for abstract suffix tree representation.
 
