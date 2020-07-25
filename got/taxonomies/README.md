@@ -281,9 +281,118 @@ Fig. 5: IAB taxonomy fragment
 
 ## ete3
 
+A format for taxonomy tree storing used in [ETE toolkit](http://etetoolkit.org/docs/latest/tutorial/tutorial_trees.html#understanding-ete-trees) and other tools.
+
 ## Tree
 
+A class representing a taxonomy tree.
+
+    A class for taxonomy representing
+
+    Initial attributes
+    ------------------
+    built_from : str
+        a string representing the filename using for taxonomy
+        building
+    _root : Node
+        a root of the taxonomy tree
+    leaves_extracted : bool
+        label: whether leaves were extracted for the taxonomy or not
+    _leaves : List[None]
+        containts all the leaves of the taxonomy
+
+    Main methods
+    ------------
+    __init__(filename)
+        constructor
+
+    __repr__()
+        represents basic info about the taxonomy
+
+    get_taxonomy_tree(filename)
+        builds the taxonomy from the file
+
+    leaves() (property)
+        returns all the leaves of the taxonomy
+
+    root() (property)
+        returns the root of the taxonomy
+
+    get_index_and_name(node_repr) (staticmethod)
+        returns str representations for index and name of node
+
 ## Node
+
+A class representing a taxonomy tree node.
+
+
+    A class used to represent a Tree node with the all descendants.
+    This is a basic data structure for a taxonomy representing.
+
+    Initial attributes
+    ------------------
+    index : str
+        a string representing the node index, for example 1.2.3.
+    name : str
+        the name of the node
+    parent : Node or None
+        the parent of the node
+    children : List['Node']
+        a list of the all direct descendants (children) of the node
+    u : float
+        membership value (normalized)
+    score : float
+        membership value (non-normalized)
+    v : float
+        node's gap importance
+    V : float
+        node's cumulative gap importance
+    G : List['Node']
+        node's set of gaps
+    L : List['Node']
+        node's set of losses
+    p : float
+        node's ParGenFS penalty
+    H : List['Node']
+        node's head subjects
+
+    Main methods
+    ------------
+    __init__(index, name, parent, children)
+        constructor
+
+    __contains__(item)
+        checks whether the item is a direct decsendant of the node,
+        one may use "in" operator to check the property above
+
+    __iter__()
+        iterates over all descendants of the node, this is a
+        syntactic sugar for iteration over "node.children"
+
+    __len__()
+        returns the outgoing degree of the node, i.e., the
+        number of node's children
+
+    __setattr__(name, value)
+        allows to set any custom attribute, this is useful for
+        ParGenFS algorithm
+
+    __getattr__(name)
+        allows to get a custom attribute. If there is no such
+        attrubute, returns "None"
+
+    is_leaf() (property)
+        checks whether the node is a leaf node
+
+    is_internal() (property)
+        checks whether the node is an internal node (i.e., is
+        not a leaf)
+
+    is_root() (property)
+        checks whether the node is a root of the tree
+
+
+
 
 ## result table
 
