@@ -220,14 +220,14 @@ We can see the figure - the same as posted below. To look in details, you can cl
 
 ![](https://raw.githubusercontent.com/dmitsf/GOT/master/got/taxonomies/got_results/cluster_0.png "Cluster 0 generalization visualization.")
 
-Fig. 1: Cluster 0 generalization.
+Fig. 3: Cluster 0 generalization.
 
 
 For cluster 2, we obtainded the following fugure.
 
 ![](https://raw.githubusercontent.com/dmitsf/GOT/master/got/taxonomies/got_results/cluster_1.png "Cluster 1 generalization visualization.")
 
-Fig. 2: Cluster 1 generalization.
+Fig. 4: Cluster 1 generalization.
 
 The 15 head subjects were obtained here, which is devoted mainly to Databases, Visualization and Implementation:
 
@@ -257,14 +257,33 @@ We can complete the same steps for all the clusters obtained.
 
 _.fvtr_ (flat-view taxonomy representation) format is tab-separated (tsv)-like format to store taxonomies. It relies on a representation of ACM CCS taxonomy (https://www.acm.org/publications/class-2012). You can see examples of files in [test_files/](https://github.com/dmitsf/GOT/blob/master/got/test_files/) folder.
 
-example:
+Example -  IAB taxonomy fragment:
 
+```
+579.,Men's Fashion,
+579.580.,,Men's Accessories,
+579.580.581.,,,Men's Jewelry and Watches,
+579.582.,,Men's Clothing Style,
+579.582.583.,,,Men's Business Wear,
+579.582.584.,,,Men's Casual Wear,
+579.582.585.,,,Men's Formal Wear,
+579.582.586.,,,Men's Outerwear Style,
+579.582.587.,,,Men's Sportswear,
+579.582.588.,,,Men's Underwear and Sleepwear,
+579.589.,,Men's Shoes and Footwear,
+```
 
+represents the taxonomy shown at Fig. 5.
 
+![Taxonomy fragment](https://raw.githubusercontent.com/dmitsf/GOT/master/got/taxonomies/got_results/iab_fragment.png)
+
+Fig. 5: IAB taxonomy fragment
 
 ## ete3
 
-##
+## Tree
 
-##
+## Node
+
+## result table
 
