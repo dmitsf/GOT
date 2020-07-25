@@ -1,4 +1,6 @@
-# Obtaining string-to-text relevance matrix using Annotated Suffix Tree approach.
+# Usage and examples
+
+## __relevance.py__: obtaining string-to-text relevance matrix using Annotated Suffix Tree approach.
 
 Let's construct string-to-text relevance matrix. We will use a collection of scientific papers' abstracts as texts and Data Science Taxonomy topics as strings.
 
@@ -148,7 +150,26 @@ if __name__ == "__main__":
 
 The text-to-topic relevance matrix is saved in _relevance_matrix.txt_ file.
 
-# Obtaining fuzzy thematic clusters using FADDIS algorithm.
+
+## __corelevance.py__: obtaining topic-to-topic co-relevance matrix.
+
+To construct co-relevance matrix we should use __corelevance.py__ module:
+
+```
+if __name__ == "__main__":
+
+    with open("taxonomy_leaves.txt") as f:
+        strings = [l.strip() for l in f.readlines()]
+
+    corelevance_matrix = get_corelevance_matrix(abstracts, strings)
+    save_matrix(corelevance_matrix)
+
+```
+
+The topic-to-topic co-relevance matrix is saved in _corelevance_matrix.txt_ file.
+
+
+## __faddis.py__: obtaining fuzzy thematic clusters using FADDIS algorithm.
 
 To obtain fuzzy thematic clusters we will use [FADDIS algorithm](https://www.sciencedirect.com/science/article/pii/S0020025511004592) and it's pythonic implementation [PyFADDIS](https://github.com/dmitsf/PyFADDIS). We will follow the pipeline with LAPIN transform from the [example](https://github.com/dmitsf/PyFADDIS/blob/master/example_clustering.py).
 
@@ -160,7 +181,6 @@ from faddis import faddis
 from operator import itemgetter
 
 NUM_EL = 15
-
 
 if __name__ == "__main__":
     relevance_matrix = np.loadtxt("relevance_matrix.txt")
@@ -202,6 +222,7 @@ if __name__ == "__main__":
 
 All the fuzzy clusters are saved in _clusters.dat_ file.
 
-# Data sctuctures
 
-These modules don't introduce data structures. All calculations use [Numpy matrices](https://numpy.org/doc/stable/reference/generated/numpy.matrix.html) and [Numpy arrays](https://numpy.org/doc/stable/reference/generated/numpy.array.html).
+# Data structures
+
+These modules don't introduce new data structures. All calculations use [Numpy matrices](https://numpy.org/doc/stable/reference/generated/numpy.matrix.html) and [Numpy arrays](https://numpy.org/doc/stable/reference/generated/numpy.array.html).
