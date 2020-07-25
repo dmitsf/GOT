@@ -1,4 +1,50 @@
-# Generalizing the clusters and visualizing them with the help of GoT.
+# Usage and examples
+
+## __taxonomy.py__: working with a taxonomy
+
+__taxonomy.py__: parses a taxonomy file in _.fvtr_ format, prepares a basic data structure for working with the taxonomy tree.
+
+### Usage
+
+```
+$ python3 taxonomy.py taxonomy_file
+```
+
+positional arguments:
+*  taxonomy_file:  taxonomy description in *.fvtr format
+
+optional arguments:
+*  -h, --help:     show help message and exit
+
+### Example
+
+
+
+
+
+## __pargenfs.py__: generalization
+
+__pargenfs.py__: lifts the leaf cluster over a taxonomy tree. Produces two files:
+* _table.csv_: table with all the variables' values
+* _taxonomy\_tree.ete_: lifting result on the taxonomy tree in ete3 format.
+
+### Usage
+
+```
+$ python3 pargenfs.py taxonomy_file taxonomy_leaves clusters cluster_number
+
+```
+
+positional arguments:
+*  taxonomy_file:    taxonomy description in *.fvtr format
+*  taxonomy_leaves:  taxonomy leaves in *.txt format
+*  clusters:         clusters' membership table in *.dat format
+*  cluster_number:   number of cluster for lifting
+
+optional arguments:
+*  -h, --help:       show help message and exit
+
+### Example
 
 Let's generalize the 0-th obtained cluster with the parameters LIMIT = 0.12 (cluster's membership threshold), GAMMA = 0.9, LAMBDA = 0.075. We will use _pargenfs.py_ module from GoT:
 
@@ -84,7 +130,30 @@ All the variables' values ware saved in _table.csv_ file. The table contains all
 5.2.4.1.2. q-learning
 ```
 
-A Ete representation of the cluster generalization in the taxonomy was saved in _taxonomy_tree_lifted.ete_ file. Let's visualize the result using _visualize.py_ module.
+A Ete representation of the cluster generalization in the taxonomy was saved in _taxonomy_tree_lifted.ete_ file.
+
+
+## __visualize.py__: Visualization
+
+__visualize.py__: draws lifting results from _taxonomy_tree.ete_ on taxonomy tree.
+
+### Usage
+
+```
+$ python3 visualize.py ete3_file
+```
+
+positional arguments:
+*  ete3_file:   lifting results description in *.ete format
+
+optional arguments:
+ * -h, --help:  show help message and exit
+
+
+### Example
+
+
+Let's visualize the result using _visualize.py_ module.
 
 ```
 $ python3 visualize.py taxonomy_tree_lifted.ete
@@ -94,14 +163,14 @@ We can see the figure - the same as posted below. To look in details, you can cl
 
 ![](https://raw.githubusercontent.com/dmitsf/GOT/master/got/taxonomies/got_results/cluster_0.png "Cluster 0 generalization visualization.")
 
-Fig. 3: Cluster 0 generalization.
+Fig. 1: Cluster 0 generalization.
 
 
 For cluster 2, we obtainded the following fugure.
 
 ![](https://raw.githubusercontent.com/dmitsf/GOT/master/got/taxonomies/got_results/cluster_1.png "Cluster 1 generalization visualization.")
 
-Fig. 4: Cluster 1 generalization.
+Fig. 2: Cluster 1 generalization.
 
 The 15 head subjects were obtained here, which is devoted mainly to Databases, Visualization and Implementation:
 
@@ -129,7 +198,7 @@ We can complete the same steps for all the clusters obtained.
 
 ## fvtr format
 
-tab-separated (tsv)-like format to store taxonomies.
+_.fvtr_ (flat-view taxonomy representation) format is tab-separated (tsv)-like format to store taxonomies. It relies on a representation of ACM CCS taxonomy (https://www.acm.org/publications/class-2012). You can see examples of files in [test_files/](https://github.com/dmitsf/GOT/blob/master/got/test_files/) folder.
 
 example:
 
