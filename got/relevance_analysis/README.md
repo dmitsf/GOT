@@ -169,6 +169,26 @@ if __name__ == "__main__":
 The topic-to-topic co-relevance matrix is saved in _corelevance_matrix.txt_ file.
 
 
+## __lapin.py__: performs Laplacian preudo-inverse transform for matrices.
+
+To obtain the transformed matrix. follow the example:
+
+```
+import numpy as np
+from lapin import lapin
+
+
+if __name__ == "__main__":
+    relevance_matrix = np.loadtxt("relevance_matrix.txt")
+    print(relevance_matrix.shape)
+    tc = relevance_matrix.dot(relevance_matrix.T)
+    print(tc.shape)
+
+    tc_transformed = lapin(tc)
+
+```
+
+
 ## __faddis.py__: obtaining fuzzy thematic clusters using FADDIS algorithm.
 
 To obtain fuzzy thematic clusters we will use [FADDIS algorithm](https://www.sciencedirect.com/science/article/pii/S0020025511004592) and it's pythonic implementation [PyFADDIS](https://github.com/dmitsf/PyFADDIS). We will follow the pipeline with LAPIN transform from the [example](https://github.com/dmitsf/PyFADDIS/blob/master/example_clustering.py).
