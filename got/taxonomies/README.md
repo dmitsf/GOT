@@ -24,11 +24,15 @@ Let us consider working with IAB taxonomy fragment [test_files/taxonomy_iab_frag
 
 Fig. 1: Taxonomy fragment
 
-Let's obtain all the leaves for the taxonomy.
+Let's obtain all the leaves for the taxonomy. 
 
 ```
 $ python3 taxonomy.py test_files/taxonomy_iab_fragment.fvtr
+```
 
+The command produces this output:
+
+```
 Taxonomy leaves for test_files/taxonomy_iab_fragment.fvtr:
 579.580.581. men's jewelry and watches
 579.582.583. men's business wear
