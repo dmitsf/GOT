@@ -2,7 +2,7 @@
 
 ## __taxonomy.py__: working with a taxonomy
 
-__taxonomy.py__: parses a taxonomy file in _.fvtr_ format, prepares a basic data structure for working with the taxonomy tree.
+__taxonomy.py__: parses a taxonomy file in _.fvtr_ format, prepares a basic data structure for working with the taxonomy tree. Prints all the leaves and saves them into __result.csv__ file.
 
 ### Usage
 
@@ -16,11 +16,68 @@ positional arguments:
 optional arguments:
 *  -h, --help:     show help message and exit
 
-### Example
+### Example 1
 
+Let us consider working with IAB taxonomy fragment [test_files/taxonomy_iab_fragment.fvtr](https://github.com/dmitsf/GOT/blob/master/got/taxonomies/test_files/taxonomy_iab_fragment.fvtr).
 
+![Taxonomy fragment](https://raw.githubusercontent.com/dmitsf/GOT/master/got/taxonomies/got_results/iab_fragment.png)
 
+Fig. 1: Taxonomy fragment
 
+Let's obtain all the leaves for the taxonomy.
+
+```
+$ python3 taxonomy.py test_files/taxonomy_iab_fragment.fvtr
+
+Taxonomy leaves for test_files/taxonomy_iab_fragment.fvtr:
+579.580.581. men's jewelry and watches
+579.582.583. men's business wear
+579.582.584. men's casual wear
+579.582.585. men's formal wear
+579.582.586. men's outerwear style
+579.582.587. men's sportswear
+579.582.588. men's underwear and sleepwear
+579.589. men's shoes and footwear
+
+```
+
+### Example 2
+
+We will consider Data Science Taxonomy (DST, published, for example, in [this preprint](https://wp.hse.ru/data/2019/01/13/1146987922/WP7_2018_04_______.pdf)). We can download the DST taxonomy via browser from the [webpage of "Concept" research group](https://cs.hse.ru/concept/taxonomies)
+or via command line:
+
+```
+$ wget https://cs.hse.ru/data/2019/12/18/1523118089/Data_Science_taxonomy.xlsx
+```
+
+Since the taxonomy has _.xlsx_ format, we should transform the taxonomy to _.csv_. One may do this using Microsoft Excel, OpenOffice/LibreOffice Calc, or via command line:
+
+```
+$ libreoffice --headless --convert-to csv Data_Science_taxonomy.xlsx
+```
+
+Assume we should extract all the leaves from a taxonomy. To do this, we can use _taxonomy.py_ module from GoT:
+
+```
+$ python3 taxonomy.py Data_Science_taxonomy.csv
+```
+
+Now all the leaves are saved in _taxonomy\_leaves.txt_ file. We can ensure this fact using _less_ command:
+
+```
+$ less taxonomy_leaves.txt
+
+sample complexity and generalization bounds
+boolean function learning
+unsupervised learning and clustering
+support vector machines
+gaussian processes
+modelling
+boosting
+bayesian analysis
+inductive inference
+online learning theory
+```
 
 ## __pargenfs.py__: generalization
 
