@@ -2,7 +2,7 @@
 
 __GOT__ (__G__ eneralization __O__ ver __T__ axonomies) software package.
 
-The repository includes ParGenFS and related algorithms implementations.
+The repository includes software for TAxonomy CONtent ANalysis (TACONAN): ParGenFS and related algorithms implementations.
 
 Read more about the algorithm and the related definitions in the recent article: https://doi.org/10.1016/j.ins.2019.09.082
 
