@@ -13,8 +13,7 @@ Let's consider an example.
 >>> import ast
 >>> a = ast.AST("xabxac hi")
 >>> a.score('dsaasddffd')
-0.04444444444444447
->>> 
+0.04444444444444447 
 ```
 
 If the text is too long, we can split the text into strings and pass them in the `AST()` constructor as a list:
