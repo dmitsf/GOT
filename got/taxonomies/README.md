@@ -259,7 +259,7 @@ We can complete the same steps for all the clusters obtained.
 
 ## fvtr format
 
-_.fvtr_ (flat-view taxonomy representation) format is tab-separated (tsv)-like format to store taxonomies. It relies on a representation of ACM CCS taxonomy (https://www.acm.org/publications/class-2012). You can see examples of files in [test_files/](https://github.com/dmitsf/GOT/blob/master/got/test_files/) folder.
+_.fvtr_ (flat-view taxonomy representation) format is a comma-separated (csv)-like format to store taxonomies. It relies on a representation of ACM CCS taxonomy (https://www.acm.org/publications/class-2012). You can see examples of files in [test_files/](https://github.com/dmitsf/GOT/blob/master/got/test_files/) folder.
 
 Example -  IAB taxonomy fragment:
 
