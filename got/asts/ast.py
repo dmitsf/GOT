@@ -27,6 +27,7 @@ class EASA(base.AST):
         self.anntab = self._compute_anntab(self.suftab, self.lcptab)
 
     def score(self, query, normalized=True, synonimizer=None, return_suffix_scores=False):
+        # TODO: check synonimizer work
         if synonimizer:
             synonyms = synonimizer.get_synonyms()
             query_words = utils.tokenize(query)
@@ -86,6 +87,7 @@ class EASA(base.AST):
 
     def traverse_breadth_first(self, callback):
         """Visits the internal "nodes" of the enhanced suffix array in breadth-first order."""
+        # TODO: remove implementation
         raise NotImplementedError
 
     def _score(self, query, normalized=True, return_suffix_scores=False):
